@@ -112,3 +112,24 @@ header {
     height: 600px;
     width: 1000px;
 }
+
+/* 가입 페이지 */
+.join-title {
+    text-align: center;
+    margin: 50px;
+    font-size: 1.5rem;
+}
+
+.join-img-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 1000px;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.img {
+    border-radius: 70%;
+    width: 150px;
+    height: 150px;
+}
