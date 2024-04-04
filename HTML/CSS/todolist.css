@@ -4,9 +4,54 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 시작 페이지 */
+.start-page {
+    background-color: #98C8E5;
+    background-image: url("/carecat/이미지/7411726-removebg-preview\ \(1\).png");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 90%;
+}
+
+.start-title {
+    font-size: 3rem;
+    text-align: center;
+    margin: 200px auto 100px auto;
+}
+
+.start-button {
+    border: 1px solid #4F82AB;
+    background-color: #4F82AB;
+    border-radius: 20px;
+    color: #ffffff;
+    width: 150px;
+    height: 90px;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 auto;
+}
+
+.start-button > a {
+    display: block;
+    text-align: center;
+    line-height: 90px;
+}
+
+/* 공통 */
+
 body {
     background-color: #F6F4EB;
+    font-family: 'GmarketSansMedium';
 }
+
+/* 반복 디자인 */
 
 a {
     text-decoration: none;
@@ -66,4 +111,25 @@ header {
     border-radius: 10px;
     height: 600px;
     width: 1000px;
+}
+
+/* 가입 페이지 */
+.join-title {
+    text-align: center;
+    margin: 50px;
+    font-size: 1.5rem;
+}
+
+.join-img-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 1000px;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.img {
+    border-radius: 70%;
+    width: 150px;
+    height: 150px;
 }
