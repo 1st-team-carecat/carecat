@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'GmarketSansMedium';
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+header .nav {
+  width: 300px;
+  justify-content: center;
+  display: flex;
+  margin: auto;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  justify-content:space-between;
+  font-weight: 800;
+}
+.logo {
+  color: #4F82AB;
+  margin: 30px 100px;
+  font-size: 1.8rem;
+  /* text-align: center; */
+  /* margin-right: 7rem; */
+  /* width: 350px; */
+}
+
+h2 img {
+  text-align: center;
+}
+
+.current-date {
+  color: #4F82AB;
+}
+button {
+    /* button 요소에 기본적으로 설정되는 스타일 속성 초기화 */
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+   
+   /*#4 */
+  body {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* min-height: 100vh; */
+    background: #F6F4EB;
+
+  }
+  main {
+    display: flex;
+    margin: auto;
+    width: 1030px;
+    
+  }
+  
+  .calendar {
+    width: 1000px;
+    height: 600px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    border: 3px solid #799BC4;
+    padding: 30px;
+    /* margin: auto; */
+  }
+   
+  /*#6*/
+  .wrapper .nav {
+    margin: auto;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+  .wrapper .nav .current-date {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .wrapper .nav button {
+    width: 38px;
+    height: 38px;
+    font-size: 30px;
+    color: #878787;
+  }
+
+  /*#7*/
+.calendar ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .calendar .weeks li {
+    font-weight: 500;
+    height: 2rem;
+  }
+  .calendar .days {
+    margin-bottom: 20px;
+    border: 1px solid #799BC4;
+  }
+  .calendar ul li {
+    /*#8*/
+    width: calc(100% / 7);
+    height: 4rem;
+    /*#9*/
+    position: relative;
+    
+  }
+  .calendar .days li {
+    /*#10*/
+    z-index: 1;
+    /* margin-top: 30px; */
+    border: 1px solid #799BC4;
+   height: 95px;
+    /* cursor: pointer; */
+  }
+   
+  /*#11*/
+  .days li.inactive {
+    color: #aaa;
+  }
+
+  .days li.active {
+    color: #fff;
+  }
+  /* .calendar .days li::before {
+    position: absolute;
+    content: '';
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+  } */
+  /* .days li:hover::before {
+    background: #f2f2f2;
+  } */
+
+  /* 공통요소 */
+  .menu {
+    border: 3px solid #799BC4;
+    background-color: #799BC4;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: #ffffff;
+    width: 40px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    width: 40px;
+}
+.menu-content{
+  display: inline-block;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 3fr 0.5fr 0.5fr;
+  align-items: center;
+  justify-items: stretch;
+}
+
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #4F82AB;
+  padding: 50px 200px 50px 200px;
+}
+
+.header-profile-name {
+  font-size: 1.5rem;
+  text-align: right;
+  padding: 10px;
+}
+
+.header-profile-img {
+  border-radius: 70%;
+  width: 100px;
+  height: 100px;
+}
