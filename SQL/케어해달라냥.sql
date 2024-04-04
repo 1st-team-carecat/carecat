@@ -1,0 +1,30 @@
+﻿CREATE TABLE `informations` (
+	`no`	INT	NOT NULL,
+	`name`	VARCHAR(50)	NOT NULL,
+	`age`	DATE	NOT NULL,
+	`gender`	CHAR(1)	NOT NULL	COMMENT ''0' : 남자
+'1': 여자',
+	`created_at`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP(),
+	`deleted_at`	DATETIME	NULL
+);
+
+CREATE TABLE `todos` (
+	`list_no`	INT	NOT NULL,
+	`no2`	INT	NOT NULL,
+	`date`	DATE	NOT NULL,
+	`content`	VARCHAR(50)	NOT NULL,
+	`checked`	CHAR(1)	NOT NULL	COMMENT ''0' : 안함
+'1': 완료',
+	`created_at`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP(),
+	`updated_at`	DATETIME	NOT NULL	DEFAULT CURRENT_TIMESTAMP(),
+	`deleted_at`	DATETIME	NULL
+);
+
+ALTER TABLE `informations` ADD CONSTRAINT `PK_INFORMATIONS` PRIMARY KEY (
+	`no`
+);
+
+ALTER TABLE `todos` ADD CONSTRAINT `PK_TODOS` PRIMARY KEY (
+	`list_no`
+);
+
