@@ -15,7 +15,7 @@ a {
 
 header {
     display: grid;
-    grid-template-columns: 3fr 0.5fr 0.5fr;
+    grid-template-columns: 3fr 0.5fr 0.5fr; 
     align-items: center;
     justify-items: stretch;
 }
