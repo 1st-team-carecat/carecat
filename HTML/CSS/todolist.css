@@ -12,13 +12,13 @@
 }
 
 /* 시작 페이지 */
-.start-page {
+/* .start-page {
     background-color: #98C8E5;
     background-image: url("/carecat/이미지/7411726-removebg-preview\ \(1\).png");
     background-repeat: no-repeat;
     background-position: top;
     background-size: 90%;
-}
+} */
 
 .start-title {
     font-size: 3rem;
@@ -125,11 +125,31 @@ header {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     width: 1000px;
     justify-content: center;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
 .img {
     border-radius: 70%;
     width: 150px;
     height: 150px;
+}
+
+.join-content-box {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.content-title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 10px;
+}
+
+.content-title > input {
+    border: 3px solid #4F82AB;
+    border-radius: 10px;
+    font-size: 2rem;
+    outline: none;
 }
