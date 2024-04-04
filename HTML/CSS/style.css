@@ -139,20 +139,7 @@ button {
   .days li.active {
     color: #fff;
   }
-  /* .calendar .days li::before {
-    position: absolute;
-    content: '';
-    height: 40px;
-    width: 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: -1;
-  } */
-  /* .days li:hover::before {
-    background: #f2f2f2;
-  } */
+
 
   /* 공통요소 */
   .menu {
