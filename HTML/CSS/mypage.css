@@ -11,10 +11,62 @@
     font-style: normal;
 }
 
+/* 시작 페이지 */
+
+.line {
+    /* background: url("/carecat/이미지/격자.jpg")no-repeat center fixed;
+    background-size: cover; */
+    background-color: #F6F4EB;
+    height: 700px;
+    margin: 200px auto;
+    padding: 50px;
+    border-top: 5px solid #799BC4;
+    border-bottom: 5px solid #799BC4;
+
+}
+
+.main-title-img {
+    height: 100%;
+    width: 800px;
+}
+
+/* 시작 페이지 */
+.start-title {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 auto;
+    height: 400px;
+}
+
+.start-button {
+    border: 1px solid #4F82AB;
+    background-color: #4F82AB;
+    border-radius: 20px;
+    color: #ffffff;
+    width: 150px;
+    height: 90px;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 auto;
+}
+
+.start-button > a {
+    display: block;
+    text-align: center;
+    line-height: 90px;
+}
+
+/* 공통 */
+
 body {
-    background-color: #F6F4EB; 
+    background: url("../img/background.jpg") center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-color: #F6F4EB; */
     font-family: 'GmarketSansMedium';
 }
+
+/* 반복 디자인 */
 
 a {
     text-decoration: none;
@@ -23,16 +75,24 @@ a {
 
 header {
     display: grid;
-    grid-template-columns: 3fr 0.5fr 0.5fr; 
+    grid-template-columns: 3fr 0.5fr 0.5fr;
     align-items: center;
     justify-items: stretch;
+}
+
+.title-img {
+    height: 150px;
+    width: 250px;
+    /* border: 5px solid #4F82AB;
+    border-radius: 60%; */
 }
 
 .main-title {
     font-size: 3rem;
     font-weight: 900;
     color: #4F82AB;
-    padding: 50px 200px 50px 200px;
+    padding: 20px 200px 20px 200px;
+    height: 200px;
 }
 
 .header-profile-name {
@@ -45,6 +105,16 @@ header {
     border-radius: 70%;
     width: 100px;
     height: 100px;
+    border: 5px solid #4F82AB;
+}
+
+.main-box {
+    background-color: #F6F4EB;
+    height: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    border-top: 5px solid #799BC4;
+    border-bottom: 5px solid #799BC4;
 }
 
 .box {
@@ -60,7 +130,7 @@ header {
     border: 3px solid #799BC4;
     background-color: #799BC4;
     border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
     color: #ffffff;
     width: 40px;
     text-align: center;
@@ -68,63 +138,14 @@ header {
     padding: 10px;
 }
 
-.selected-menu {
-    background-color: #4F82AB;
-    border: 3px solid #4F82AB;
-}
-
-.content {
-    border: 3px solid #799BC4;
+.content-info {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-image: url("../img/content-back.jpg");
+    border: 5px solid #799BC4;
     border-radius: 10px;
     height: 600px;
     width: 1000px;
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-    background-image: url("../../이미지/모눈.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.gage {
-    display: grid;
-    grid-template-rows: 3fr 2fr;
-    place-items: center;
-}
-
-.gage-back {
-    position: relative;
-    width: 300px;
-    height: 40px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 50px;
-    margin-top: 30px;
-    box-shadow: 3px 3px 0 pink,
-                -3px -3px 0 pink,
-                3px -3px 0 pink,
-                -3px 3px 0 pink;
-}
-
-.gage-bar {
-    position: absolute;
-    bottom: 0;
-    background-color: pink;
-    border-radius: 50px;
-    width: 250px;
-    height: 40px;
-
-}
-
-.gage-text {
-    background-color: white;
-    color: #4F82AB;
-    font-size: 1.2rem;
-    font-weight: 900;
-}
-
-.info-con {
-    display: grid;
-    grid-template-rows: 1fr 3.5fr 1fr;
-
 }
 
 .info-title {
@@ -140,6 +161,59 @@ header {
     font-weight: 900;
 }
 
+
+/* 가입 페이지 */
+.join-title {
+    text-align: center;
+    margin: 50px;
+    font-size: 1.5rem;
+}
+
+.join-img-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 1000px;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.img {
+    border-radius: 70%;
+    width: 150px;
+    height: 150px;
+}
+
+.join-content-box {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.content-title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 10px;
+    width: 200px;
+}
+
+.content-title > input {
+    border: 3px solid #4F82AB;
+    border-radius: 10px;
+    font-size: 2rem;
+    outline: none;
+}
+
+.join-content-box > label {
+    margin: 10px;
+    position: relative;
+    top: 5px
+}
+
+input[type="date"] {
+    background: transparent;
+}
+
 .info-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -147,11 +221,7 @@ header {
 
 .info-left {
     margin: auto;
-    width: 320px;
-    height: 500px;
     place-items: center;
-    display: grid;
-    grid-template-rows: 1fr auto;
 
 }
 .info-pic {
@@ -164,12 +234,13 @@ header {
 .info-right {
     display: grid;
     grid-template-rows: repeat(5, 1fr) auto;
-    padding: 30px;
     align-items: center;
+    width: 500px;
+    height: 300px;
 
 }
 
-[class^='info-text'], .dday-text {
+[class^='info-text'] {
     width: 70%;
     height: 40px;
     border-radius: 50px;
@@ -178,17 +249,63 @@ header {
     font-weight: 900;
 }
 
-.info-text1, .dday-text {
+.info-text1 {
     background-color: #DADADA;
-
+    margin: 5px;
 }
 
 .info-text2 {
     background-color: #EDEDED;
+    margin: 5px;
 
 }
 
+.dday {
+    background-color: #DADADA;
+    width: 70%;
+    height: 90px;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 90px;
+    font-weight: 900;
+    margin: 5px;
 
-.dday-text {
-    margin-top: 50px;
+}
+
+.gage {
+    place-items: center;
+    margin: auto;
+}
+
+.gage-back {
+    position: relative;
+    width: 700px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    box-shadow: 3px 3px 0 pink,
+                -3px -3px 0 pink,
+                3px -3px 0 pink,
+                -3px 3px 0 pink;
+    text-align: end;
+    line-height: 50px;
+}
+
+.gage-bar {
+    position: absolute;
+    bottom: 0;
+    background-color: pink;
+    border-radius: 50px;
+    width: 550px;
+    height: 50px;
+    text-align: start;
+    line-height: 50px;
+
+}
+
+.gage-text {
+    color: #4F82AB;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 20px;
 }
