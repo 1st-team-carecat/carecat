@@ -25,11 +25,12 @@
 
 }
 
-.title-img {
+.main-title-img {
     height: 100%;
     width: 800px;
 }
 
+/* 시작 페이지 */
 .start-title {
     font-size: 3rem;
     text-align: center;
@@ -58,7 +59,7 @@
 /* 공통 */
 
 body {
-    background: url("/이미지/격자.jpg")no-repeat center fixed;
+    background: url("/HTML/img/background.jpg")no-repeat center fixed;
     background-size: cover;
     background-attachment: fixed;
     /* background-color: #F6F4EB; */
@@ -79,12 +80,19 @@ header {
     justify-items: stretch;
 }
 
+.title-img {
+    height: 150px;
+    width: 200px;
+    /* border: 5px solid #4F82AB;
+    border-radius: 60%; */
+}
 
 .main-title {
     font-size: 3rem;
     font-weight: 900;
     color: #4F82AB;
-    padding: 50px 200px 50px 200px;
+    padding: 20px 200px 20px 200px;
+    height: 200px;
 }
 
 .header-profile-name {
@@ -97,6 +105,16 @@ header {
     border-radius: 70%;
     width: 100px;
     height: 100px;
+    border: 5px solid #4F82AB;
+}
+
+.main-box {
+    background-color: #F6F4EB;
+    height: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    border-top: 5px solid #799BC4;
+    border-bottom: 5px solid #799BC4;
 }
 
 .box {
@@ -121,7 +139,8 @@ header {
 }
 
 .content {
-    border: 3px solid #799BC4;
+    background-image: url("/이미지/Untitled-3.jpg");
+    border: 5px solid #799BC4;
     border-radius: 10px;
     height: 600px;
     width: 1000px;
