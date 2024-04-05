@@ -12,13 +12,14 @@
 }
 
 /* 시작 페이지 */
-/* .start-page {
-    background-color: #98C8E5;
-    background-image: url("/carecat/이미지/7411726-removebg-preview\ \(1\).png");
-    background-repeat: no-repeat;
-    background-position: top;
-    background-size: 90%;
-} */
+
+.line {
+    /* background: url("/carecat/이미지/격자.jpg")no-repeat center fixed;
+    background-size: cover; */
+    width: 1000px;
+    height: 900px;
+    background-color: #F6F4EB;
+}
 
 .start-title {
     font-size: 3rem;
@@ -47,7 +48,10 @@
 /* 공통 */
 
 body {
-    background-color: #F6F4EB;
+    background: url("/carecat/이미지/격자.jpg")no-repeat center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-color: #F6F4EB; */
     font-family: 'GmarketSansMedium';
 }
 
@@ -145,6 +149,7 @@ header {
     font-size: 2rem;
     text-align: center;
     margin: 10px;
+    width: 200px;
 }
 
 .content-title > input {
@@ -152,4 +157,14 @@ header {
     border-radius: 10px;
     font-size: 2rem;
     outline: none;
+}
+
+.join-content-box > label {
+    margin: 10px;
+    position: relative;
+    top: 5px
+}
+
+input[type="date"] {
+    background: transparent;
 }
