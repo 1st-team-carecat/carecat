@@ -155,7 +155,7 @@ header {
     background-color: #4F82AB;
     border-radius: 50px;
     text-align: center;
-    line-height: 50px;
+    line-height: 55px;
     color: white;
     font-size: 1.2rem;
     font-weight: 900;
@@ -221,6 +221,8 @@ input[type="date"] {
 
 .info-left {
     margin: auto;
+    display: grid;
+    grid-template-rows: 1ㄺ auto;
     place-items: center;
 
 }
@@ -229,6 +231,19 @@ input[type="date"] {
     width: 220px;
     height: 220px;
     place-items: center;
+}
+
+.info-edit {
+    width: 150px;
+    height: 50px;
+    margin: 15px auto;
+    background-color: #4F82AB;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 55px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
 }
 
 .info-right {
@@ -246,7 +261,8 @@ input[type="date"] {
     border-radius: 50px;
     text-align: center;
     line-height: 40px;
-    font-weight: 900;
+    font-weight: 00;
+    font-size: 1.2rem;
 }
 
 .info-text1 {
@@ -267,8 +283,9 @@ input[type="date"] {
     border-radius: 30px;
     text-align: center;
     line-height: 90px;
-    font-weight: 900;
+    font-weight: 700;
     margin: 5px;
+    font-size: 1.2rem;
 
 }
 
