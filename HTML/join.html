@@ -4,81 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./CSS/todolist.css">
+    <link rel="stylesheet" href="/HTML/CSS/todolist.css">
 </head>
 <body>
-    <div class="line">
-        <header>
-            <div class="main-title">
-                <img src="/이미지/003.png" class="title-img">
+    <header>
+        <div class="main-title">
+          <img src="./img/content-title.png" class="title-img">
+        </div>
+      </header>
+      <main class="main-box">
+        <div class="join-title">
+            비슷한 아이를 선택해주세요!
+        </div>
+        <form action="">
+            <div class="join-img-box">
+                <div class="join-img">
+                    <a href="">
+                        <img class="img"
+                            src="./img/11zon_cropped-removebg-preview.png">
+                    </a>    
+                </div>
+                <div class="join-img">
+                    <a href="">
+                        <img class="img"
+                            src="./img/11zon_cropped__1_-removebg-preview.png">
+                    </a>
+                </div>
+                <div class="join-img">
+                    <a href="">
+                        <img class="img"
+                            src="./img/11zon_cropped__2_-removebg-preview.png">
+                    </a>
+                </div>
+                <div class="join-img">
+                    <a href="">
+                        <img class="img"
+                            src="./img/11zon_cropped__3_-removebg-preview.png">
+                    </a>
+                </div>
+                <div class="join-img">
+                    <a href="">
+                        <img class="img"
+                            src="./img/11zon_cropped__4_-removebg-preview.png">
+                    </a>
+                </div>
             </div>
-        </header>
-        <main>
-            <div class="join-title">
-                비슷한 아이를 선택해주세요!
+            <div class="join-content-box">
+                <label for="name">이름</label>
+                <div class="content-title">
+                    <input type="text" name="name" id="name">
+                </div>
             </div>
-            <form action="">
-                <div class="join-img-box">
-                    <div class="join-img">
-                        <a href="">
-                            <img class="img"
-                                src="/이미지/11zon_cropped__1_-removebg-preview.png">
-                        </a>    
-                    </div>
-                    <div class="join-img">
-                        <a href="">
-                            <img class="img"
-                                src="/이미지/11zon_cropped__2_-removebg-preview.png">
-                        </a>
-                    </div>
-                    <div class="join-img">
-                        <a href="">
-                            <img class="img"
-                                src="/이미지/11zon_cropped__3_-removebg-preview.png">
-                        </a>
-                    </div>
-                    <div class="join-img">
-                        <a href="">
-                            <img class="img"
-                                src="/이미지/11zon_cropped__4_-removebg-preview.png">
-                        </a>
-                    </div>
-                    <div class="join-img">
-                        <a href="">
-                            <img class="img"
-                                src="/이미지/11zon_cropped-removebg-preview.png">
-                        </a>
-                    </div>
+            <div class="join-content-box">
+                <label for="gender">성별</label>
+                <div class="content-title">
+                    <label for="gender">남자</label>
+                    <input type="radio" name="gender" id="0">
+                    <label for="gender">여자</label>
+                    <input type="radio" name="gender" id="1">
                 </div>
-                <div class="join-content-box">
-                    <label for="name">이름</label>
-                    <div class="content-title">
-                        <input type="text" name="name" id="name">
-                    </div>
+            </div>
+            <div class="join-content-box">
+                <label for="birthday">생년월일</label>
+                <div class="content-title">
+                    <input type="date" name="birthday" id="birthday">
                 </div>
-                <div class="join-content-box">
-                    <label for="gender">성별</label>
-                    <div class="content-title">
-                        <label for="gender">남자</label>
-                        <input type="radio" name="gender" id="0">
-                        <label for="gender">여자</label>
-                        <input type="radio" name="gender" id="1">
-                    </div>
+            </div>
+            <div class="join-content-box">
+                <label for="weight">몸무게</label>
+                <div class="content-title">
+                    <input type="text" name="weight" id="weight">
                 </div>
-                <div class="join-content-box">
-                    <label for="birthday">생년월일</label>
-                    <div class="content-title">
-                        <input type="date" name="birthday" id="birthday">
-                    </div>
-                </div>
-                <div class="join-content-box">
-                    <label for="weight">몸무게</label>
-                    <div class="content-title">
-                        <input type="text" name="weight" id="weight">
-                    </div>
-                </div>
-            </form>
-        </main>
-    </div>
+            </div>
+        </form>
+      </main>
 </body>
 </html>
