@@ -16,15 +16,25 @@
 .line {
     /* background: url("/carecat/이미지/격자.jpg")no-repeat center fixed;
     background-size: cover; */
-    width: 1000px;
-    height: 900px;
     background-color: #F6F4EB;
+    height: 700px;
+    margin: 200px auto;
+    padding: 50px;
+    border-top: 5px solid #799BC4;
+    border-bottom: 5px solid #799BC4;
+
+}
+
+.title-img {
+    height: 100%;
+    width: 800px;
 }
 
 .start-title {
     font-size: 3rem;
     text-align: center;
-    margin: 200px auto 100px auto;
+    margin: 0 auto;
+    height: 400px;
 }
 
 .start-button {
