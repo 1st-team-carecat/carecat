@@ -4,8 +4,16 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #F6F4EB; 
+    font-family: 'GmarketSansMedium';
 }
 
 a {
@@ -70,13 +78,8 @@ header {
     border-radius: 10px;
     height: 600px;
     width: 1000px;
-}
-
-.mypage-content {
-    width: 100%;
-    height: 100%;
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr 5fr;
     background-image: url("../../이미지/모눈.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -84,15 +87,14 @@ header {
 
 .gage {
     display: grid;
-    grid-template-rows: 9fr 1fr;
+    grid-template-rows: 3fr 2fr;
     place-items: center;
-    border-right: 5px dashed #4F82AB;
 }
 
 .gage-back {
     position: relative;
-    width: 60px;
-    height: 500px;
+    width: 300px;
+    height: 40px;
     background-color: rgb(255, 255, 255);
     border-radius: 50px;
     margin-top: 30px;
@@ -107,7 +109,8 @@ header {
     bottom: 0;
     background-color: pink;
     border-radius: 50px;
-    height: 400px;
+    width: 250px;
+    height: 40px;
 
 }
 
@@ -139,11 +142,14 @@ header {
 
 .info-box {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1fr;
 }
 
-.info-pic {
+.info-left {
     margin: auto;
+    width: 320px;
+    height: 500px;
+    place-items: center;
 
 }
 .profile-img {
@@ -186,9 +192,9 @@ header {
 .info-dday {
     width: 90%;
     height: 100%;
-    background-image: url("../../이미지/dday-con.png");
+    /* background-image: url("../../이미지/dday-con.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     text-align: center;
     margin: 0 auto ;
 }
