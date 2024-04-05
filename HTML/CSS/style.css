@@ -197,3 +197,52 @@ main {
 .scroll {
   overflow: hidden;
 }
+
+body{
+  background-image: url(../../이미지/격자.jpg);
+}
+
+.box {
+  /* background: url("/carecat/이미지/격자.jpg")no-repeat center fixed;
+  background-size: cover; */
+  background-color: #F6F4EB;
+  height: 700px;
+  margin: 200px auto;
+  padding: 50px;
+  border-top: 5px solid #799BC4;
+  border-bottom: 5px solid #799BC4;
+  display: flex;
+  width: 100%;
+
+}
+
+input[type="date"]{
+  position: relative;
+  min-height:30px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  font-size:20px;
+}
+
+input[type="date"]::-webkit-clear-button,
+input[type="date"]::-webkit-inner-spin-button { 
+    display: none;
+} 
+input[type="date"]::-webkit-calendar-picker-indicator { 
+    background: transparent;
+    z-index: 1;
+} 
+
+.input_date_box input:after{
+  position: absolute;
+  top:50%;
+  right:10px;
+  content: '';
+  width: 20px;
+  height:22px;
+
+  background: #799BC4 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVR4nO2YTWsTYRDHtxbEgyAqiIKKol4U8eWioEfFm4K02IPiFygoWLozqZCTHnpTS8vOpBahp3yJmsxsqrTSgwVPvqAetQepUl9XZrOxbZqEbTaxOezAHDY7+5/fM3n2YWYdJ7XUOtzgyfOdSPIAWb2KA8u9bDbYFFfDYpH0/koN0zTtxIDIchVZAyT5gqwLwPLVroc8PRRXw2LtmejZhUgrMO3kgOT3mJjryXm7Bpb+crLS4bgaFhsB9tu1aZUX7fc0BeV6s9sgV7wBJC6yTNYGlGG7H8tZhmsCskyWc+h1yxkLLkP+JSD5XBZY9mrAZhzWAK5wkk/IcrEh3N2xp0dsnwDrG/D08p1Rfxd6fl8o7smFEDAnA3Y9SHIMRmV7HLfYUCMnA6ZhIGVgvWY5XNIryPIWSRcb7m1gHQHWnzhePPqvol5hD7J8A5IZILkNLB+R9LWzHguCLls0snxAT24h66xpDkxM7a6EhIsg/QUsD+sDkiqQvKz+Paxi9OYB6XvwimfWBejY1pGzIWDlRPD8vjV5WOeRVRoAyky9gGx+frOVvzef73aatN58vts0TKvWfcttDA0BrYK239rlQ1Q4WC9/LMBm31CM+yaTvEsECCyvICe97XLXKx1PWsH6m7TNhilgQksrmNTSCia1tIKNDLl4rvrQtgaiIw7qjLVsJH9qNLC/s1zaseGAEM0kSPqo0jRE010wSM/2dgwgRC3/6s48BVxHBUl1efjX6Y6pYHZkaqu1ceHQvsKtOc5OTG2JDYgkJWCZczbIgGUOWPz6AaTjQPJ96HFh338lc8JZeb/lRhKuG5TxCqdt7ATWFxnSkzYutp0sCLrcnH/KciLLD3dcTjSMB5abyLoUnVuL1fum5U5hDju4l+xzS6xF2eSFpJlVn8va6MCC7tj0gRb9J6ml5rTS/gIZD1DnjJMwJAAAAABJRU5ErkJggg==") center center /contain;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
