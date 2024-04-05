@@ -150,26 +150,26 @@ header {
     width: 320px;
     height: 500px;
     place-items: center;
+    display: grid;
+    grid-template-rows: 1fr auto;
 
 }
-.profile-img {
+.info-pic {
     border-radius: 70%;
     width: 220px;
     height: 220px;
+    place-items: center;
 }
 
-.info-list {
+.info-right {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    background-image: url("../../이미지/profile-list.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding: 85px;
+    grid-template-rows: repeat(5, 1fr) auto;
+    padding: 30px;
     align-items: center;
 
 }
 
-[class^='info-text'] {
+[class^='info-text'], .dday-text {
     width: 70%;
     height: 40px;
     border-radius: 50px;
@@ -178,7 +178,7 @@ header {
     font-weight: 900;
 }
 
-.info-text1 {
+.info-text1, .dday-text {
     background-color: #DADADA;
 
 }
@@ -188,16 +188,6 @@ header {
 
 }
 
-
-.info-dday {
-    width: 90%;
-    height: 100%;
-    /* background-image: url("../../이미지/dday-con.png");
-    background-repeat: no-repeat;
-    background-size: cover; */
-    text-align: center;
-    margin: 0 auto ;
-}
 
 .dday-text {
     margin-top: 50px;
