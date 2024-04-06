@@ -159,9 +159,11 @@ header {
     justify-content: center;
     margin: 50px auto;
 }
+
 .join-content {
     align-items: center;
 }
+
 .img {
     border-radius: 70%;
     width: 150px;
