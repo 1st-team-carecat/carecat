@@ -9,7 +9,7 @@ define("MARIADB_DSN", "mysql:host=".MARIADB_HOST.";port=6412;dbname=;dbname=".MA
 
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
 define("FILE_HEADER", ROOT."todolist_header.php");
-define("FILE_LIB_DB", ROOT."lib/lib_db.php");
+define("FILE_LIB_DB", ROOT."carecat/PHP/lib/lib_db.php");
 
 
 define("REQUEST_METHOD", strtoupper($_SERVER["REQUEST_METHOD"]));

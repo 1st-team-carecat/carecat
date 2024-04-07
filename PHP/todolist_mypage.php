@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/carecat/todolist_config.php"); // 설정 파일 호출
+require_once($_SERVER["DOCUMENT_ROOT"] . "/carecat/PHP/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 try {
@@ -8,30 +8,25 @@ try {
     // db_count_checked 함수를 호출하여 결과를 얻어옵니다.
     $result = db_count_checked($conn);
 
-    if ($result !== false) {
+    if (isset($result['chk_ttl']) && isset($result['chk_cnt'])) {
         // 전체 데이터 수, 체크된 데이터 수 가져오기
         $checked_total = $result['chk_ttl'];
         $checked_count = $result['chk_cnt'];
 
-        // 백분율 계산
-        $result = ($checked_total > 0) ? ($checked_count / $checked_total) * 100 : 0;
+        // 백분율로 계산
+        $percentage = ($checked_total > 0) ? ($checked_count / $checked_total) * 100 : 0;
 
-        // 백분율 반환
-        echo $result;
+        // 백분율 정수로 반환
+        $percentage = intval($percentage);
+
     } else {
-        // 결과가 없을 경우 0 반환
+        // 결과 없을 경우 0 반환
         echo 0;
     }
 
-    // 커밋
-    $conn->commit();
-
 } catch (\Throwable $e) {
-    // 롤백 처리
-    if(!empty($conn) && $conn->inTransaction()){
-        $conn->rollBack();
-    }
     echo $e->getMessage();
+    // exit;
 
 } finally {
     // 연결 종료
@@ -53,7 +48,7 @@ try {
     <link rel="stylesheet" href="./CSS/mypage.css">
     <style>
     .gauge-bar {
-        width: <?php echo $result; ?>%;
+        width: <?php echo $percentage; ?>%;
     }
     </style>
 </head>
@@ -90,18 +85,22 @@ try {
                 </div>
                 <div class="info-right">
                     <span class="info-text1">로미</span>
+                    <span class="info-text1"><?php echo $name; ?></span>
                     <span class="info-text2">남</span>
+                    <span class="info-text2"><?php echo ($gender) ?></span>
                     <span class="info-text1">8개월</span>
+                    <span class="info-text1"><?php echo $birth_at; ?> 개월</span>
                     <span class="info-text2">4kg</span>
+                    <span class="info-text2"><?php echo $weight; ?>kg</span>
                     <span class="dday">로미의 생일이 100일 남았습니다!</span>
+                    <span class="dday"><?php echo '로미의 생일이 ' . $days_until_birthday . '일 남았습니다!'; ?></span>
                     </div>
                 </div>
                 <div class="gauge">
                     <div class="gauge-back">
-                        <span class="gauge-text"><?php echo $result."%"; ?></span>
-                        <div class="gauge-bar" style="width: <?php echo $result; ?>%;">
-                            <span class="gauge-text">행복달성지수</span>
-                        </div>
+                        <span class="gauge-percent"><?php echo $percentage."%"; ?></span>
+                        <div class="gauge-bar" style="width: <?php echo $percentage; ?>%;"></div>
+                        <span class="gauge-text">행복달성지수</span>
                     </div>
                 </div>
             </div>

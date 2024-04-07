@@ -139,31 +139,30 @@ function db_delete_todos_no($conn, $array_param)
     return $stmt->rowCount();
 }
 
-
-
-
-
-
-
-
-
 // 리스트페이지 끝
+
+
+
+
+
+
+
 
 function db_count_checked($conn) {
     // SQL
     $sql = 
     " SELECT "
-    ." COUNT(checked) AS chk_ttl, "
-    ." SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) AS chk_cnt "
+    ." COUNT(checked) chk_ttl, "
+    ." SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt "
     ." FROM "
     ." todos "
     ;
 
     // 쿼리 실행
     $stmt = $conn->query($sql);
-
+ 
     // 쿼리 결과 가져옴
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // 결과 반환
     return $result; 

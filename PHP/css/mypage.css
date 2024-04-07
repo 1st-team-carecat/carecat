@@ -59,7 +59,7 @@
 /* 공통 */
 
 body {
-    background: url("../img/background.jpg") center fixed;
+    background: url("../css/background.jpg") center fixed;
     background-size: cover;
     background-attachment: fixed;
     /* background-color: #F6F4EB; */
@@ -127,8 +127,8 @@ header {
 }
 
 .menu {
-    border: 3px solid #799BC4;
-    background-color: #799BC4;
+    border: 3px solid #98C8E5;
+    background-color: #98C8E5;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     color: #ffffff;
@@ -138,10 +138,15 @@ header {
     padding: 10px;
 }
 
+.selected-menu {
+    border: 3px solid #799BC4;
+    background-color: #799BC4;
+}
+
 .content-info {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    background-image: url("../img/content-back.jpg");
+    background-image: url("../css/content-back.jpg");
     border: 5px solid #799BC4;
     border-radius: 10px;
     height: 600px;
@@ -289,12 +294,12 @@ input[type="date"] {
 
 }
 
-.gage {
+.gauge {
     place-items: center;
     margin: auto;
 }
 
-.gage-back {
+.gauge-back {
     position: relative;
     width: 700px;
     height: 50px;
@@ -304,25 +309,56 @@ input[type="date"] {
                 -3px -3px 0 pink,
                 3px -3px 0 pink,
                 -3px 3px 0 pink;
-    text-align: end;
-    line-height: 50px;
 }
 
-.gage-bar {
+.gauge-bar {
     position: absolute;
     bottom: 0;
     background-color: pink;
     border-radius: 50px;
     width: 550px;
     height: 50px;
-    text-align: start;
-    line-height: 50px;
 
 }
 
-.gage-text {
+.gauge-text {
+    position: absolute;
+    left: 10px;
+    color: #4F82AB;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 20px;
+    line-height: 15px;
+
+}
+
+.gauge-percent {
+    position: absolute;
+    right: 10px;
+    color: #4F82AB;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 20px;
+    line-height: 15px;
+
+}
+
+.gauge-number {
+    position: absolute;
+    right: 10px; /* gauge-back의 우측에 위치 */
+    bottom: 50%;
+    transform: translate(0, 50%); /* 세로 가운데 정렬 */
     color: #4F82AB;
     font-size: 1.3rem;
     font-weight: 900;
     padding: 20px;
 }
+
+
+/* ------------------------------------------------------------------------------ */
+
+
+
+
+
+
