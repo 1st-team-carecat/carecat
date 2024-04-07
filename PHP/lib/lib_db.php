@@ -19,6 +19,7 @@ function db_select_todos_cnt($conn){
         ."  todos "
         ." WHERE "
         ." deleted_at IS NULL "
+        ." AND DATE(todo_date) = CURDATE() "
     ;						 
 
     // Query 실행
@@ -71,12 +72,14 @@ function db_update_todos(&$conn, &$array_param){
 function db_insert_list(&$conn, &$array_param){
     // SQL
     $sql = "INSERT INTO todos (
+        list_no,
         cat_no, 
         todo_date,
         content,
         checked
     ) 
     VALUES (
+        :list_no,
         1,
         CURDATE(), 
         :content, 
@@ -95,6 +98,21 @@ function db_insert_list(&$conn, &$array_param){
 
     // 리턴
     return $stmt->rowCount();
+}
+
+function db_update_todos_no(&$conn, &$array_param){
+    $sql =
+    " UPDATE "
+    ." todos "
+    ." SET "
+    ." ,content = :content "
+    ." WHERE "
+    ." list_no = :list_no "
+    ;
+$stmt = $conn->prepare($sql);
+$stmt->execute($array_param);
+
+return $stmt->rowCount();
 }
 
 // 리스트 페이지 끝
