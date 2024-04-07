@@ -108,7 +108,7 @@ try {
 <body>
     <header>
         <div class="main-title">
-            <img src="../HTML/img/content-title.png" class="title-img" />
+            <img src="./css/content-title.png" class="title-img" />
         </div>
         <div class="header-profile-name">로미</div>
         <a href="">
