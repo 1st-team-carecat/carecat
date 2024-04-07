@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
+        // $list_no = isset($_POST["list_no"]) ? trim($_POST["list_no"]) : "";
         
         $arr_err_param = [];
         if ($content === "") {
@@ -21,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
        
         $arr_param = [
+            // "list_no" => $list_no
             "content" => $content
             ,"todo_date" => date("Y-m-d")
         ];
@@ -49,6 +51,7 @@ else if ($_SERVER["REQUEST_METHOD"] === "GET") {
    try {
         $conn = my_db_conn(); // connection 함수 호출
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
+        $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
        
         $result = db_select_todos_list($conn, $arr_param);
       } catch (\Throwable $e) {
@@ -120,16 +123,21 @@ else if ($_SERVER["REQUEST_METHOD"] === "GET") {
                     </form>
                         <div class="scroll">
                             <form method="post">   
-                    <?php foreach($result as $item){
+                    <?php
+                    $cnt = 1;
+                     foreach($result as $item){
+                        $cnt++
                         ?>
                             <div class="chk-list">
-                                <input type="checkbox" id="check1" />
-                                <label for="check1"></label>
-
-                                <input type="text" name="content" value="<?php echo $item["content"]?>"/>
-                                <button type="submit" formaction="./todolist_list_update.php">
+                                <input type="checkbox" id="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>" />
+                                <label for="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>"></label>
+                                
+                                <input type="text" name="content" value="<?php echo $item["content"];?>"/>
+                                <!-- 수정 버튼 -->
+                                <button type="submit" formaction="./todolist_list_update.php">  
                                     <img
                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAABa0lEQVR4nO3XvUoDQRDA8VX8KAQ730QQfRcLC9NZ2cxoYEF7wTI7Z2M6BUtRgwQzk2BhaamFL6Hi18ndJYZILmfhcbOwf9j+x3CzxxoTCoVKaevwfN6e3M8ZH7LN20V00kaSGJ18IEkLGp0VoxvMvRQ8cvgNos668QcsQ7i2iQPJfj44O+Dkymiq1ribRZKziWiSd3XLWSuCO/5Shy6EO2mbqto+vlwA4oudSJb/DHfcS5a1MjA6vuljnvCos1QIrxI8/lrja2vbM7lwJ3taJhyPXmV8YLQ1CYw/11l3w/gExuzH8ZK3mCrBODy5i6kVHGu61gL43wsTLrsw4bILEy477yachMQAxJ/egAcBcc0rcFocT6GTR3/A/ZJ3nlfgJHBiEzgQP3gBHvOpbKbLqQmMjut5D9BBQIxqwLuN7lr2juPTIriawHFz+AD1AG5tPI3Ez78WrW7ULxlJC0lek4lDJKtVk0KhkNHXN22uzocDxBx4AAAAAElFTkSuQmCC" /></button>
+                                <!-- 삭제 버튼 -->
                                 <button type="submit" formaction="./todolist_list_delete.php">
                                     <img
                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC1UlEQVR4nO2ZO2wTQRCGFwJCEAkEJA00UEGgBUTDo6cEt0CFCIiCRNi7x+MoaVAIr+hmHKEECmJRICIhpSAWnrETJBc8QkVDAyL0kSISxXB2nJh4D4ll1wfoPmka+/zP/rdzvt9nIRISEhIS/gcy2eJhifRAQfGE+CepVFZJJKWA5xVypVb0KBOUNzUe5vv5NV62eOxKlneJvw3/4eRGhfRk2cBySaCPCvhQfbcU0tvq68hzCvnGmaC8NpZF9w6Ptcv7tLleXpb3KaAPOhNLZpDnJNC4AlrQvE/h7jRq9g6PtTsz4GHpgAR+E7EYuwW0oIBfy6C436oJPyhvkMifnRvAJkOfLt4srbdmxAM62HITWKuwtzUjl+HlzpaMFDaPWGZgYoewiUS+FcOO9AkXKOTRlc0k0owEyvxRIc1oTIw6MbFo5F7z9vO871dWm2qGn128p6w4QXxXuEIhXdeNgBx6tdVUsyfId2g1gX3hCgV0XjvLQXG3qWYaJ7q0RoLCOeEKmaWU/tulFkFMqMUWnWbRXejMIB3VNc0EfNxUM1ywfpcLR4Qr0kB7I+b5rKmmQu7WGhks7LG7+samg4VOrRGkq8aayNd0mj1BvkO4IpXLtf38e2PJyG1TTQV8R/eVnsrl2oRLJPBXTZR4bKyHPNK8IzRtd9W6xsDvNY1fmOvRuGa0poRrFHC++WKnd8Z6yFMavXG7q9Y1Bs5pGn8x1kOa1sSTEburdpy3YslZLvJWLDmrTpiBbOWtqJylkLuFa6LyVpiZflcrjCEtz1ku8lYsOatOmIFs5a2onJXGiS7hmui8xUM+lrY0Pmj7VVWPRR6KCIydzo1U8xbybMRFaqNmneesOgp50pkRoJJoFR7waVdGPKCTLTNSvSMDP7NvhJ6Gf0+IVnKh//k6BdSvkL5ZMBBq9IWaIi68gdJ2iXTK9OFcOEqXsrwtNgMJCQkJCQk/zsB35gy2CL4XJHAAAAAASUVORK5CYII=" />
