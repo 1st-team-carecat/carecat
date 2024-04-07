@@ -16,68 +16,72 @@
         <div class="join-title">
             비슷한 아이를 선택해주세요!
         </div>
-        <form action="">
+        <form action="/HTML/mypage.html" method="get">
             <div class="join-img-box">
-                <div class="join-img">
-                    <a href="">
-                        <img class="img"
-                            src="./img/11zon_cropped-removebg-preview.png">
-                    </a>    
+                <div class="join-img1">
+                    <input type="radio" class="btn" id="select1" name="option" value="0 required"/>
+                    <label for="select1">
+                        <img src="./img/11zon_cropped-removebg-preview.png" alt="">
+                    </label> 
                 </div>
-                <div class="join-img">
-                    <a href="">
-                        <img class="img"
-                            src="./img/11zon_cropped__1_-removebg-preview.png">
-                    </a>
+                <div class="join-img1">
+                    <input type="radio" class="btn" id="select2" name="option" value="0 required"/>
+                    <label for="select2">
+                        <img src="./img/11zon_cropped__1_-removebg-preview.png" alt="">
+                    </label> 
                 </div>
-                <div class="join-img">
-                    <a href="">
-                        <img class="img"
-                            src="./img/11zon_cropped__2_-removebg-preview.png">
-                    </a>
+                <div class="join-img1">
+                    <input type="radio" class="btn" id="select3" name="option" value="0 required"/>
+                    <label for="select3">
+                        <img src="./img/11zon_cropped__2_-removebg-preview.png" alt="">
+                    </label> 
                 </div>
-                <div class="join-img">
-                    <a href="">
-                        <img class="img"
-                            src="./img/11zon_cropped__3_-removebg-preview.png">
-                    </a>
+                <div class="join-img1">
+                    <input type="radio" class="btn" id="select4" name="option" value="0 required"/>
+                    <label for="select4">
+                        <img src="./img/11zon_cropped__3_-removebg-preview.png" alt="">
+                    </label> 
                 </div>
-                <div class="join-img">
-                    <a href="">
-                        <img class="img"
-                            src="./img/11zon_cropped__4_-removebg-preview.png">
-                    </a>
+                <div class="join-img1">
+                    <input type="radio" class="btn" id="select5" name="option" value="0 required"/>
+                    <label for="select5">
+                        <img src="./img/11zon_cropped__4_-removebg-preview.png" alt="">
+                    </label> 
                 </div>
             </div>
             <div class="join-content-box">
                 <label for="name">이름</label>
                 <div class="content-title">
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" required>
                 </div>
             </div>
             <div class="join-content-box">
                 <label for="gender">성별</label>
                 <div class="content-title">
-                    <label for="gender">남자</label>
-                    <input type="radio" name="gender" id="0">
-                    <label for="gender">여자</label>
-                    <input type="radio" name="gender" id="1">
+                    <input type="radio" class="btn" name="gender" id="0" checked required>
+                    <label for="0" class="men">남자</label>
+                    <input type="radio" class="btn" name="gender" id="1" reauired>
+                    <label for="1" class="women">여자</label>
                 </div>
             </div>
             <div class="join-content-box">
                 <label for="birthday">생년월일</label>
-                <div class="content-title">
-                    <input type="date" name="birthday" id="birthday">
+                <div class="content-title content-title1">
+                    <input type="date" name="birthday" id="birthday" class="input_text" required>
                 </div>
             </div>
             <div class="join-content-box">
                 <label for="weight">몸무게</label>
                 <div class="content-title">
-                    <input type="text" name="weight" id="weight">
+                    <input type="text" name="weight" id="weight" required>
                 </div>
-            </div>
-          
+            </div>  
         </form>
       </main>
+      <footer>
+        <nav>
+            <a href="./mypage.html" class="button">확인</a>
+        </nav>
+      </footer>
 </body>
 </html>
