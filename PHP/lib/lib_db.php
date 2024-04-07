@@ -1,5 +1,5 @@
 <?php
-
+// 공통
 function my_db_conn(){
     $option = [																			
 		PDO::ATTR_EMULATE_PREPARES	=>	FALSE,								
@@ -10,6 +10,7 @@ function my_db_conn(){
 
 }
 
+// 리스트 페이지 시작
 function db_select_todos_cnt($conn){
     $sql =  // sql 작성
         " SELECT "
@@ -31,15 +32,17 @@ function db_select_todos_cnt($conn){
 function db_select_todos_list(&$conn, &$array_param){
     $sql =
         " SELECT "
+        ." list_no "
         ." cat_no "
         ." ,content "
-        ." ,created_at "
+        ." ,todo_date "
         ." ,checked "
         ." FROM "
         ." todos "
         ." WHERE "
-        ." cat_no = :cat_no "
-        ." AND DATE(created_at) = CURDATE()";
+        ." deleted_at IS NULL "
+        ." ORDER BY "
+        ." list_no DESC "
 ;
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
@@ -64,3 +67,34 @@ function db_update_todos(&$conn, &$array_param){
     
     return $stmt->rowCount();
 }
+
+function db_insert_list(&$conn, &$array_param){
+    // SQL
+    $sql = "INSERT INTO todos (
+        cat_no, 
+        todo_date,
+        content,
+        checked
+    ) 
+    VALUES (
+        1,
+        CURDATE(), 
+        :content, 
+        0
+    )";
+
+
+    // Query 실행
+    $stmt = $conn->prepare($sql);
+
+    // :content 매개변수에 해당하는 값 바인딩
+    $stmt->bindParam(':content', $array_param['content']);
+
+    // Query 실행
+    $stmt->execute(); 
+
+    // 리턴
+    return $stmt->rowCount();
+}
+
+// 리스트 페이지 끝
