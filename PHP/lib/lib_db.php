@@ -1,26 +1,26 @@
 <?php
 // 공통
-function my_db_conn(){
-    $option = [																			
-		PDO::ATTR_EMULATE_PREPARES	=>	FALSE,								
-		PDO::ATTR_ERRMODE	=>	PDO::ERRMODE_EXCEPTION,								
-		PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC								
-	];																			
+function my_db_conn()
+{
+    $option = [
+        PDO::ATTR_EMULATE_PREPARES    =>    FALSE,
+        PDO::ATTR_ERRMODE    =>    PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE    => PDO::FETCH_ASSOC
+    ];
     return new PDO(MARIADB_DSN, MARIADB_USER, MARIADB_PASSWORD, $option);
-
 }
 
 // 리스트 페이지 시작
-function db_select_todos_cnt($conn){
+function db_select_todos_cnt($conn)
+{
     $sql =  // sql 작성
         " SELECT "
-        ."	COUNT(list_no) as cnt "
-        ." FROM "
-        ."  todos "
-        ." WHERE "
-        ." deleted_at IS NULL "
-        ." AND DATE(todo_date) = CURDATE() "
-    ;						 
+        . "	COUNT(list_no) as cnt "
+        . " FROM "
+        . "  todos "
+        . " WHERE "
+        . " deleted_at IS NULL "
+        . " AND DATE(todo_date) = CURDATE() ";
 
     // Query 실행
     $stmt = $conn->query($sql);
@@ -30,46 +30,47 @@ function db_select_todos_cnt($conn){
     return (int)$result[0]["cnt"];
 }
 
-function db_select_todos_list(&$conn, &$array_param){
+function db_select_todos_list(&$conn, &$array_param)
+{
     $sql =
         " SELECT "
-        ." list_no "
-        ." cat_no "
-        ." ,content "
-        ." ,todo_date "
-        ." ,checked "
-        ." FROM "
-        ." todos "
-        ." WHERE "
-        ." deleted_at IS NULL "
-        ." ORDER BY "
-        ." list_no DESC "
-;
+        . " list_no "
+        . " cat_no "
+        . " ,content "
+        . " ,todo_date "
+        . " ,checked "
+        . " FROM "
+        . " todos "
+        . " WHERE "
+        . " deleted_at IS NULL "
+        . " ORDER BY "
+        . " list_no DESC ";
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
     $result = $stmt->fetchAll();
-    
+
     return $result;
 }
 
-function db_update_todos(&$conn, &$array_param){
+function db_update_todos(&$conn, &$array_param)
+{
     $sql =
         " UPDATE "
-        ." todos "
-        ." SET "
-        ." content = :content "
-        ." WHERE "
-        ." list_no = :list_no "
-        ;
+        . " todos "
+        . " SET "
+        . " content = :content "
+        . " WHERE "
+        . " list_no = :list_no ";
     $stmt = $conn->prepare($sql);
     $stmt->execute(array(':cat_no' => $array_param['cat_no']));
     $stmt->execute(array(':content' => $array_param['content'], ':list_no' => $array_param['list_no']));
 
-    
+
     return $stmt->rowCount();
 }
 
-function db_insert_list(&$conn, &$array_param){
+function db_insert_list(&$conn, &$array_param)
+{
     // SQL
     $sql = "INSERT INTO todos (
         list_no,
@@ -94,25 +95,56 @@ function db_insert_list(&$conn, &$array_param){
     $stmt->bindParam(':content', $array_param['content']);
 
     // Query 실행
-    $stmt->execute(); 
+    $stmt->execute();
 
     // 리턴
     return $stmt->rowCount();
 }
 
-function db_update_todos_no(&$conn, &$array_param){
-    $sql =
-    " UPDATE "
-    ." todos "
-    ." SET "
-    ." ,content = :content "
-    ." WHERE "
-    ." list_no = :list_no "
-    ;
-$stmt = $conn->prepare($sql);
-$stmt->execute($array_param);
+// 리스트 페이지 -수정
 
-return $stmt->rowCount();
+function db_update_todos_no(&$conn, &$array_param)
+{
+    $sql =
+        " UPDATE "
+        . " todos "
+        . " SET "
+        . " ,content = :content "
+        . " WHERE "
+        . " list_no = :list_no ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    return $stmt->rowCount();
 }
 
-// 리스트 페이지 끝
+
+// 리스트페이지 - 달력
+//  수정하기
+
+
+// 리스트페이지 - 삭제
+function db_delete_todos_no($conn, $array_param)
+{
+    $sql =
+        " UPDATE "
+        . " todos "
+        . " SET "
+        . " deleted_at = NOW()"
+        . " WHERE "
+        . " list_no = :list_no";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    return $stmt->rowCount();
+}
+
+
+
+
+
+
+
+
+
+// 리스트페이지 끝
