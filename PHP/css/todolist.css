@@ -125,6 +125,9 @@ header {
     margin: auto;
 }
 
+.menu:last-child {
+    border:3px solid #98C8E5;
+}
 .menu {
     border: 3px solid #799BC4;
     background-color: #799BC4;
@@ -298,7 +301,7 @@ footer {
     z-index: 1;
     /* margin-top: 30px; */
     border: 1px solid #799bc4;
-    height: 95px;
+    height: 77px;
     /* cursor: pointer; */
   }
   
@@ -310,3 +313,19 @@ footer {
   .days li.active {
     color: #fff;
   }
+
+/* 서린이 작성해둠 캘린더 년월*/
+.nav {
+    width: 300px;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+  }
+
+.nav a{
+    background-color: inherit ;
+    cursor: pointer;
+  }  
