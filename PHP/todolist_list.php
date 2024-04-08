@@ -166,7 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                     <!-- 달력  -->
                     <form action="/todolist_list.php" method="get">
-                       
                         <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
@@ -205,7 +204,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <li>토</li>
                                     </ul>
                                     <ul class="days">
-                                       
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
@@ -240,3 +238,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </body>
 
 </html>
+                                       
+                       
