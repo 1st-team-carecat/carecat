@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>할일 페이지</title>
+    <title>케어해달라냥 할일 페이지</title>
     <link rel="stylesheet" href="./css/list.css" />
 </head>
 
@@ -225,14 +225,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form action="./todolist.html" method="post">
                         <div class="shopping-list">
                             <div class="shopping-list-title">쇼핑리스트</div>
-                            <input type="text" value="폼폼공" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent;  margin: 5px 0;">
-                            <input type="text" value="고양이정수기필터"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
-                            <input type="text" value="B유산균"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
+                            <input type="text" value="폼폼공" name="" id="shp-li" >
+                            <input type="text" value="고양이정수기필터" name="" id="shp-li"> 
+                            <input type="text" value="B유산균" name="" id="shp-li" >
+                            <input type="text" value="" name="" id="shp-li" >
                     </form>
                 </div>
             </div>
-
         </div>
     </main>
 </body>
