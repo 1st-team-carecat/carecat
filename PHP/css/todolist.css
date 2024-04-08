@@ -83,7 +83,7 @@ header {
 
 .title-img {
     height: 150px;
-    width: 200px;
+    width: 250px;
 }
 
 .main-title {
@@ -125,12 +125,9 @@ header {
     margin: auto;
 }
 
-.menu:last-child {
-    border:3px solid #98C8E5;
-}
 .menu {
-    border: 3px solid #799BC4;
-    background-color: #799BC4;
+    border: 3px solid #98C8E5;
+    background-color: #98C8E5;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     color: #ffffff;
@@ -274,11 +271,13 @@ footer {
 
 /* 캘린더 */
 .page-point {
-    background-color: #98C8E5;
+    background-color: #799BC4;
+    border: 3px solid #799BC4;
 }
 
 .calendar-dox{
     border: 5px solid #799BC4;
+    background-color: #fff;
     border-radius: 10px;
     height: 600px;
     width: 1000px;
