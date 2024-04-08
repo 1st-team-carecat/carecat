@@ -11,15 +11,15 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./CSS/todolist.css">
+    <link rel="stylesheet" href="./css/todolist.css">
 </head>
 <body class="start-page">
     <div class="line">
         <div class="start-title">
-            <img src="./img/main-title.png" class="main-title-img">
+            <img src="./css/main-title.png" class="main-title-img">
         </div>
         <div class="start-button">
-            <a href="./join.html">START</a>
+            <a href="./todolist_join.php">START</a>
         </div>
     </div>
 </body>

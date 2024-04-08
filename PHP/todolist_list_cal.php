@@ -1,8 +1,7 @@
 <?php
 
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
-require_once(FILE_LIB_DB); 
-
+require_once(FILE_LIB_DB); // DB관련 라이브러리
 ?>
 
 <!DOCTYPE html>
@@ -12,13 +11,13 @@ require_once(FILE_LIB_DB);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./CSS/todolist.css">
+  <link rel="stylesheet" href="./css/todolist.css">
 </head>
 
 <body>
   <header>
     <div class="main-title">
-      <img src="./img/content-title.png" class="title-img">
+      <img src="./css/content-title.png" class="title-img">
     </div>
     <div class="header-profile-name">로미</div>
     <a href="./join.html">
@@ -29,10 +28,10 @@ require_once(FILE_LIB_DB);
     <div class="box">
       <div class="menu-content">
         <div class="menu">
-          <a href="./mypage.html">내정보</a>
+          <a href="./todolist_mypage.php">내정보</a>
         </div>
         <div class="menu">
-          <a href="./todolist.html">알림</a>
+          <a href="./todolist_list.php">할일</a>
         </div>
         <div class="menu page-point">
           <a href="#">캘린더</a>

@@ -1,9 +1,10 @@
 <?php
 
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
-require_once(FILE_LIB_DB); 
+require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,53 +12,53 @@ require_once(FILE_LIB_DB);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./join.css">
+    <link rel="stylesheet" href="./css/todolist.css">
 </head>
 <body>
     <header>
         <div class="main-title">
-          <img src="./content-title.png" class="title-img">
+          <img src="./css/content-title.png" class="title-img">
         </div>
     </header>
     <main class="main-box">
         <div class="join-title">
             비슷한 아이를 선택해주세요!
         </div>
-        <form action="./mypage.html" method="get">
+        <form action="./todolist_mypage.php" method="get">
             <div class="join-img-box">
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select1" name="img-select" value="0" required>
                     <label for="img-select1" class="radio-img-label">
-                        <img src="./11zon_cropped-removebg-preview.png" class="cat-img">
-                        <img src="./11zon_cropped-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img">
+                        <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select2" name="img-select" value="1" required>
                     <label for="img-select2" class="radio-img-label">
-                        <img src="./11zon_cropped__1_-removebg-preview.png" class="cat-img">
-                        <img src="./11zon_cropped__1_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img">
+                        <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select3" name="img-select" value="2" required>
                     <label for="img-select3" class="radio-img-label">
-                        <img src="./11zon_cropped__2_-removebg-preview.png" class="cat-img">
-                        <img src="./11zon_cropped__2_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img">
+                        <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select4" name="img-select" value="3" required>
                     <label for="img-select4" class="radio-img-label">
-                        <img src="./11zon_cropped__3_-removebg-preview.png" class="cat-img">
-                        <img src="./11zon_cropped__3_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img">
+                        <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select5" name="img-select" value="4" required>
                     <label for="img-select5" class="radio-img-label">
-                        <img src="./11zon_cropped__4_-removebg-preview.png" class="cat-img">
-                        <img src="./11zon_cropped__4_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img">
+                        <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
             </div>
