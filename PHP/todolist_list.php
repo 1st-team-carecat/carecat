@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $conn->commit();
-        header("Location: todolist_list.php");
+        header("Location: todolist_list.php?selected_date=".$todo_date);
         exit;
     } catch (\Throwable $e) {
         if (!empty($conn)) {
@@ -50,19 +50,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conn = my_db_conn(); // connection 함수 호출
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
+        $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
 
         // GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
         $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
         // GET으로 넘겨 받은 month값이 있다면 넘겨 받은걸 month변수에 적용하고 없다면 현재 월
         $month = isset($_GET['month']) ? $_GET['month'] : date('m');
-
+        
         $date = "$year-$month-01"; // 현재 날짜
         $time = strtotime($date); // 현재 날짜의 타임스탬프
         $start_week = date('w', $time); // 1. 시작 요일
         $total_day = date('t', $time); // 2. 현재 달의 총 날짜
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
+        
 
-        $result = db_select_todos_list($conn, $arr_param);
+        $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
+        $result = db_select_todos_list($conn, $arr_param); // 게시글 내용 조회
+
+
+        
     } catch (\Throwable $e) {
         echo $e->getMessage();
         exit;
@@ -107,18 +113,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="box">
             <div class="menu-content">
                 <div class="menu">
-                    <a href="">내정보</a>
+                    <a href="./todolist_mypage.php">내정보</a>
                 </div>
                 <div class="menu">
-                    <a href="">할일</a>
+                    <a href="#">할일</a>
                 </div>
                 <div class="menu">
-                    <a href="">캘린더</a>
+                    <a href="./todolist_calendar.php">캘린더</a>
                 </div>
             </div>
             <div class="content">
                 <div class="content-list">
-                    <form action="./com.php" method="POST">     
+                    <form action="./todolist_list.php" method="POST">     
                         <div class="list-box">
                             <label for="todo_date">
                                 <input type="date" id="todo_date" name="todo_date" value="<?php echo date('Y-m-d'); ?>" />
@@ -159,7 +165,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <?php } ?>
                     </div>
                     <!-- 달력  -->
-                    <form action="/todolist_list_cal.php" method="get">
+                    <form action="/todolist_list.php" method="get">
+                       
                         <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
@@ -202,12 +209,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
-                                                <li> <button>
+                                                <li><button type="submit" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                     <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {?>
                                                         <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                         <?php echo $n++ ?>
                                                     <?php };?>
-                                                </li> </button>
+                                                   </li>  </button>
                                             <?php }; ?>
                                         <?php } ?>
                                        
@@ -220,9 +227,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form action="./todolist.html" method="post">
                         <div class="shopping-list">
                             <div class="shopping-list-title">쇼핑리스트</div>
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent;  margin: 5px 0;">
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
+                            <input type="text" value="폼폼공" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent;  margin: 5px 0;">
+                            <input type="text" value="고양이정수기필터"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
+                            <input type="text" value="B유산균"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
                             <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
                     </form>
                 </div>
