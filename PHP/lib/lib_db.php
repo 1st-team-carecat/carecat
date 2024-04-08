@@ -180,26 +180,6 @@ function db_select_todos_list_with_date($conn, $chk_day) {
 
 
 
-function db_count_checked($conn) {
-    // SQL
-    $sql = 
-    " SELECT "
-    ." COUNT(checked) chk_ttl, "
-    ." SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt "
-    ." FROM "
-    ." todos "
-    ;
-
-    // 쿼리 실행
-    $stmt = $conn->query($sql);
- 
-    // 쿼리 결과 가져옴
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // 결과 반환
-    return $result; 
-
-}
 
 // join 페이지
 function db_insert_profile(&$conn, &$array_param){
@@ -209,23 +189,25 @@ function db_insert_profile(&$conn, &$array_param){
         ." ,NAME "
         ." ,birth_at "
         ." ,gender "
+        ." ,weight "
         ." ) "
         ." VALUES( "
         ." :PROFILE "
         ." ,:NAME "
         ." ,:birth_at "
         ." ,:gender "
+        ." ,:weight "
         ." ) "
-    ;
-    $stmt = $conn->prepare($sql);
-    $stmt->execute($array_param);
-
-    return $stmt->rowCount();
-}
-
-// calendar 페이지
-function db_select_todolist_no(&$conn, &$array_param){
-    $sql = 
+        ;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($array_param);
+        
+        return $stmt->rowCount();
+    }
+    
+    // calendar 페이지
+    function db_select_todolist_no(&$conn, &$array_param){
+        $sql = 
         " SELECT "
         ." list_no "
         ." todo_date "
@@ -234,10 +216,50 @@ function db_select_todolist_no(&$conn, &$array_param){
         ." todos "
         ." WHERE "
         ." list_no = :list_no "
-    ;
-    $stmt = $conn->prepare($sql);
-    $stmt->execute($array_param);
-    $result = $stmt->fetchAll();
+        ;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($array_param);
+        $result = $stmt->fetchAll();
+        
+        return $result;
+    }
 
-    return $result;
-}
+
+
+    
+    // 내 정보 페이지
+    function db_count_checked($conn) {
+        // SQL
+        $sql = 
+        " SELECT "
+        ." COUNT(checked) chk_ttl, "
+        ." SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt "
+        ." FROM "
+        ." todos "
+        ;
+    
+        // 쿼리 실행
+        $stmt = $conn->query($sql);
+     
+        // 쿼리 결과 가져옴
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // 결과 반환
+        return $result; 
+    
+    }
+
+    function db_update_contents_checked(&$conn, &$array_param) {
+        $sql = 
+            " UPDATE todos
+            SET checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END
+            WHERE list_no = :list_no "
+        ;
+    
+        // Query 실행
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($array_param);
+    
+        // 리턴
+        return $stmt->rowCount();
+    }
