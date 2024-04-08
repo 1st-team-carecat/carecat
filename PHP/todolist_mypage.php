@@ -5,13 +5,13 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 try {
     $conn = my_db_conn();
 
-    // db_count_checked 함수를 호출하여 결과를 얻어옵니다.
+    // 함수 호출하기
     $result = db_count_checked($conn);
 
     if (isset($result['chk_ttl']) && isset($result['chk_cnt'])) {
-        // 전체 데이터 수, 체크된 데이터 수 가져오기
-        $checked_total = $result['chk_ttl'];
-        $checked_count = $result['chk_cnt'];
+        // 데이터 수 가져와서 변수에 담기
+        $checked_total = $result['chk_ttl']; // 전체 데이터
+        $checked_count = $result['chk_cnt']; // 체크된 데이터
 
         // 백분율로 계산
         $percentage = ($checked_total > 0) ? ($checked_count / $checked_total) * 100 : 0;
@@ -66,10 +66,10 @@ try {
                 <a href="./mypage.php">내정보</a>
             </div>
             <div class="menu">
-                <a href="./">알림</a>
+                <a href="./todolist_list.php">할일</a>
             </div>
             <div class="menu">
-                <a href="./">캘린더</a>
+                <a href="./todolist_cal.php">캘린더</a>
             </div>
         </div>
         <div class="content-info">
@@ -90,7 +90,9 @@ try {
                 <div class="gauge">
                     <div class="gauge-back">
                         <span class="gauge-percent"><?php echo $percentage."%"; ?></span>
+                        <!-- 퍼센트를 텍스트로 출력 -->
                         <div class="gauge-bar" style="width: <?php echo $percentage; ?>%;"></div>
+                        <!-- 퍼센트를 게이지 바의 넓이로 출력 -->
                         <span class="gauge-text">행복달성지수</span>
                     </div>
                 </div>
