@@ -124,8 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <div class="content">
                 <div class="content-list">
-                    <!-- 할일추가 폼 -->
-                    <form action="./todolist_list.php" method="POST">
+                    <form action="./com.php" method="POST">     
                         <div class="list-box">
                             <label for="todo_date">
                                 <input type="date" id="todo_date" name="todo_date" value="<?php echo date('Y-m-d'); ?>" />
