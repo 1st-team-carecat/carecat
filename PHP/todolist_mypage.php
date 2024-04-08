@@ -48,7 +48,7 @@ try {
     <link rel="stylesheet" href="./CSS/mypage.css">
     <style>
     .gauge-bar {
-        width: <?php echo $percentage; ?>%;
+        width: <?php echo $percentage; ?>%
     }
     </style>
 </head>
