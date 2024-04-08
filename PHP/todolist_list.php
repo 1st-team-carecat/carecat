@@ -6,7 +6,7 @@ $page_num = 1;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
-
+        $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
         // $list_no = isset($_POST["list_no"]) ? trim($_POST["list_no"]) : "";
 
@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
         $arr_param = [
-            // "list_no" => $list_no
-            "content" => $content, "todo_date" => date("Y-m-d")
+            "content" => $content,
+           "todo_date" => $todo_date
         ];
         $result = db_insert_list($conn, $arr_param);
 
@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-
 
 // GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
 $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
@@ -122,7 +121,7 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                     <form action="./todolist_list.php" method="POST">
                         <div class="list-box">
                             <label for="todo_date">
-                                <input type="date" id="todo_date" name="todo_date" />
+                                <input type="date" id="todo_date" name="todo_date" value="<?php echo date('Y-m-d'); ?>" />
                             </label>
                             <label for="content" class="text-list">
                                 <input type="text" id="content" name="content" placeholder="할일을 추가하세요!" />
@@ -133,13 +132,14 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                         </div>
                     </form>
                     <div class="scroll">
-                        <form method="post">
-                            <?php
+                        <?php
                             $cnt = 1;
                             foreach ($result as $item) {
                                 $cnt++
-                            ?>
+                                ?>
+                                <form method="post">
                                 <div class="chk-list">
+                                    <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
                                     <input type="checkbox" id="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>" />
                                     <label for="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>"></label>
 
@@ -152,8 +152,8 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC1UlEQVR4nO2ZO2wTQRCGFwJCEAkEJA00UEGgBUTDo6cEt0CFCIiCRNi7x+MoaVAIr+hmHKEECmJRICIhpSAWnrETJBc8QkVDAyL0kSISxXB2nJh4D4ll1wfoPmka+/zP/rdzvt9nIRISEhIS/gcy2eJhifRAQfGE+CepVFZJJKWA5xVypVb0KBOUNzUe5vv5NV62eOxKlneJvw3/4eRGhfRk2cBySaCPCvhQfbcU0tvq68hzCvnGmaC8NpZF9w6Ptcv7tLleXpb3KaAPOhNLZpDnJNC4AlrQvE/h7jRq9g6PtTsz4GHpgAR+E7EYuwW0oIBfy6C436oJPyhvkMifnRvAJkOfLt4srbdmxAM62HITWKuwtzUjl+HlzpaMFDaPWGZgYoewiUS+FcOO9AkXKOTRlc0k0owEyvxRIc1oTIw6MbFo5F7z9vO871dWm2qGn128p6w4QXxXuEIhXdeNgBx6tdVUsyfId2g1gX3hCgV0XjvLQXG3qWYaJ7q0RoLCOeEKmaWU/tulFkFMqMUWnWbRXejMIB3VNc0EfNxUM1ywfpcLR4Qr0kB7I+b5rKmmQu7WGhks7LG7+samg4VOrRGkq8aayNd0mj1BvkO4IpXLtf38e2PJyG1TTQV8R/eVnsrl2oRLJPBXTZR4bKyHPNK8IzRtd9W6xsDvNY1fmOvRuGa0poRrFHC++WKnd8Z6yFMavXG7q9Y1Bs5pGn8x1kOa1sSTEburdpy3YslZLvJWLDmrTpiBbOWtqJylkLuFa6LyVpiZflcrjCEtz1ku8lYsOatOmIFs5a2onJXGiS7hmui8xUM+lrY0Pmj7VVWPRR6KCIydzo1U8xbybMRFaqNmneesOgp50pkRoJJoFR7waVdGPKCTLTNSvSMDP7NvhJ6Gf0+IVnKh//k6BdSvkL5ZMBBq9IWaIi68gdJ2iXTK9OFcOEqXsrwtNgMJCQkJCQk/zsB35gy2CL4XJHAAAAAASUVORK5CYII=" />
                                     </button>
                                 </div>
+                            </form>
                             <?php } ?>
-                        </form>
                     </div>
                     <form action="/todolist_list.php" method="get">
                         <input type="date" name="list_start_date" style="display: none;">
