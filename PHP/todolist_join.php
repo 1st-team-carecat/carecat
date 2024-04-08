@@ -4,53 +4,54 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파�
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 if(REQUEST_METHOD === "POST") {
-    try {
-        $PROFILE = isset($_POST["PROFILE"]) ? ($_POST["PROFILE"]) : "";
-        $NAME = isset($_POST["NAME"]) ? ($_POST["NAME"]) : "";
-        $birth_at = isset($_POST["birth_at"]) ? ($_POST["birth_at"]) : "";
-        $gender = isset($_POST["gender"]) ? ($_POST["gender"]) : "";
-        $weight = isset($_POST["weight"]) ? ($_POST["weight"]) : "";
+try {
+    $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
+    $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
+    $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
+    $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
+    $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
 
-        $arr_err_param = [];
-        if($PROFILE === ""){
-            $arr_err_param[] = "PROFILE";
-        }
-        if($NAME === ""){
-            $arr_err_param[] = "NAME";
-        }
-        if($birth_at === ""){
-            $arr_err_param[] = "birth_at";
-        }
-        if($gender !== "0" && $gender !== "1"){
-            $arr_err_param[] = "gender";
-        }
-        if($weight === ""){
-            $arr_err_param[] = "weight";
-        }
-        if(count($arr_err_param) > 0){
-            throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
-        }
 
-        $conn = my_db_conn();
-        $conn->beginTransaction();
+    $arr_err_param = [];
+    if($PROFILE !== "0" && $PROFILE !== "1" && $PROFILE !== "2" && $PROFILE !== "3" && $PROFILE !== "4"){
+        $arr_err_param[] = "PROFILE";
+    }
+    if($NAME === ""){
+        $arr_err_param[] = "NAME";
+    }
+    if($birth_at === ""){
+        $arr_err_param[] = "birth_at";
+    }
+    if($gender !== "0" && $gender !== "1"){
+        $arr_err_param[] = "gender";
+    }
+    if($weight === ""){
+        $arr_err_param[] = "weight";
+    }
+    if(count($arr_err_param) > 0){
+        throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
+    }
 
-        $arr_param = [
-            "PROFILE" => $PROFILE
-            ,"NAME" => $NAME
-            ,"birth_at" => $birth_at
-            ,"gender" => ($gender === "0") ? "수컷" : "암컷"
-            ,"weight" => $weight
-        ];
-        $result = db_insert_profile($conn, $arr_param);
+    $conn = my_db_conn();
+    $conn->beginTransaction();
 
-        if($result !==1 ){
-            throw new Exception("Insert Profile count");
-        }
+    $arr_param = [
+        "PROFILE" => $PROFILE 
+        ,"NAME" => $NAME
+        ,"birth_at" => $birth_at
+        ,"gender" => ($gender === "0") ? "0" : "1"
+        ,"weight" => $weight
+    ];
+    $result = db_insert_profile($conn, $arr_param);
 
-        $conn->commit();
+    if($result !== 1){
+        throw new Exception("Insert Profile count");
+    }
 
-        header("Location: todolist_mypage.php");
-        exit;
+    $conn->commit();
+
+    header("Location: todolist_mypage.php");
+    exit;
 
     } catch (\Throwable $e) {
         if(!empty($conn) && $conn->inTransaction()){
@@ -63,7 +64,7 @@ if(REQUEST_METHOD === "POST") {
         if(!empty($conn)){
             $conn = null;
         }
-    }
+    }   
 }
 
 ?>
@@ -76,7 +77,7 @@ if(REQUEST_METHOD === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>케어해달라냥 가입페이지</title>
     <link rel="stylesheet" href="./css/todolist.css">
 </head>
 <body>
@@ -89,7 +90,7 @@ if(REQUEST_METHOD === "POST") {
         <div class="join-title">
             비슷한 아이를 선택해주세요!
         </div>
-        <form action="./todolist_mypage.php" method="POST">
+        <form action="./todolist_join.php" method="POST">
             <div class="join-img-box">
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="0" required>
@@ -146,7 +147,7 @@ if(REQUEST_METHOD === "POST") {
                 <div class="join-content">
                     <label for="birthday">생년월일</label>
                     <div class="content-title">
-                        <input type="date" class="join-date" name="birth_at" id="birth_at" required value="<?php echo date('Y-m-d'); ?>">
+                        <input type="date" class="join-date" name="birth_at" id="birth_at" required >
                     </div>
                 </div>
                 <div class="join-content">
