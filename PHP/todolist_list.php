@@ -99,7 +99,7 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
             <img src="./css/content-title.png" class="title-img" />
         </div>
         <div class="header-profile-name">로미</div>
-        <a href="">
+        <a href="./todolist_mypage.php">
             <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
         </a>
     </header>
@@ -159,25 +159,25 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                         <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
-                                <?php if ($month == 1) : ?>
+                                <?php if ($month == 1) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year - 1 ?>&month=12">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                <?php else : ?>
+                                <?php }else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month - 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                    <p><?php echo  "$year 년 $month 월" ?> </p>
-                                <?php endif ?>
-                                <?php if ($month == 12) : ?>
+                                <?php }?>
+                                <p><?php echo  "$year 년 $month 월" ?> </p>
+                                <?php if ($month == 12) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year + 1 ?>&month=1">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
-                                <?php else : ?>
+                                <?php }else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
-                                <?php endif ?>
+                                <?php } ?>
 
                             </div>
 
@@ -193,16 +193,16 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                                         <li>토</li>
                                     </ul>
                                     <ul class="days">
-                                        <?php for ($n = 1, $i = 0; $i < $total_week; $i++) : ?>
-                                            <?php for ($k = 0; $k < 7; $k++) : ?>
+                                        <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
+                                            <?php for ($k = 0; $k < 7; $k++) { ?>
                                                 <li>
-                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) : ?>
+                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {?>
                                                         <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                         <?php echo $n++ ?>
-                                                    <?php endif ?>
+                                                    <?php };?>
                                                 </li>
-                                            <?php endfor; ?>
-                                        <?php endfor; ?>
+                                            <?php }; ?>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>
