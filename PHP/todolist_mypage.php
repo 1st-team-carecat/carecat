@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/carecat/PHP/todolist_config.php"); // 설정 파일 호출
+require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 try {
@@ -46,11 +46,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이 페이지 PHP</title>
     <link rel="stylesheet" href="./CSS/mypage.css">
-    <style>
-    .gauge-bar {
-        width: <?php echo $percentage; ?>%
-    }
-    </style>
+
 </head>
 <body>
     <header>
@@ -85,15 +81,10 @@ try {
                 </div>
                 <div class="info-right">
                     <span class="info-text1">로미</span>
-                    <span class="info-text1"><?php echo $name; ?></span>
                     <span class="info-text2">남</span>
-                    <span class="info-text2"><?php echo ($gender) ?></span>
                     <span class="info-text1">8개월</span>
-                    <span class="info-text1"><?php echo $birth_at; ?> 개월</span>
                     <span class="info-text2">4kg</span>
-                    <span class="info-text2"><?php echo $weight; ?>kg</span>
                     <span class="dday">로미의 생일이 100일 남았습니다!</span>
-                    <span class="dday"><?php echo '로미의 생일이 ' . $days_until_birthday . '일 남았습니다!'; ?></span>
                     </div>
                 </div>
                 <div class="gauge">

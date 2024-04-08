@@ -189,6 +189,10 @@ function db_insert_profile(&$conn, &$array_param){
         ." ,:gender "
         ." ) "
     ;
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    return $stmt->rowCount();
 }
 
 // calendar 페이지
