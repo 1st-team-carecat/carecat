@@ -2,6 +2,7 @@
 
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
+
 ?>
 
 <!DOCTYPE html>
