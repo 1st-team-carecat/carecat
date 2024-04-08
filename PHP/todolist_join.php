@@ -36,9 +36,19 @@ if(REQUEST_METHOD === "POST") {
             ,"birth_at" => $birth_at
             ,"gender" => $gender
         ];
-        $result = db_insert_profile($conn, $arr_param);
+        // $result = db_insert_profile($conn, $arr_param);
+
+        if($result !==1 ){
+            throw new Exception("Insert Profile count");
+        }
+
+        $conn->commit();
+
+        header("Location: todolist_mypage.php");
+        exit;
 
     } catch (\Throwable $e) {
+        if(!empty($))
         
     }
 }
