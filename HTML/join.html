@@ -4,82 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/HTML/CSS/todolist.css">
+    <link rel="stylesheet" href="./join.css">
 </head>
 <body>
     <header>
         <div class="main-title">
-          <img src="./img/content-title.png" class="title-img">
+          <img src="./content-title.png" class="title-img">
         </div>
-      </header>
-      <main class="main-box">
+    </header>
+    <main class="main-box">
         <div class="join-title">
             비슷한 아이를 선택해주세요!
         </div>
-        <form action="/HTML/mypage.html" method="get">
+        <form action="./mypage.html" method="get">
             <div class="join-img-box">
-                <div class="join-img1">
-                    <input type="radio" class="btn" id="select1" name="option" value="0 required"/>
-                    <label for="select1">
-                        <img src="./img/11zon_cropped-removebg-preview.png" alt="">
+                <div class="join-img">
+                    <input type="radio" class="radio-img" id="img-select1" name="img-select" value="0" required>
+                    <label for="img-select1" class="radio-img-label">
+                        <img src="./11zon_cropped-removebg-preview.png" class="cat-img">
+                        <img src="./11zon_cropped-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
-                <div class="join-img1">
-                    <input type="radio" class="btn" id="select2" name="option" value="0 required"/>
-                    <label for="select2">
-                        <img src="./img/11zon_cropped__1_-removebg-preview.png" alt="">
+                <div class="join-img">
+                    <input type="radio" class="radio-img" id="img-select2" name="img-select" value="1" required>
+                    <label for="img-select2" class="radio-img-label">
+                        <img src="./11zon_cropped__1_-removebg-preview.png" class="cat-img">
+                        <img src="./11zon_cropped__1_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
-                <div class="join-img1">
-                    <input type="radio" class="btn" id="select3" name="option" value="0 required"/>
-                    <label for="select3">
-                        <img src="./img/11zon_cropped__2_-removebg-preview.png" alt="">
+                <div class="join-img">
+                    <input type="radio" class="radio-img" id="img-select3" name="img-select" value="2" required>
+                    <label for="img-select3" class="radio-img-label">
+                        <img src="./11zon_cropped__2_-removebg-preview.png" class="cat-img">
+                        <img src="./11zon_cropped__2_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
-                <div class="join-img1">
-                    <input type="radio" class="btn" id="select4" name="option" value="0 required"/>
-                    <label for="select4">
-                        <img src="./img/11zon_cropped__3_-removebg-preview.png" alt="">
+                <div class="join-img">
+                    <input type="radio" class="radio-img" id="img-select4" name="img-select" value="3" required>
+                    <label for="img-select4" class="radio-img-label">
+                        <img src="./11zon_cropped__3_-removebg-preview.png" class="cat-img">
+                        <img src="./11zon_cropped__3_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
-                <div class="join-img1">
-                    <input type="radio" class="btn" id="select5" name="option" value="0 required"/>
-                    <label for="select5">
-                        <img src="./img/11zon_cropped__4_-removebg-preview.png" alt="">
+                <div class="join-img">
+                    <input type="radio" class="radio-img" id="img-select5" name="img-select" value="4" required>
+                    <label for="img-select5" class="radio-img-label">
+                        <img src="./11zon_cropped__4_-removebg-preview.png" class="cat-img">
+                        <img src="./11zon_cropped__4_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
             </div>
             <div class="join-content-box">
-                <label for="name">이름</label>
-                <div class="content-title">
-                    <input type="text" name="name" id="name" required>
+                <div class="join-content">
+                    <label for="name">이름</label>
+                    <div class="content-title">
+                        <input type="text" name="name" id="name" required>
+                    </div>
                 </div>
-            </div>
-            <div class="join-content-box">
-                <label for="gender">성별</label>
-                <div class="content-title">
-                    <input type="radio" class="btn" name="gender" id="0" checked required>
-                    <label for="0" class="men">수컷</label>
-                    <input type="radio" class="btn" name="gender" id="1" reauired>
-                    <label for="1" class="women">암컷</label>
+                <div class="join-content">
+                    <label for="gender">성별</label>
+                    <div class="content-title">
+                        <input type="radio" class="btn" name="gender" id="0" required>
+                        <label for="0" class="men">수컷</label>
+                        <input type="radio" class="btn" name="gender" id="1" reauired>
+                        <label for="1" class="women">암컷</label>
+                    </div>
                 </div>
-            </div>
-            <div class="join-content-box">
-                <label for="birthday">생년월일</label>
-                <div class="content-title content-title1">
-                    <input type="date" name="birthday" id="birthday" class="input_text" required>
+                <div class="join-content">
+                    <label for="birthday">생년월일</label>
+                    <div class="content-title">
+                        <input type="date" class="join-date" name="birthday" id="birthday" required>
+                    </div>
                 </div>
-            </div>
-            <div class="join-content-box">
-                <label for="weight">몸무게</label>
-                <div class="content-title">
-                    <input type="text" name="weight" id="weight" required>
+                <div class="join-content">
+                    <label for="weight">몸무게</label>
+                    <div class="content-title">
+                        <input type="text" name="weight" id="weight" required>
+                    </div>
                 </div>
-            </div>
-        <a href="/HTML/mypage.html">
-            <input type="submit" class="button" value="다음으로">
-        </a>
+                <footer>
+                    <button type="submit" class="join-save">저장</button>
+                </footer>
+            </div>  
         </form>
-      </main>
+    </main>
 </body>
 </html>
