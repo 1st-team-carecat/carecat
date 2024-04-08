@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
-        // $list_no = isset($_POST["list_no"]) ? trim($_POST["list_no"]) : "";
 
         $arr_err_param = [];
         if ($content === "") {
@@ -160,8 +159,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </form>
                             <?php } ?>
                     </div>
-                    <!-- 달력 폼 -->
-                    <form action="/todolist_list.php" method="get">
+                    <!-- 달력  -->
+                    <form action="/todolist_list_cal.php" method="get">
                         <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
@@ -200,17 +199,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <li>토</li>
                                     </ul>
                                     <ul class="days">
+                                       
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
-                                                <li>
+                                                <li> <button>
                                                     <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {?>
                                                         <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                         <?php echo $n++ ?>
                                                     <?php };?>
-                                                </li>
+                                                </li> </button>
                                             <?php }; ?>
                                         <?php } ?>
+                                       
                                     </ul>
                                 </div>
                             </div>
