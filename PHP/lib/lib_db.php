@@ -33,18 +33,19 @@ function db_select_todos_cnt($conn)
 function db_select_todos_list(&$conn, &$array_param)
 {
     $sql =
-        " SELECT "
-        . " list_no "
-        . " cat_no "
-        . " ,content "
-        . " ,todo_date "
-        . " ,checked "
-        . " FROM "
-        . " todos "
-        . " WHERE "
-        . " deleted_at IS NULL "
-        . " ORDER BY "
-        . " list_no DESC ";
+    "SELECT "
+    . "list_no "
+    . ",cat_no "
+    . ",content "
+    . ",todo_date "
+    . ",checked "
+    . "FROM "
+    . "todos "
+    . "WHERE "
+    . "deleted_at IS NULL "
+    . "AND cat_no = 1 " // 이 부분을 추가해줍니다.
+    . "ORDER BY "
+    . "list_no DESC ";
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
     $result = $stmt->fetchAll();
@@ -74,7 +75,7 @@ function db_insert_list(&$conn, &$array_param)
     // SQL
     $sql = "INSERT INTO todos (
         list_no,
-        cat_no, 
+        cat_no,
         todo_date,
         content,
         checked
@@ -82,7 +83,7 @@ function db_insert_list(&$conn, &$array_param)
     VALUES (
         :list_no,
         1,
-        CURDATE(), 
+        :todo_date, 
         :content, 
         0
     )";
@@ -91,7 +92,9 @@ function db_insert_list(&$conn, &$array_param)
     // Query 실행
     $stmt = $conn->prepare($sql);
 
-    // :content 매개변수에 해당하는 값 바인딩
+    // 바인딩
+    $stmt->bindParam(':list_no', $array_param['list_no']);
+    $stmt->bindParam(':todo_date', $array_param['todo_date']);
     $stmt->bindParam(':content', $array_param['content']);
 
     // Query 실행
@@ -101,22 +104,23 @@ function db_insert_list(&$conn, &$array_param)
     return $stmt->rowCount();
 }
 
+
+
 // 리스트 페이지 -수정
 
 function db_update_todos_no(&$conn, &$array_param)
 {
     $sql =
-        " UPDATE "
-        . " todos "
-        . " SET "
-        . " ,content = :content "
-        . " WHERE "
-        . " list_no = :list_no ";
+        " UPDATE todos " .
+        " SET content = :content " .
+        " ,updated_at = NOW() " .
+        " WHERE list_no = :list_no";
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
 
     return $stmt->rowCount();
 }
+
 
 
 // 리스트페이지 - 달력

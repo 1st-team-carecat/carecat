@@ -46,6 +46,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이 페이지 PHP</title>
     <link rel="stylesheet" href="./CSS/mypage.css">
+
 </head>
 <body>
     <header>
