@@ -9,6 +9,7 @@ if(REQUEST_METHOD === "POST") {
         $NAME = isset($_POST["NAME"]) ? ($_POST["NAME"]) : "";
         $birth_at = isset($_POST["birth_at"]) ? ($_POST["birth_at"]) : "";
         $gender = isset($_POST["gender"]) ? ($_POST["gender"]) : "";
+        $weight = isset($_POST["weight"]) ? ($_POST["weight"]) : "";
 
         $arr_err_param = [];
         if($PROFILE === ""){
@@ -20,8 +21,11 @@ if(REQUEST_METHOD === "POST") {
         if($birth_at === ""){
             $arr_err_param[] = "birth_at";
         }
-        if($gender === ""){
+        if($gender !== "0" && $gender !== "1"){
             $arr_err_param[] = "gender";
+        }
+        if($weight === ""){
+            $arr_err_param[] = "weight";
         }
         if(count($arr_err_param) > 0){
             throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
@@ -34,7 +38,8 @@ if(REQUEST_METHOD === "POST") {
             "PROFILE" => $PROFILE
             ,"NAME" => $NAME
             ,"birth_at" => $birth_at
-            ,"gender" => $gender
+            ,"gender" => ($gender === "0") ? "수컷" : "암컷"
+            ,"weight" => $weight
         ];
         $result = db_insert_profile($conn, $arr_param);
 
@@ -53,6 +58,7 @@ if(REQUEST_METHOD === "POST") {
         }
         echo $e->getMessage();
         exit;
+
     } finally {
         if(!empty($conn)){
             $conn = null;
@@ -86,35 +92,35 @@ if(REQUEST_METHOD === "POST") {
         <form action="./todolist_mypage.php" method="POST">
             <div class="join-img-box">
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select1" name="img-select" value="0" required>
+                    <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="0" required>
                     <label for="img-select1" class="radio-img-label">
                         <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img">
                         <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select2" name="img-select" value="1" required>
+                    <input type="radio" class="radio-img" id="img-select2" name="PROFILE" value="1" required>
                     <label for="img-select2" class="radio-img-label">
                         <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img">
                         <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select3" name="img-select" value="2" required>
+                    <input type="radio" class="radio-img" id="img-select3" name="PROFILE" value="2" required>
                     <label for="img-select3" class="radio-img-label">
                         <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img">
                         <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select4" name="img-select" value="3" required>
+                    <input type="radio" class="radio-img" id="img-select4" name="PROFILE" value="3" required>
                     <label for="img-select4" class="radio-img-label">
                         <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img">
                         <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img-unchecke">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select5" name="img-select" value="4" required>
+                    <input type="radio" class="radio-img" id="img-select5" name="PROFILE" value="4" required>
                     <label for="img-select5" class="radio-img-label">
                         <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img">
                         <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img-unchecke">
@@ -123,24 +129,24 @@ if(REQUEST_METHOD === "POST") {
             </div>
             <div class="join-content-box">
                 <div class="join-content">
-                    <label for="name">이름</label>
+                    <label for="NAME">이름</label>
                     <div class="content-title">
-                        <input type="text" name="name" id="name" required>
+                        <input type="text" name="NAME" id="NAME" required>
                     </div>
                 </div>
                 <div class="join-content">
                     <label for="gender">성별</label>
                     <div class="content-title">
-                        <input type="radio" class="btn" name="gender" id="0" required>
-                        <label for="0" class="men">수컷</label>
-                        <input type="radio" class="btn" name="gender" id="1" reauired>
-                        <label for="1" class="women">암컷</label>
+                        <input type="radio" name="gender" id="0" value="0" required>
+                        <label for="0">수컷</label>
+                        <input type="radio" name="gender" id="1" value="1" reauired>
+                        <label for="1">암컷</label>
                     </div>
                 </div>
                 <div class="join-content">
                     <label for="birthday">생년월일</label>
                     <div class="content-title">
-                        <input type="date" class="join-date" name="birthday" id="birthday" required>
+                        <input type="date" class="join-date" name="birth_at" id="birth_at" required value="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
                 <div class="join-content">
