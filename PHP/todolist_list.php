@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $conn->commit();
-        header("Location: todolist_list.php");
+        header("Location: todolist_list.php?selected_date=".$todo_date);
         exit;
     } catch (\Throwable $e) {
         if (!empty($conn)) {
@@ -113,18 +113,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="box">
             <div class="menu-content">
                 <div class="menu">
-                    <a href="">내정보</a>
+                    <a href="./todolist_mypage.php">내정보</a>
                 </div>
                 <div class="menu">
-                    <a href="">할일</a>
+                    <a href="#">할일</a>
                 </div>
                 <div class="menu">
-                    <a href="">캘린더</a>
+                    <a href="./todolist_calendar.php">캘린더</a>
                 </div>
             </div>
             <div class="content">
                 <div class="content-list">
-                    <form action="./com.php" method="POST">     
+                    <form action="./todolist_list.php" method="POST">     
                         <div class="list-box">
                             <label for="todo_date">
                                 <input type="date" id="todo_date" name="todo_date" value="<?php echo date('Y-m-d'); ?>" />
@@ -227,9 +227,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form action="./todolist.html" method="post">
                         <div class="shopping-list">
                             <div class="shopping-list-title">쇼핑리스트</div>
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent;  margin: 5px 0;">
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
-                            <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
+                            <input type="text" value="폼폼공" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent;  margin: 5px 0;">
+                            <input type="text" value="고양이정수기필터"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
+                            <input type="text" value="B유산균"name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
                             <input type="text" name="" id="" style="width: 170px; height: 3px; border:none; border-bottom: 3px solid #799bc4; border-radius: 0; background-color: transparent; margin: 5px 0;">
                     </form>
                 </div>
