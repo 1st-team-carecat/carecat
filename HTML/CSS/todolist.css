@@ -270,6 +270,7 @@ footer {
     height: 600px;
     width: 1000px;
     padding: 0 25px;
+    background-color: #fff;
 }
 
 .calendar ul {
