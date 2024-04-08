@@ -30,8 +30,7 @@ function db_select_todos_cnt($conn)
     return (int)$result[0]["cnt"];
 }
 
-function db_select_todos_list(&$conn, &$array_param)
-{
+function db_select_todos_list(&$conn, &$array_param) {
     $sql =
     "SELECT "
     . "list_no "
@@ -43,15 +42,31 @@ function db_select_todos_list(&$conn, &$array_param)
     . "todos "
     . "WHERE "
     . "deleted_at IS NULL "
-    . "AND cat_no = 1 " // 이 부분을 추가해줍니다.
-    . "ORDER BY "
+    . "AND cat_no = 1 ";
+    
+    // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
+    if (isset($array_param['selected_date'])) {
+        $sql .= "AND todo_date = :selected_date ";
+    } else {
+        // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
+        $array_param['selected_date'] = date('Y-m-d');
+        $sql .= "AND todo_date = :selected_date ";
+    }
+
+    $sql .= "ORDER BY "
     . "list_no DESC ";
+    
     $stmt = $conn->prepare($sql);
-    $stmt->execute($array_param);
+    
+    // 바인딩
+    $stmt->bindParam(':selected_date', $array_param['selected_date']);
+
+    $stmt->execute();
     $result = $stmt->fetchAll();
 
     return $result;
 }
+
 
 function db_update_todos(&$conn, &$array_param)
 {
