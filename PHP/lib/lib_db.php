@@ -168,3 +168,19 @@ function db_count_checked($conn) {
     return $result; 
 
 }
+
+
+function db_update_contents_checked(&$conn, &$array_param) {
+    $sql = 
+        " UPDATE todos
+        SET checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END
+        WHERE list_no = :list_no "
+    ;
+
+    // Query 실행
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    // 리턴
+    return $stmt->rowCount();
+}

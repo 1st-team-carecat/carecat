@@ -119,7 +119,7 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
             </div>
             <div class="content">
                 <div class="content-list">
-                    <form action="./todolist_list.php" method="POST">
+                    <form action="./com.php" method="POST">
                         <div class="list-box">
                             <label for="todo_date">
                                 <input type="date" id="todo_date" name="todo_date" />
