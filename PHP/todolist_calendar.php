@@ -2,6 +2,35 @@
 
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
+
+try {
+  $conn = my_db_conn();
+
+  $todo_date = isset($_GET["todo_date"]) ? $_GET["todo_date"] : "";
+  $content = isset($_GET["content"]) ? $_GET["content"] : "";
+
+  
+  $arr_param = [
+    "no" => $no
+  ];
+  $result = db_select_todolist_no($conn, $arr_param);
+
+  if(count($result) !== 1){
+    throw new Exception("Select todolist no count");
+  }
+
+  $item = $result[0];
+
+} catch (\Throwable $e) {
+  echo $e->getMessage();
+  exit;
+
+} finally {
+  if(!empty($conn)){
+    $conn = null;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>

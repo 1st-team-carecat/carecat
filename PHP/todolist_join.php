@@ -36,7 +36,7 @@ if(REQUEST_METHOD === "POST") {
             ,"birth_at" => $birth_at
             ,"gender" => $gender
         ];
-        // $result = db_insert_profile($conn, $arr_param);
+        $result = db_insert_profile($conn, $arr_param);
 
         if($result !==1 ){
             throw new Exception("Insert Profile count");
@@ -48,8 +48,15 @@ if(REQUEST_METHOD === "POST") {
         exit;
 
     } catch (\Throwable $e) {
-        if(!empty($))
-        
+        if(!empty($conn) && $conn->inTransaction()){
+            $conn->rollBack();
+        }
+        echo $e->getMessage();
+        exit;
+    } finally {
+        if(!empty($conn)){
+            $conn = null;
+        }
     }
 }
 

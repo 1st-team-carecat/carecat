@@ -172,3 +172,40 @@ function db_count_checked($conn) {
     return $result; 
 
 }
+
+// join 페이지
+function db_insert_profile(&$conn, &$array_param){
+    $sql =
+        " INSERT INTO informations( "
+        ." PROFILE "
+        ." ,NAME "
+        ." ,birth_at "
+        ." ,gender "
+        ." ) "
+        ." VALUES( "
+        ." :PROFILE "
+        ." ,:NAME "
+        ." ,:birth_at "
+        ." ,:gender "
+        ." ) "
+    ;
+}
+
+// calendar 페이지
+function db_select_todolist_no(&$conn, &$array_param){
+    $sql = 
+        " SELECT "
+        ." list_no "
+        ." todo_date "
+        ." content "
+        ." FROM "
+        ." todos "
+        ." WHERE "
+        ." list_no = :list_no "
+    ;
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+    $result = $stmt->fetchAll();
+
+    return $result;
+}
