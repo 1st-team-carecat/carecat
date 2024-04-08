@@ -39,7 +39,7 @@ try {
         "PROFILE" => $PROFILE 
         ,"NAME" => $NAME
         ,"birth_at" => $birth_at
-        ,"gender" => ($gender === "0") ? "0" : "1"
+        ,"gender" => $gender
         ,"weight" => $weight
     ];
     $result = db_insert_profile($conn, $arr_param);
