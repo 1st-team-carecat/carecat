@@ -52,6 +52,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
 
+        // GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
+        $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+        // GET으로 넘겨 받은 month값이 있다면 넘겨 받은걸 month변수에 적용하고 없다면 현재 월
+        $month = isset($_GET['month']) ? $_GET['month'] : date('m');
+
+        $date = "$year-$month-01"; // 현재 날짜
+        $time = strtotime($date); // 현재 날짜의 타임스탬프
+        $start_week = date('w', $time); // 1. 시작 요일
+        $total_day = date('t', $time); // 2. 현재 달의 총 날짜
+        $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
+
         $result = db_select_todos_list($conn, $arr_param);
     } catch (\Throwable $e) {
         echo $e->getMessage();
@@ -63,16 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
-$year = isset($_GET['year']) ? $_GET['year'] : date('Y');
-// GET으로 넘겨 받은 month값이 있다면 넘겨 받은걸 month변수에 적용하고 없다면 현재 월
-$month = isset($_GET['month']) ? $_GET['month'] : date('m');
-
-$date = "$year-$month-01"; // 현재 날짜
-$time = strtotime($date); // 현재 날짜의 타임스탬프
-$start_week = date('w', $time); // 1. 시작 요일
-$total_day = date('t', $time); // 2. 현재 달의 총 날짜
-$total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
 
 ?>
 
@@ -99,7 +100,7 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
             <img src="./css/content-title.png" class="title-img" />
         </div>
         <div class="header-profile-name">로미</div>
-        <a href="">
+        <a href="./todolist_mypage.php">
             <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
         </a>
     </header>
@@ -118,6 +119,7 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
             </div>
             <div class="content">
                 <div class="content-list">
+                    <!-- 할일추가 폼 -->
                     <form action="./todolist_list.php" method="POST">
                         <div class="list-box">
                             <label for="todo_date">
@@ -133,13 +135,16 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                     </form>
                     <div class="scroll">
                         <?php
+                        // 게시글 출력
                             $cnt = 1;
                             foreach ($result as $item) {
                                 $cnt++
                                 ?>
                                 <form method="post">
                                 <div class="chk-list">
+                                    <!-- list_no 담을 인풋 히든처리 -->
                                     <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
+
                                     <input type="checkbox" id="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>" />
                                     <label for="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>"></label>
 
@@ -155,29 +160,31 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                             </form>
                             <?php } ?>
                     </div>
+                    <!-- 달력 폼 -->
                     <form action="/todolist_list.php" method="get">
                         <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
-                                <?php if ($month == 1) : ?>
+                                <!-- 년 월 구하기 -->
+                                <?php if ($month == 1) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year - 1 ?>&month=12">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                <?php else : ?>
+                                <?php }else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month - 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                    <p><?php echo  "$year 년 $month 월" ?> </p>
-                                <?php endif ?>
-                                <?php if ($month == 12) : ?>
+                                <?php }?>
+                                <p><?php echo  "$year 년 $month 월" ?> </p>
+                                <?php if ($month == 12) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year + 1 ?>&month=1">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
-                                <?php else : ?>
+                                <?php }else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
-                                <?php endif ?>
+                                <?php } ?>
 
                             </div>
 
@@ -193,21 +200,23 @@ $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주
                                         <li>토</li>
                                     </ul>
                                     <ul class="days">
-                                        <?php for ($n = 1, $i = 0; $i < $total_week; $i++) : ?>
-                                            <?php for ($k = 0; $k < 7; $k++) : ?>
+                                        <!-- 달력 날짜 표시 -->
+                                        <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
+                                            <?php for ($k = 0; $k < 7; $k++) { ?>
                                                 <li>
-                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) : ?>
+                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {?>
                                                         <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                         <?php echo $n++ ?>
-                                                    <?php endif ?>
+                                                    <?php };?>
                                                 </li>
-                                            <?php endfor; ?>
-                                        <?php endfor; ?>
+                                            <?php }; ?>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <!-- 쇼핑리스트 -->
                     <form action="./todolist.html" method="post">
                         <div class="shopping-list">
                             <div class="shopping-list-title">쇼핑리스트</div>

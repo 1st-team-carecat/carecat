@@ -83,7 +83,7 @@ function db_insert_list(&$conn, &$array_param)
     VALUES (
         :list_no,
         1,
-        CURDATE(), 
+        :todo_date, 
         :content, 
         0
     )";
@@ -94,6 +94,7 @@ function db_insert_list(&$conn, &$array_param)
 
     // 바인딩
     $stmt->bindParam(':list_no', $array_param['list_no']);
+    $stmt->bindParam(':todo_date', $array_param['todo_date']);
     $stmt->bindParam(':content', $array_param['content']);
 
     // Query 실행
