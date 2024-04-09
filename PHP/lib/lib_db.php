@@ -69,19 +69,20 @@ function db_select_todos_cnt($conn)
 function db_select_todos_list(&$conn, &$array_param) {
     $sql = 
     " SELECT 
-     t.list_no,
-     t.cat_no,
-     t.content,
-     t.todo_date,
-     t.checked,
-     i.name
+     tod.list_no,
+     tod.cat_no,
+     tod.content,
+     tod.todo_date,
+     tod.checked,
+     inf.name,
+     inf.profile
     FROM 
-    todos t
+    todos tod
     JOIN 
-    informations i ON t.cat_no = i.cat_no
+    informations inf ON tod.cat_no = inf.cat_no
     WHERE 
-    t.deleted_at IS NULL 
-    AND t.cat_no = 1";
+    tod.deleted_at IS NULL 
+    AND tod.cat_no = 1";
 
     
     // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
