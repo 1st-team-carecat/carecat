@@ -130,7 +130,7 @@ try {
                       <!-- 날짜 표시 -->
                       <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {
                         echo $n;
-                        // 할일 목록이 있으면 숫자 1 출력
+                        // 할일 목록이 있으면 img출력
                         if (!empty($todo_list)) {
                           echo '<br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAACbUlEQVR4nKVWTWsUQRBdjd/oQZCgEDwEjaIeEvxCb+rBiwqi3rypoOBF9CQ5KYLgH/CQs4ZV8QPMQchU74dxu6ojootCgkTBg0Q0qFGQuD7pnsnuZLdndowLfZip6ffqvaqu3lyuzQ/Agv+JJ28c5k1QXAJxDUqqUM821mPV6hIouQHFUyD5CpJryOc7soMPjS2F4ndQgsbicRiz2MWJb86N2WUuZicoyKlWALEkR0Jl8rslRvIZRIuyERAPJBBcBslZf0xgybMRKL6TQtCfSBCrUzuCK14A0mdA5rQ/xjVbu4wWmc0g/uNRsBPDemuCunI737dB8WEYsyJ8lsEmgDe2590ieetRcNLtK71c7XCKuiee8bl6xsSvUTLrUS6vguIH4XseB+kdje/leJPCuwAWItAHoPhT9G7GPlu/+1rsIH5cBxvy+wpl9rlaWTIL7qzj7004xRyU3PYXzazJVLBoXNgaeOoybQkmvATB6HYfkJcgMAcTCj9l/fzmDRbMuoYd3BdlOAOSMSh9tKlBPKMjstovTSZms0WB97Z4a0cF6UOxoj9MSHK/LdYJz1zpDzeObgDxZEJ2kyC9NlJ41WPPrbjE67GNAUZGloMqXa49E8eC+/aJ6yCqrgSxjiU4OHueGiRF3YOC7AoPku6Fkg+p4A2wR+7c2H2B2Y0Sd6e3XNjf05nAVV3JLzeBn77oTAfP5ztA/P6fwNWc9Sr1CnVS5w+OUE2lK5mAaBlIfs4fnL+0vZtBcj666OMbayB5DpJ7UHwfSgTEP5oIPsbPRhsS3QuSCyC+hICP+eaSa88Sd0PpPShWtth/Gj6wv9yB9UMKw8w6AAAAAElFTkSuQmCC">';
                         }
