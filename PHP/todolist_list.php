@@ -184,6 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <div class="chk-list">
                                     <!-- list_no 담을 인풋 히든처리 -->
                                     <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
+                                    <input type="hidden" value="<?php echo $item["todo_date"]?>" name="todo_date">
                                     <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
                                     <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
 
