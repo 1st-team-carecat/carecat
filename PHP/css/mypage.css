@@ -66,6 +66,11 @@ body {
     font-family: 'GmarketSansMedium';
 }
 
+/* form {
+    font-family: 'GmarketSansMedium';
+} */
+
+
 /* 반복 디자인 */
 
 a {
@@ -238,6 +243,9 @@ input[type="date"] {
     place-items: center;
 }
 
+
+/* ------------------------------------------------ */
+
 .info-edit {
     width: 150px;
     height: 50px;
@@ -248,8 +256,15 @@ input[type="date"] {
     line-height: 55px;
     color: white;
     font-size: 1.2rem;
-    font-weight: 900;
+    border: none;
+    font-family: 'GmarketSansMedium';
 }
+
+.up-btn {
+    width: 70px;
+}
+
+/* ------------------------------------------------ */
 
 .info-right {
     display: grid;
@@ -270,16 +285,23 @@ input[type="date"] {
     font-size: 1.2rem;
 }
 
+/* ----------------------------- */
+
 .info-text1 {
     background-color: #DADADA;
     margin: 5px;
+    border: none;
+    font-family: 'GmarketSansMedium';
 }
 
 .info-text2 {
     background-color: #EDEDED;
     margin: 5px;
+    border: none;
+    font-family: 'GmarketSansMedium';
 
 }
+
 
 .dday {
     background-color: #DADADA;
@@ -290,8 +312,16 @@ input[type="date"] {
     line-height: 90px;
     margin: 5px;
     font-size: 1.2rem;
-
+    border: none;
+    font-family: 'GmarketSansMedium';
+    
 }
+
+.dday-up {
+    color: #767676;
+}
+
+/* ----------------------------- */
 
 .gauge {
     place-items: center;
@@ -359,5 +389,4 @@ input[type="date"] {
 
 
 
-
-
+/* text-1, text-2 */

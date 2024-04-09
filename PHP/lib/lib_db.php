@@ -267,4 +267,32 @@ function db_select_todolist_no(&$conn, &$array_param){
         return $stmt->rowCount();
     }
     
-    
+    function db_update_information(&$conn, &$array_param) {
+        //SQL
+        $sql =
+            "UPDATE informations
+            SET
+                name = :name
+                ,gender = :gender
+                ,birth_at = :birth_at
+                ,weight = :weight
+            WHERE cat_no = :cat_no " 
+            ;
+                
+        ;
+
+        // 쿼리 실행
+        $stmt = $conn->prepare($sql);
+
+        // 바인딩 매개 변수 설정
+        $stmt->bindParam(':name', $array_param['name']);
+        $stmt->bindParam(':gender', $array_param['gender']);
+        $stmt->bindParam(':birth_at', $array_param['birth_at']);
+        $stmt->bindParam(':weight', $array_param['weight']);
+        $stmt->bindParam(':cat_no', $array_param['cat_no']);
+        
+
+        $stmt->execute();
+
+        return true;
+    }
