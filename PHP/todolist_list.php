@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $arr_param = [
             "content" => $content,
-           "todo_date" => $todo_date
+            "todo_date" => $todo_date
         ];
         $result = db_insert_list($conn, $arr_param);
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $conn->commit();
-        header("Location: todolist_list.php?selected_date=".$todo_date);
+        header("Location: todolist_list.php?selected_date=" . $todo_date);
         exit;
     } catch (\Throwable $e) {
         if (!empty($conn)) {
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
-        
+
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = db_select_todos_list($conn, $arr_param); // 게시글 내용 조회
 
 
-        
+
     } catch (\Throwable $e) {
         echo $e->getMessage();
         exit;
@@ -160,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <div class="content">
                 <div class="content-list">
-                    <form action="./todolist_list.php" method="POST">     
+                    <form action="./todolist_list.php" method="POST">
                         <div class="list-box">
                             <label for="todo_date">
                                 <input type="date" id="todo_date" name="todo_date" value="<?php echo date('Y-m-d'); ?>" />
@@ -176,11 +176,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="scroll">
                         <?php
                         // 게시글 출력
-                            $cnt = 1;
-                            foreach ($result as $item) {
-                                $cnt++
-                                ?>
-                                <form method="post">
+                        $cnt = 1;
+                        foreach ($result as $item) {
+                            $cnt++
+                        ?>
+                            <form method="post">
                                 <div class="chk-list">
                                     <!-- list_no 담을 인풋 히든처리 -->
                                     <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
@@ -197,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </button>
                                 </div>
                             </form>
-                            <?php } ?>
+                        <?php } ?>
                     </div>
                     <!-- 달력  -->
                     <form action="/todolist_list.php" method="get">
@@ -209,23 +209,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <a href="/todolist_list.php?year=<?php echo $year - 1 ?>&month=12">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                <?php }else { ?>
+                                <?php } else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month - 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
-                                <?php }?>
+                                <?php } ?>
                                 <p><?php echo  "$year 년 $month 월" ?> </p>
                                 <?php if ($month == 12) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year + 1 ?>&month=1">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
-                                <?php }else { ?>
+                                <?php } else { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
                                 <?php } ?>
 
                             </div>
+
 
                             <div class="calendar">
                                 <div class="calendar-detail">
@@ -242,28 +243,61 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
-                                                <li><button type="submit" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
-                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {?>
-                                                        <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
-                                                        <?php echo $n++ ?>
-                                                    <?php };?>
-                                                   </li>  </button>
+                                                <li><button type="submit" class="day_btn" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
+                                                        <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
+                                                            <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
+                                                            <?php echo $n++ ?>
+                                                        <?php }; ?>
+                                                </li> </button>
                                             <?php }; ?>
                                         <?php } ?>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
+                            <!-- 달력 날짜를 눌렀을때 뒷배경 유지되게 하는 자바스크립트 -->
+                            <script>
+                                // 페이지가 로드될 때 실행되는 함수
+                                window.onload = function() {
+                                    // 저장된 선택된 날짜가 있는지 확인하고 배경을 설정합니다.
+                                    var selectedDate = localStorage.getItem('selectedDate');
+                                    if (selectedDate) {
+                                        var selectedButton = document.querySelector('button[value="' + selectedDate + '"]');
+                                        if (selectedButton) {
+                                            selectedButton.parentNode.classList.add('pink-bg');
+                                        }
+                                    }
+                                };
+
+                                // 모든 버튼 요소를 가져옵니다.
+                                var buttons = document.querySelectorAll('.day_btn');
+
+                                // 모든 버튼에 대한 클릭 이벤트를 추가합니다.
+                                buttons.forEach(function(button) {
+                                    button.addEventListener('click', function() {
+                                        // 클릭된 버튼의 값을 가져옵니다.
+                                        var selectedDate = this.value;
+
+                                        // 선택된 날짜를 로컬 스토리지에 저장합니다.
+                                        localStorage.setItem('selectedDate', selectedDate);
+
+                                        // 선택된 버튼의 부모 요소인 li에 'pink-bg' 클래스를 추가합니다.
+                                        this.parentNode.classList.add('pink-bg');
+                                    });
+                                });
+                            </script>
+
+
                         </div>
                     </form>
                     <!-- 쇼핑리스트 -->
                     <form action="./todolist.html" method="post">
                         <div class="shopping-list">
                             <div class="shopping-list-title">쇼핑리스트</div>
-                            <input type="text" value="폼폼공" name="" id="shp-li" >
-                            <input type="text" value="고양이정수기필터" name="" id="shp-li"> 
-                            <input type="text" value="B유산균" name="" id="shp-li" >
-                            <input type="text" value="" name="" id="shp-li" >
+                            <input type="text" value="폼폼공" name="" id="shp-li">
+                            <input type="text" value="고양이정수기필터" name="" id="shp-li">
+                            <input type="text" value="B유산균" name="" id="shp-li">
+                            <input type="text" value="" name="" id="shp-li">
                     </form>
                 </div>
             </div>
@@ -272,5 +306,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </body>
 
 </html>
-                                       
-                       
