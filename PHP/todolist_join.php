@@ -5,7 +5,6 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 try {
     if(REQUEST_METHOD === "POST") {
-        $cat_no = isset($_POST["cat_no"]) ? trim($_POST["cat_no"]) : "";
         $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
         $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
         $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
@@ -67,7 +66,6 @@ try {
         $conn = null;
     }   
 }
-var_dump($item["cat_no"]);
 
 ?>
 
@@ -84,7 +82,7 @@ var_dump($item["cat_no"]);
     <script>
         // 입력 요소를 찾아서 해당 요소에 이벤트를 추가하는 함수
         function addInputEvents() {
-            var inputs = document.querySelectorAll('input[type="text"]');
+            var inputs = document.querySelectorAll('input[type="number"]');
     
             inputs.forEach(function(input) {
                 // 입력란에 포커스가 들어오면 placeholder를 숨김
@@ -118,7 +116,6 @@ var_dump($item["cat_no"]);
             비슷한 아이를 선택해주세요!
         </div>
         <form action="./todolist_join.php" method="POST">
-            <input type="hidden" name="cat_no" value="<?php echo $item["cat_no"]; ?>">
             <div class="join-img-box">
                 <div class="join-img">
                     <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="0" required>
