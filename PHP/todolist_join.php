@@ -79,31 +79,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케어해달라냥 가입페이지</title>
     <link rel="stylesheet" href="./css/todolist.css">
-    <script>
-        // 입력 요소를 찾아서 해당 요소에 이벤트를 추가하는 함수
-        function addInputEvents() {
-            var inputs = document.querySelectorAll('input[type="number"]');
-    
-            inputs.forEach(function(input) {
-                // 입력란에 포커스가 들어오면 placeholder를 숨김
-                input.addEventListener('focus', function() {
-                    this.placeholder = '';
-                });
-    
-                // 입력란에서 포커스가 나가면 placeholder를 재설정
-                input.addEventListener('blur', function() {
-                    if (this.value === '') {
-                        this.placeholder = 'Weight (kg)';
-                    }
-                });
-            });
-        }
-    
-        // 문서가 로드될 때 이벤트 추가
-        document.addEventListener('DOMContentLoaded', function() {
-            addInputEvents();
-        });
-    </script>  
 </head>
 <body>
     <header>
