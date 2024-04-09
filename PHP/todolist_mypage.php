@@ -170,7 +170,7 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
                         <span class="info-con2 info-other"><?php echo $gender_echo ?></span>
                         <span class="info-con1 info-other"><?php echo $birth_at_echo ?></span>
                         <span class="info-con2 info-other"><?php echo $weight."kg" ?></span>
-                        <span class="dday"><?php echo $name."의 생일이 ".$dday."일 남았습니다!"?></span>
+                        <span class="dday"><?php echo $name?>"의 생일이<?php echo $dday?>일 남았습니다!"</span>
                     </span>
                 </div>
             </div>
