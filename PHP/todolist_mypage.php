@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
+
 try {
     $conn = my_db_conn();
 
@@ -44,12 +45,14 @@ try {
 
 
     $name = isset($_GET['name']) ? $_GET['name'] : '1';
+    $profile = isset($_GET['profile']) ? $_GET['profile'] : '1';
     $gender = isset($_GET['gender']) ? $_GET['gender'] : '1';
     $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '1';
     $weight = isset($_GET['weight']) ? $_GET['weight'] : '1';
     
     $array_param = array(
         'name' => $name
+        ,'profile' => $profile
         ,'gender' => $gender
         ,'birth_at' => $birth_at
         ,'weight' => $weight
@@ -64,6 +67,7 @@ try {
     // 가져온 데이터가 있으면 변수에 할당
     if (!empty($result)) {
         $name = $result[0]['name'];
+        $profile = $result[0]['profile'];
         $gender = $result[0]['gender'];
         $birth_at = $result[0]['birth_at'];
         $weight = $result[0]['weight'];
@@ -79,20 +83,19 @@ try {
 
 
     // 디데이 가져오기
-
     // 현재 날짜 
     $now = date("Y-m-d");
 
-    // 생일의 연도를 현재 연도로 설정하여 날짜를 만듭니다.
+    // 생일의 연도를 현재 연도로 설정
     $next_birthday = date('Y') . '-' . date('m-d', strtotime($birth_at));
 
 
-    // 만약 생일이 오늘 이전이라면, 다음 해의 생일로 설정합니다.
+    // 생일이 오늘보다 이전인 경우 연도를 다음해로 설정
     if ($next_birthday < $now) {
         $next_birthday = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
     }
 
-    // 다음 생일까지의 남은 일 수 계산
+    // 남은 일 수 계산
     $difference = strtotime($next_birthday) - strtotime($now);
     $dday = floor($difference / (60 * 60 * 24));
 
@@ -108,11 +111,15 @@ try {
     }
 }
 
+// 성별 데이터 출력
+if ($gender === 0) {
+    $gender_echo = "수컷";
+} else {
+    $gender_echo = "암컷";  
+} 
 
-
-
-
-
+// 생년월일 데이터 출력
+$birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
 
 
 ?>
@@ -136,7 +143,7 @@ try {
         <div class="header-profile-name">로미</div>
         <a href="./mypage.php">
           <img class="header-profile-img"
-                src="./css/11zon_cropped__1_-removebg-preview.png"/>
+                src="<?php echo $profle ?>"/>
         </a>
       </header>
     <main class="main-box">
@@ -157,14 +164,14 @@ try {
             <div>
                 <div class="info-box">
                     <div class="info-left">
-                        <img class="info-pic" src="./css/11zon_cropped__1_-removebg-preview.png" alt="">
+                        <img class="info-pic" src="<?php echo $profle ?>" alt="">
                         <a href="./todolist_info_update.php" class="info-edit">내 정보 수정</a> 
                     </div>
                     <div class="info-right">
                         <span class="info-text1"><?php echo $name ?></span>
-                        <span class="info-text2"><?php echo $gender ?></span>
-                        <span class="info-text1"><?php echo $birth_at ?></span>
-                        <span class="info-text2"><?php echo $weight ?></span>
+                        <span class="info-text2"><?php echo $gender_echo ?></span>
+                        <span class="info-text1"><?php echo $birth_at_echo ?></span>
+                        <span class="info-text2"><?php echo $weight."kg" ?></span>
                         <span class="dday"><?php echo $name."의 생일이 ".$dday."일 남았습니다!"?></span>
                     </span>
                 </div>
