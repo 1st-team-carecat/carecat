@@ -309,11 +309,14 @@ label:active + input[type="text"] {
 }
 
 /* 캘린더  */
-.pink-bg {
+/* .pink-bg {
   background-color: #ffc0cb;
   border-radius: 100%;
-}
+} */
 
+.days li button {
+  width: 80%;
+}
 .todo-get-calendar {
   width: 200px;
   height: 270px;

@@ -6,7 +6,7 @@ $page_num = 1;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     try {
         $conn = my_db_conn(); // DB 연결
         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($result !== 1) {
             throw new Exception("Insert Boards count");
         }
-        
+
         // 보배언니작성
         // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
         $array_param = [
@@ -64,8 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $conn = null;
         }
     }
-
-
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
@@ -87,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
         $result = db_select_todos_list($conn, $arr_param); // 게시글 내용 조회
-
+         
 
 
     } catch (\Throwable $e) {
@@ -197,8 +195,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <form method="post">
                                 <div class="chk-list">
                                     <!-- list_no 담을 인풋 히든처리 -->
-                                    <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
-                                    <input type="hidden" value="<?php echo $item["todo_date"]?>" name="todo_date">
+                                    <input type="hidden" value="<?php echo $item["list_no"] ?>" name="list_no">
+                                    <input type="hidden" value="<?php echo $item["todo_date"] ?>" name="todo_date">
                                     <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
                                     <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
 
@@ -241,8 +239,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <?php } ?>
 
                             </div>
-
-
                             <div class="calendar">
                                 <div class="calendar-detail">
                                     <ul class="weeks">
@@ -258,51 +254,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
-                                                <li><button type="submit" class="day_btn" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
+                                                <li >
+                                                    <button type="submit"  name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>"<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'style="background-color: pink; border-radius: 50%"' : ''; ?>>
                                                         <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
                                                         <?php }; ?>
-                                                </li> </button>
+                                                    </button>
+                                                </li>
                                             <?php }; ?>
                                         <?php } ?>
-
                                     </ul>
+
                                 </div>
                             </div>
-                            <!-- 달력 날짜를 눌렀을때 뒷배경 유지되게 하는 자바스크립트 -->
-                            <script>
-                                // 페이지가 로드될 때 실행되는 함수
-                                window.onload = function() {
-                                    // 저장된 선택된 날짜가 있는지 확인하고 배경을 설정합니다.
-                                    var selectedDate = localStorage.getItem('selectedDate');
-                                    if (selectedDate) {
-                                        var selectedButton = document.querySelector('button[value="' + selectedDate + '"]');
-                                        if (selectedButton) {
-                                            selectedButton.parentNode.classList.add('pink-bg');
-                                        }
-                                    }
-                                };
-
-                                // 모든 버튼 요소를 가져옵니다.
-                                var buttons = document.querySelectorAll('.day_btn');
-
-                                // 모든 버튼에 대한 클릭 이벤트를 추가합니다.
-                                buttons.forEach(function(button) {
-                                    button.addEventListener('click', function() {
-                                        // 클릭된 버튼의 값을 가져옵니다.
-                                        var selectedDate = this.value;
-
-                                        // 선택된 날짜를 로컬 스토리지에 저장합니다.
-                                        localStorage.setItem('selectedDate', selectedDate);
-
-                                        // 선택된 버튼의 부모 요소인 li에 'pink-bg' 클래스를 추가합니다.
-                                        this.parentNode.classList.add('pink-bg');
-                                    });
-                                });
-                            </script>
-
-
                         </div>
                     </form>
                     <!-- 쇼핑리스트 -->
