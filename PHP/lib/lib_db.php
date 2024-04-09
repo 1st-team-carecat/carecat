@@ -158,7 +158,25 @@ function db_delete_todos_no($conn, $array_param)
     return $stmt->rowCount();
 }
 
+function db_update_contents_checked(&$conn, &$array_param) {
+    // SQL
+    $sql = 
+    " UPDATE todos
+    SET checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END
+    WHERE list_no = :list_no 
+    AND deleted_at IS NULL"
+    ;
+
+    // Query 실행
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($array_param);
+
+    // 리턴
+    return $stmt->rowCount();
+}
+
 // 리스트페이지 끝
+
 
 // 달력페이지 시작
 function db_select_todos_list_with_date($conn, $chk_day) {
@@ -175,11 +193,6 @@ function db_select_todos_list_with_date($conn, $chk_day) {
 }
 
 // 달력페이지 끝
-
-
-
-
-
 
 
 // join 페이지
@@ -225,74 +238,74 @@ function db_select_todolist_no(&$conn, &$array_param){
         return $result;
     }
 
-
-
     
-    // 내 정보 페이지
-    function db_count_checked($conn) {
-        // SQL
-        $sql = 
-        "SELECT 
-        COUNT(checked) chk_ttl
-        , SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
-        FROM todos
-        WHERE deleted_at IS NULL "
+// 내 정보 페이지
+function db_count_checked($conn) {
+    // SQL
+    $sql = 
+    "SELECT 
+    COUNT(checked) chk_ttl
+    , SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
+    FROM todos
+    WHERE deleted_at IS NULL "
+    ;
+
+    // 쿼리 실행
+    $stmt = $conn->query($sql);
+    
+    // 쿼리 결과 가져옴
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // 결과 반환
+    return $result; 
+
+}
+
+function db_select_information(&$conn, &$array_param) {
+    //SQL
+    $sql =
+    "SELECT
+        name
+        ,gender
+        ,birth_at
+        ,weight
+    FROM informations
+    WHERE cat_no = 1 "
+    ;
+
+    $stmt = $conn->query($sql);
+    $result = $stmt->fetchAll(); 
+
+    return $result;
+
+}
+
+function db_update_information(&$conn, &$array_param) {
+    //SQL
+    $sql =
+        "UPDATE informations
+        SET
+            name = :name
+            ,gender = :gender
+            ,birth_at = :birth_at
+            ,weight = :weight
+        WHERE cat_no = :cat_no " 
         ;
-    
-        // 쿼리 실행
-        $stmt = $conn->query($sql);
-        
-        // 쿼리 결과 가져옴
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        // 결과 반환
-        return $result; 
-    
-    }
-    
-    function db_update_contents_checked(&$conn, &$array_param) {
-        // SQL
-        $sql = 
-        " UPDATE todos
-        SET checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END
-        WHERE list_no = :list_no 
-        AND deleted_at IS NULL"
-        ;
-    
-        // Query 실행
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($array_param);
-    
-        // 리턴
-        return $stmt->rowCount();
-    }
-    
-    function db_update_information(&$conn, &$array_param) {
-        //SQL
-        $sql =
-            "UPDATE informations
-            SET
-                name = :name
-                ,gender = :gender
-                ,birth_at = :birth_at
-                ,weight = :weight
-            WHERE cat_no = :cat_no " 
-            ;
-                
-        ;
+            
+    ;
 
-        // 쿼리 실행
-        $stmt = $conn->prepare($sql);
+    // 쿼리 실행
+    $stmt = $conn->prepare($sql);
 
-        // 바인딩 매개 변수 설정
-        $stmt->bindParam(':name', $array_param['name']);
-        $stmt->bindParam(':gender', $array_param['gender']);
-        $stmt->bindParam(':birth_at', $array_param['birth_at']);
-        $stmt->bindParam(':weight', $array_param['weight']);
-        $stmt->bindParam(':cat_no', $array_param['cat_no']);
-        
+    // 바인딩 매개 변수 설정
+    $stmt->bindParam(':name', $array_param['name']);
+    $stmt->bindParam(':gender', $array_param['gender']);
+    $stmt->bindParam(':birth_at', $array_param['birth_at']);
+    $stmt->bindParam(':weight', $array_param['weight']);
+    $stmt->bindParam(':cat_no', $array_param['cat_no']);
+    
 
-        $stmt->execute();
+    $stmt->execute();
 
-        return true;
-    }
+    return true;
+}

@@ -36,44 +36,71 @@ try {
 }
 
 
-// 내 정보 수정하기
+// 내 정보 출력하기
 
 try {
 
     $conn = my_db_conn();
-    
-    // 폼에서 전송한 데이터 가져오기
-    $name = $_GET['name'] ?? '';
-    $gender = $_GET['gender'] ?? '';
-    $birth_at = $_GET['birth_at'] ?? '';
-    $weight = $_GET['weight'] ?? '';
-    $cat_no = $_GET['cat_no'] ?? '';
-    
-    // 함수 호출하기
-    $result = db_update_information($conn, $array_param);
 
-    // 수정할 정보 배열 생성하기
+
+    $name = isset($_GET['name']) ? $_GET['name'] : '1';
+    $gender = isset($_GET['gender']) ? $_GET['gender'] : '1';
+    $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '1';
+    $weight = isset($_GET['weight']) ? $_GET['weight'] : '1';
+    
     $array_param = array(
         'name' => $name
         ,'gender' => $gender
         ,'birth_at' => $birth_at
         ,'weight' => $weight
-        ,'cat_no' => $cat_no
     );
-    
-    $item = array(
-        'name' => $name
-        ,'gender' => $gender
-        ,'birth_at' => $birth_at
-        ,'weight' => $weight
-    );
-    
 
+
+    // 데이터 가져오기
+    $result = db_select_information($conn, $array_param);
+
+
+
+    // 가져온 데이터가 있으면 변수에 할당
+    if (!empty($result)) {
+        $name = $result[0]['name'];
+        $gender = $result[0]['gender'];
+        $birth_at = $result[0]['birth_at'];
+        $weight = $result[0]['weight'];
+
+    } else {
+        // 가져온 데이터가 없을 경우 빈 문자열
+        $name = "1";
+        $gender = "1";
+        $birth_at = "1";
+        $weight = "1";
+    }
+
+
+
+    // 디데이 가져오기
+
+    // 현재 날짜 
+    $now = date("Y-m-d");
+
+    // 생일의 연도를 현재 연도로 설정하여 날짜를 만듭니다.
+    $next_birthday = date('Y') . '-' . date('m-d', strtotime($birth_at));
+
+
+    // 만약 생일이 오늘 이전이라면, 다음 해의 생일로 설정합니다.
+    if ($next_birthday < $now) {
+        $next_birthday = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
+    }
+
+    // 다음 생일까지의 남은 일 수 계산
+    $difference = strtotime($next_birthday) - strtotime($now);
+    $dday = floor($difference / (60 * 60 * 24));
+
+        
 
 } catch(\Throwable $e) {
     echo $e->getMessage();
     exit;
-
 
 } finally {
     if(!empty($conn)) {
@@ -86,7 +113,7 @@ try {
 
 
 
-$name = "로미";
+
 
 ?>
 
@@ -138,7 +165,7 @@ $name = "로미";
                         <span class="info-text2"><?php echo $gender ?></span>
                         <span class="info-text1"><?php echo $birth_at ?></span>
                         <span class="info-text2"><?php echo $weight ?></span>
-                        <span class="dday"><?php echo $name."의 생일이 100일 남았습니다!"?></span>
+                        <span class="dday"><?php echo $name."의 생일이 ".$dday."일 남았습니다!"?></span>
                     </span>
                 </div>
             </div>
