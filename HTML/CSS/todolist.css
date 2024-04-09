@@ -195,7 +195,7 @@ header {
 
 .radio-img:checked + .radio-img-label .cat-img {
     display: inline-block;
-    border: 5px solid #4F82AB;
+    border: 5px solid pink;
 }
 
 .radio-img:checked + .radio-img-label .cat-img-unchecke {
