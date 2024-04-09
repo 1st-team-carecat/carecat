@@ -82,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
 
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
+        
         $result = db_select_todos_list($conn, $arr_param); // 게시글 내용 조회
          
 
@@ -148,17 +149,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <header>
     <div class="main-title">
-        <img src="/img/content-title.png" class="title-img" />
+        <img src="./css/content-title.png" class="title-img" />
     </div>
-    <?php if (!empty($item) && isset($item["name"])) { ?>
-        <div class="header-profile-name"><?php echo $item["name"]; ?></div>
-    <?php } else { ?>
-        <div class="header-profile-name">로미</div>
+    <?php if (!empty($result) && isset($result[0]["name"])) { ?>
+        <div class="header-profile-name"><?php echo $result[0]["name"];?></div>
     <?php } ?>
     <a href="./todolist_mypage.php">
-        <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
+        <img class="header-profile-img" src="<?php echo $result[0]["profile"]?>" />
     </a>
 </header>
+
 
 
 
