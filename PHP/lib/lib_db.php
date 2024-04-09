@@ -181,10 +181,13 @@ function db_update_contents_checked(&$conn, &$array_param) {
 // 달력페이지 시작
 function db_select_todos_list_with_date($conn, $chk_day) {
     // 해당 날짜의 할 일 목록 중에서 checked가 1인 항목을 가져오는 쿼리를 실행합니다.
-    $query = "SELECT * FROM todos WHERE todo_date = :chk_day AND checked = 1";
+    $sql = "SELECT * 
+    FROM todos 
+    WHERE todo_date = :chk_day 
+    AND checked = 1";
     
     // PDO를 사용하는 예시
-    $stmt = $conn->prepare($query);
+    $stmt = $conn->prepare($sql);
     $stmt->bindParam(':chk_day', $chk_day);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -205,7 +208,7 @@ function db_insert_profile(&$conn, &$array_param){
         ."  ,gender "
         ."  ,weight "	
         ." ) "
-        ." VALUES( "		
+        ." VALUES( "	
         ."  :PROFILE "
         ."  ,:NAME "
         ."  ,:birth_at "		

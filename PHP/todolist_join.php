@@ -3,67 +3,67 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
-if(REQUEST_METHOD === "POST") {
 try {
-    $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
-    $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
-    $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
-    $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
-    $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
+    if(REQUEST_METHOD === "POST") {
+        $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
+        $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
+        $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
+        $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
+        $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
 
 
-    $arr_err_param = [];
-    if($PROFILE !== "0" && $PROFILE !== "1" && $PROFILE !== "2" && $PROFILE !== "3" && $PROFILE !== "4"){
-        $arr_err_param[] = "PROFILE";
-    }
-    if($NAME === ""){
-        $arr_err_param[] = "NAME";
-    }
-    if($birth_at === ""){
-        $arr_err_param[] = "birth_at";
-    }
-    if($gender !== "0" && $gender !== "1"){
-        $arr_err_param[] = "gender";
-    }
-    if($weight === ""){
-        $arr_err_param[] = "weight";
-    }
-    if(count($arr_err_param) > 0){
-        throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
+        $arr_err_param = [];
+        if($PROFILE !== "0" && $PROFILE !== "1" && $PROFILE !== "2" && $PROFILE !== "3" && $PROFILE !== "4"){
+            $arr_err_param[] = "PROFILE";
+        }
+        if($NAME === ""){
+            $arr_err_param[] = "NAME";
+        }
+        if($birth_at === ""){
+            $arr_err_param[] = "birth_at";
+        }
+        if($gender !== "0" && $gender !== "1"){
+            $arr_err_param[] = "gender";
+        }
+        if($weight === ""){
+            $arr_err_param[] = "weight";
+        }
+        if(count($arr_err_param) > 0){
+            throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
+        }
+
+        $conn = my_db_conn();
+        $conn->beginTransaction();
+
+        $arr_param = [
+            "PROFILE" => $PROFILE 
+            ,"NAME" => $NAME
+            ,"birth_at" => $birth_at
+            ,"gender" => $gender
+            ,"weight" => $weight
+        ];
+        $result = db_insert_profile($conn, $arr_param);
+
+        if($result !== 1){
+            throw new Exception("Insert Profile count");
+        }
+
+        $conn->commit();
+
+        header("Location: todolist_mypage.php");
+        exit;
     }
 
-    $conn = my_db_conn();
-    $conn->beginTransaction();
-
-    $arr_param = [
-        "PROFILE" => $PROFILE 
-        ,"NAME" => $NAME
-        ,"birth_at" => $birth_at
-        ,"gender" => $gender
-        ,"weight" => $weight
-    ];
-    $result = db_insert_profile($conn, $arr_param);
-
-    if($result !== 1){
-        throw new Exception("Insert Profile count");
+} catch (\Throwable $e) {
+    if(!empty($conn) && $conn->inTransaction()){
+        $conn->rollBack();
     }
-
-    $conn->commit();
-
-    header("Location: todolist_mypage.php?cat_no=1");
+    echo $e->getMessage();
     exit;
 
-    } catch (\Throwable $e) {
-        if(!empty($conn) && $conn->inTransaction()){
-            $conn->rollBack();
-        }
-        echo $e->getMessage();
-        exit;
-
-    } finally {
-        if(!empty($conn)){
-            $conn = null;
-        }
+} finally {
+    if(!empty($conn)){
+        $conn = null;
     }   
 }
 
@@ -153,7 +153,7 @@ try {
                 <div class="join-content">
                     <label for="weight">몸무게</label>
                     <div class="content-title">
-                        <input type="text" name="weight" id="weight" required>
+                        <input type="number" name="weight" id="weight" required placeholder="kg"> 
                     </div>
                 </div>
                 <footer>
