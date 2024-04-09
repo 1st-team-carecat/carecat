@@ -23,6 +23,31 @@ try {
     exit;
 }
 
+try {
+    $name = isset($_GET['name']) ? $_GET['name'] : '';
+    $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
+
+    $array_param = array(
+        'name' => $name
+        ,'profile' => $profile
+    );
+
+    $result = db_select_information($conn, $array_param);
+
+    if (!empty($result)) {
+        $name = $result[0]['name'];
+        $profile = $result[0]['profile'];
+
+    } else {
+        // 가져온 데이터가 없을 경우 빈 문자열
+        $name = "1";
+    }
+} catch (\Throwable $t) {
+    echo $t->getMessage();
+    exit;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +65,9 @@ try {
     <div class="main-title">
       <img src="/img/content-title.png" class="title-img">
     </div>
-    <div class="header-profile-name">로미</div>
+    <div class="header-profile-name"><?php echo $name ?></div>
     <a href="./join.html">
-      <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
+      <img class="header-profile-img" src="<?php echo $profile ?>" />
     </a>
   </header>
   <main class="main-box">
