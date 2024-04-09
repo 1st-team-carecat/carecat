@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <input type="hidden" value="<?php echo $item["todo_date"] ?>" name="todo_date">
                                     <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
                                     <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
-
+                                    
                                     <input type="text" name="content" value="<?php echo $item["content"]; ?>" />
                                     <!-- 수정 버튼 -->
                                     <button type="submit" formaction="./todolist_list_update.php">
