@@ -283,6 +283,11 @@ label:active + input[type="text"] {
 }
 
 /* 캘린더  */
+.pink-bg {
+  background-color: #ffc0cb;
+  border-radius: 100%;
+}
+
 .todo-get-calendar {
   width: 200px;
   height: 270px;
@@ -335,5 +340,6 @@ li {
   border:none; 
   border-bottom: 3px solid #799bc4; 
   border-radius: 0; 
-  background-color:transparent;  margin: 5px 0 
+  background-color:transparent;  
+  margin: 5px 0 
 }
