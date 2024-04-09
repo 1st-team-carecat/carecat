@@ -83,9 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
         
-        $result = db_select_todos_list($conn, $arr_param); // 게시글 내용 조회
-         
-
+        $result1 = db_select_todos_list1($conn, $arr_param); // 게시글 내용 조회
+        $result2 = db_select_todos_list2($conn, $arr_param); // 게시글 내용 조회
+        
 
     } catch (\Throwable $e) {
         echo $e->getMessage();
@@ -149,18 +149,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <header>
     <div class="main-title">
-        <img src="./css/content-title.png" class="title-img" />
+        <img src="/img/content-title.png" class="title-img" />
     </div>
-    <?php if (!empty($result) && isset($result[0]["name"])) { ?>
-        <div class="header-profile-name"><?php echo $result[0]["name"];?></div>
-    <?php } ?>
-    <a href="./todolist_mypage.php">
-        <img class="header-profile-img" src="<?php echo $result[0]["profile"]?>" />
-    </a>
+        <div class="header-profile-name"><?php echo $result1[0]["NAME"];?></div>
+        <a href="./todolist_mypage.php">
+            <img class="header-profile-img" src="<?php echo $result1[0]["PROFILE"]?>" />
+        </a>
 </header>
-
-
-
 
 
     <main class="main-box">
@@ -195,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php
                         // 게시글 출력
                         $cnt = 1;
-                        foreach ($result as $item) {
+                        foreach ($result2 as $item) {
                             $cnt++
                         ?>
                             <form method="post">
