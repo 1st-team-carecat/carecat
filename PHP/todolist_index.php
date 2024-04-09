@@ -16,7 +16,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 <body class="start-page">
     <div class="line">
         <div class="start-title">
-            <img src="./css/main-title.png" class="main-title-img">
+            <img src="/PHP/img/main-title.png" class="main-title-img">
         </div>
         <div class="start-button">
             <a href="./todolist_join.php">START</a>

@@ -93,38 +93,38 @@ try {
         <form action="./todolist_join.php" method="POST">
             <div class="join-img-box">
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="0" required>
+                    <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="/PHP/img/1.png" required>
                     <label for="img-select1" class="radio-img-label">
-                        <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img">
-                        <img src="./css/11zon_cropped-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="/PHP/img/1.png" class="cat-img">
+                        <img src="/PHP/img/1.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select2" name="PROFILE" value="1" required>
+                    <input type="radio" class="radio-img" id="img-select2" name="PROFILE" value="/PHP/img/1.png" required>
                     <label for="img-select2" class="radio-img-label">
-                        <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img">
-                        <img src="./css/11zon_cropped__1_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="/PHP/img/2.png" class="cat-img">
+                        <img src="/PHP/img/2.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select3" name="PROFILE" value="2" required>
+                    <input type="radio" class="radio-img" id="img-select3" name="PROFILE" value="/PHP/img/3.png" required>
                     <label for="img-select3" class="radio-img-label">
-                        <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img">
-                        <img src="./css/11zon_cropped__2_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="/PHP/img/3.png" class="cat-img">
+                        <img src="/PHP/img/3.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select4" name="PROFILE" value="3" required>
+                    <input type="radio" class="radio-img" id="img-select4" name="PROFILE" value="/PHP/img/4.png" required>
                     <label for="img-select4" class="radio-img-label">
-                        <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img">
-                        <img src="./css/11zon_cropped__3_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="/PHP/img/4.png" class="cat-img">
+                        <img src="/PHP/img/4.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select5" name="PROFILE" value="4" required>
+                    <input type="radio" class="radio-img" id="img-select5" name="PROFILE" value="/PHP/img/5.png" required>
                     <label for="img-select5" class="radio-img-label">
-                        <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img">
-                        <img src="./css/11zon_cropped__4_-removebg-preview.png" class="cat-img-unchecke">
+                        <img src="/PHP/img/5.png" class="cat-img">
+                        <img src="/PHP/img/5.png" class="cat-img-unchecked">
                     </label> 
                 </div>
             </div>

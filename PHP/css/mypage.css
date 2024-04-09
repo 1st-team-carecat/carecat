@@ -59,7 +59,7 @@
 /* 공통 */
 
 body {
-    background: url("../css/background.jpg") center fixed;
+    background: url("../img/background.jpg") center fixed;
     background-size: cover;
     background-attachment: fixed;
     /* background-color: #F6F4EB; */
@@ -152,7 +152,7 @@ header {
 .content-info {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    background-image: url("../css/content-back.jpg");
+    background-image: url("../img/content-back.jpg");
     border: 5px solid #799BC4;
     border-radius: 10px;
     height: 600px;

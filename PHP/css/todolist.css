@@ -59,7 +59,7 @@
 /* 공통 */
 
 body {
-    background: url("./background.jpg")no-repeat center fixed;
+    background: url("../img/background.jpg")no-repeat center fixed;
     background-size: cover;
     background-attachment: fixed;
     /* background-color: #F6F4EB; */
@@ -138,7 +138,7 @@ header {
 }
 
 .content {
-    background-image: url("./content-back.jpg");
+    background-image: url("../img/content-back.jpg");
     border: 5px solid #799BC4;
     border-radius: 10px;
     height: 600px;
@@ -177,7 +177,7 @@ header {
     cursor: pointer;
 }
 
-.cat-img-unchecke {
+.cat-img-unchecked {
     border-radius: 70%;
     width: 150px;
     height: 150px;
@@ -198,7 +198,7 @@ header {
     border: 5px solid pink;
 }
 
-.radio-img:checked + .radio-img-label .cat-img-unchecke {
+.radio-img:checked + .radio-img-label .cat-img-unchecked {
     display: none;
 }
 

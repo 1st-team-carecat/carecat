@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <header>
         <div class="main-title">
-            <img src="./css/content-title.png" class="title-img" />
+            <img src="/PHP/img/content-title.png" class="title-img">
         </div>
         <div class="header-profile-name">로미</div>
         <a href="./todolist_mypage.php">
