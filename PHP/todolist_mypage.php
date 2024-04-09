@@ -116,13 +116,13 @@ $name = "로미";
       <div class="box">
         <div class="menu-content">
             <div class="menu selected-menu">
-                <a href="./mypage.php">내정보</a>
+                <a href="./todolist_mypage.php">내정보</a>
             </div>
             <div class="menu">
                 <a href="./todolist_list.php">할일</a>
             </div>
             <div class="menu">
-                <a href="./todolist_cal.php">캘린더</a>
+                <a href="./todolist_calendar.php">캘린더</a>
             </div>
         </div>
         <div class="content-info">

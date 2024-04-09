@@ -50,7 +50,7 @@ try {
 
     $conn->commit();
 
-    header("Location: todolist_mypage.php");
+    header("Location: todolist_mypage.php?cat_no=1");
     exit;
 
     } catch (\Throwable $e) {

@@ -143,7 +143,7 @@ $name = "로미";
                         <img class="info-pic" src="./css/11zon_cropped__1_-removebg-preview.png" alt="">
                         <div>
                         <button type="submit" class="info-edit up-btn">수정</button>
-                        <button class="info-edit up-btn"><a href="./todolist_mypage.php" >취소</a></button>
+                        <button class="info-edit up-btn cancel"><a href="./todolist_mypage.php" >취소</a></button>
                         </div> 
                     </div>
                     <div class="info-right">
