@@ -1,11 +1,17 @@
 <?php
+
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 $page_num = 1;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
     try {
+        $conn = my_db_conn(); // DB 연결
+        $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
+
+
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
 
@@ -45,6 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $conn = null;
         }
     }
+
+
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
@@ -78,6 +86,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
+// checked 데이터 넘길 함수 호출
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    try {
+        $conn = my_db_conn(); // DB 연결
+        $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : ""; // POST 데이터에서 list_no 가져오기
+
+        // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
+        $array_param = [
+            "list_no" => $list_no
+        ];
+        $result = db_update_contents_checked($conn, $array_param);
+
+        if ($result === 1) {
+            echo "Successfully updated the checked status.";
+        } else {
+            echo "Failed to update the checked status.";
+        }
+
+    } catch (\Throwable $e) {
+        echo $e->getMessage();
+    } finally {
+        if (!empty($conn)) {
+            $conn = null;
+        }
+    }
+}
+
+
 
 
 ?>
@@ -148,9 +184,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <div class="chk-list">
                                     <!-- list_no 담을 인풋 히든처리 -->
                                     <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
-
-                                    <input type="checkbox" id="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>" />
-                                    <label for="check<?php echo $cnt <= $result_board_cnt ? $cnt : "1"; ?>"></label>
+                                    <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
+                                    <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
 
                                     <input type="text" name="content" value="<?php echo $item["content"]; ?>" />
                                     <!-- 수정 버튼 -->
