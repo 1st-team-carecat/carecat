@@ -29,31 +29,87 @@ function db_select_todos_cnt($conn)
     // 리턴
     return (int)$result[0]["cnt"];
 }
+function db_select_todos_list1(&$conn) {
+    $sql = "SELECT NAME, PROFILE 
+            FROM informations 
+            WHERE cat_no = 1"; // cat_no를 1로 설정
 
+    // Query 실행
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(); 
+    $result1 = $stmt->fetchAll();
+
+    // 리턴
+    return $result1;
+}
+
+
+
+function db_select_todos_list2(&$conn, &$array_param) {
+    $sql =
+    "SELECT "
+    . "list_no "
+    . ",cat_no "
+    . ",content "
+    . ",todo_date "
+    . ",checked "
+    . "FROM "
+    . "todos "
+    . "WHERE "
+    . "deleted_at IS NULL "
+    . "AND cat_no = 1 ";
+    
+    // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
+    if (isset($array_param['selected_date'])) {
+        $sql .= "AND todo_date = :selected_date ";
+    } else {
+        // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
+        $array_param['selected_date'] = date('Y-m-d');
+        $sql .= "AND todo_date = :selected_date ";
+    }
+
+    $sql .= "ORDER BY "
+    . "list_no DESC ";
+    
+    $stmt = $conn->prepare($sql);
+    
+    // 바인딩
+    $stmt->bindParam(':selected_date', $array_param['selected_date']);
+
+    $stmt->execute();
+    $result2 = $stmt->fetchAll();
+
+    return $result2;
+}
 // function db_select_todos_list(&$conn, &$array_param) {
-//     $sql =
-//     "SELECT "
-//     . "list_no "
-//     . ",cat_no "
-//     . ",content "
-//     . ",todo_date "
-//     . ",checked "
-//     . "FROM "
-//     . "todos "
-//     . "WHERE "
-//     . "deleted_at IS NULL "
-//     . "AND cat_no = 1 ";
+//     $sql = 
+//     " SELECT 
+//      tod.list_no,
+//      tod.cat_no,
+//      tod.content,
+//      tod.todo_date,
+//      tod.checked,
+//      inf.name,
+//      inf.profile
+//     FROM 
+//     todos tod
+//     JOIN 
+//     informations inf ON tod.cat_no = inf.cat_no
+//     WHERE 
+//     tod.deleted_at IS NULL 
+//     AND tod.cat_no = 1";
+
     
 //     // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
 //     if (isset($array_param['selected_date'])) {
-//         $sql .= "AND todo_date = :selected_date ";
+//         $sql .= " AND todo_date = :selected_date ";
 //     } else {
 //         // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
 //         $array_param['selected_date'] = date('Y-m-d');
-//         $sql .= "AND todo_date = :selected_date ";
+//         $sql .= " AND todo_date = :selected_date ";
 //     }
 
-//     $sql .= "ORDER BY "
+//     $sql .= " ORDER BY "
 //     . "list_no DESC ";
     
 //     $stmt = $conn->prepare($sql);
@@ -66,47 +122,6 @@ function db_select_todos_cnt($conn)
 
 //     return $result;
 // }
-function db_select_todos_list(&$conn, &$array_param) {
-    $sql = 
-    " SELECT 
-     tod.list_no,
-     tod.cat_no,
-     tod.content,
-     tod.todo_date,
-     tod.checked,
-     inf.name,
-     inf.profile
-    FROM 
-    todos tod
-    JOIN 
-    informations inf ON tod.cat_no = inf.cat_no
-    WHERE 
-    tod.deleted_at IS NULL 
-    AND tod.cat_no = 1";
-
-    
-    // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
-    if (isset($array_param['selected_date'])) {
-        $sql .= " AND todo_date = :selected_date ";
-    } else {
-        // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
-        $array_param['selected_date'] = date('Y-m-d');
-        $sql .= " AND todo_date = :selected_date ";
-    }
-
-    $sql .= " ORDER BY "
-    . "list_no DESC ";
-    
-    $stmt = $conn->prepare($sql);
-    
-    // 바인딩
-    $stmt->bindParam(':selected_date', $array_param['selected_date']);
-
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-
-    return $result;
-}
 
 
 
