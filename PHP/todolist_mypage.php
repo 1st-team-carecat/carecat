@@ -44,11 +44,11 @@ try {
     $conn = my_db_conn();
 
 
-    $name = isset($_GET['name']) ? $_GET['name'] : '1';
-    $profile = isset($_GET['profile']) ? $_GET['profile'] : '1';
-    $gender = isset($_GET['gender']) ? $_GET['gender'] : '1';
-    $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '1';
-    $weight = isset($_GET['weight']) ? $_GET['weight'] : '1';
+    $name = isset($_GET['name']) ? $_GET['name'] : '';
+    $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
+    $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
+    $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
+    $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
     
     $array_param = array(
         'name' => $name
@@ -120,8 +120,6 @@ if ($gender === 0) {
 
 // 생년월일 데이터 출력
 $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
-
-
 ?>
 
 
@@ -138,12 +136,12 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
 <body>
     <header>
         <div class="main-title">
-          <img src="/PHP/img/content-title.png" class="title-img">
+          <img src="/img/content-title.png" class="title-img">
         </div>
-        <div class="header-profile-name">로미</div>
+        <div class="header-profile-name"><?php echo $name ?></div>
         <a href="./mypage.php">
           <img class="header-profile-img"
-                src="<?php echo $profle ?>"/>
+                src="<?php echo $profile ?>"/>
         </a>
       </header>
     <main class="main-box">
@@ -164,14 +162,14 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
             <div>
                 <div class="info-box">
                     <div class="info-left">
-                        <img class="info-pic" src="<?php echo $profle ?>" alt="">
+                        <img class="info-pic" src="<?php echo $profile ?>" alt="">
                         <a href="./todolist_info_update.php" class="info-edit">내 정보 수정</a> 
                     </div>
                     <div class="info-right">
-                        <span class="info-text1"><?php echo $name ?></span>
-                        <span class="info-text2"><?php echo $gender_echo ?></span>
-                        <span class="info-text1"><?php echo $birth_at_echo ?></span>
-                        <span class="info-text2"><?php echo $weight."kg" ?></span>
+                        <span class="info-con1 info-name"><?php echo $name ?></span>
+                        <span class="info-con2 info-other"><?php echo $gender_echo ?></span>
+                        <span class="info-con1 info-other"><?php echo $birth_at_echo ?></span>
+                        <span class="info-con2 info-other"><?php echo $weight."kg" ?></span>
                         <span class="dday"><?php echo $name."의 생일이 ".$dday."일 남았습니다!"?></span>
                     </span>
                 </div>

@@ -169,7 +169,7 @@ header {
     line-height: 55px;
     color: white;
     font-size: 1.2rem;
-    font-weight: 900;
+
 }
 
 
@@ -281,32 +281,41 @@ input[type="date"] {
 
 }
 
-[class^='info-text'] {
+[class^='info-con'] {
     width: 70%;
     height: 40px;
     border-radius: 50px;
     text-align: center;
-    line-height: 40px;
+    line-height: 45px;
     font-weight: 00;
     font-size: 1.2rem;
     outline: none;
 }
 
+
 /* ----------------------------- */
 
-.info-text1 {
+
+.info-con1 {
     background-color: #DADADA;
     margin: 5px;
     border: none;
     font-family: 'GmarketSansMedium';
 }
 
-.info-text2 {
+.info-con2 {
     background-color: #EDEDED;
     margin: 5px;
     border: none;
     font-family: 'GmarketSansMedium';
+}
 
+.info-name {
+    font-size: 1.3rem;
+}
+
+.info-other {
+    color: #4f4f4f;
 }
 
 
