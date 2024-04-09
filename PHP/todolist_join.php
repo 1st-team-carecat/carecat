@@ -93,38 +93,38 @@ try {
         <form action="./todolist_join.php" method="POST">
             <div class="join-img-box">
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="./img/1.png" required>
+                    <input type="radio" class="radio-img" id="img-select1" name="PROFILE" value="/img/1.png" required>
                     <label for="img-select1" class="radio-img-label">
                         <img src="/img/1.png" class="cat-img">
-                        <img src="./img/1.png" class="cat-img-unchecked">
+                        <img src="/img/1.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select2" name="PROFILE" value="./img/2.png" required>
+                    <input type="radio" class="radio-img" id="img-select2" name="PROFILE" value="/img/2.png" required>
                     <label for="img-select2" class="radio-img-label">
-                        <img src="./img/2.png" class="cat-img">
-                        <img src="./img/2.png" class="cat-img-unchecked">
+                        <img src="/img/2.png" class="cat-img">
+                        <img src="/img/2.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select3" name="PROFILE" value="./img/3.png" required>
+                    <input type="radio" class="radio-img" id="img-select3" name="PROFILE" value="/img/3.png" required>
                     <label for="img-select3" class="radio-img-label">
-                        <img src="./img/3.png" class="cat-img">
-                        <img src="./img/3.png" class="cat-img-unchecked">
+                        <img src="/img/3.png" class="cat-img">
+                        <img src="/img/3.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select4" name="PROFILE" value="./img/4.png" required>
+                    <input type="radio" class="radio-img" id="img-select4" name="PROFILE" value="/img/4.png" required>
                     <label for="img-select4" class="radio-img-label">
-                        <img src="./img/4.png" class="cat-img">
-                        <img src="./img/4.png" class="cat-img-unchecked">
+                        <img src="/img/4.png" class="cat-img">
+                        <img src="/img/4.png" class="cat-img-unchecked">
                     </label> 
                 </div>
                 <div class="join-img">
-                    <input type="radio" class="radio-img" id="img-select5" name="PROFILE" value="./img/5.png" required>
+                    <input type="radio" class="radio-img" id="img-select5" name="PROFILE" value="/img/5.png" required>
                     <label for="img-select5" class="radio-img-label">
-                        <img src="./img/5.png" class="cat-img">
-                        <img src="./img/5.png" class="cat-img-unchecked">
+                        <img src="/img/5.png" class="cat-img">
+                        <img src="/img/5.png" class="cat-img-unchecked">
                     </label> 
                 </div>
             </div>
