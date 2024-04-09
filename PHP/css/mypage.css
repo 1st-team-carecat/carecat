@@ -66,6 +66,11 @@ body {
     font-family: 'GmarketSansMedium';
 }
 
+/* form {
+    font-family: 'GmarketSansMedium';
+} */
+
+
 /* 반복 디자인 */
 
 a {
@@ -238,6 +243,9 @@ input[type="date"] {
     place-items: center;
 }
 
+
+/* ------------------------------------------------ */
+
 .info-edit {
     width: 150px;
     height: 50px;
@@ -248,8 +256,20 @@ input[type="date"] {
     line-height: 55px;
     color: white;
     font-size: 1.2rem;
-    font-weight: 900;
+    border: none;
+    font-family: 'GmarketSansMedium';
 }
+
+.up-btn {
+    width: 70px;
+
+}
+
+.cancel {
+    background-color: #8a8a8a;
+}
+
+/* ------------------------------------------------ */
 
 .info-right {
     display: grid;
@@ -268,18 +288,26 @@ input[type="date"] {
     line-height: 40px;
     font-weight: 00;
     font-size: 1.2rem;
+    outline: none;
 }
+
+/* ----------------------------- */
 
 .info-text1 {
     background-color: #DADADA;
     margin: 5px;
+    border: none;
+    font-family: 'GmarketSansMedium';
 }
 
 .info-text2 {
     background-color: #EDEDED;
     margin: 5px;
+    border: none;
+    font-family: 'GmarketSansMedium';
 
 }
+
 
 .dday {
     background-color: #DADADA;
@@ -290,8 +318,16 @@ input[type="date"] {
     line-height: 90px;
     margin: 5px;
     font-size: 1.2rem;
-
+    border: none;
+    font-family: 'GmarketSansMedium';
+    
 }
+
+.dday-up {
+    color: #8a8a8a;
+}
+
+/* ----------------------------- */
 
 .gauge {
     place-items: center;
@@ -357,7 +393,16 @@ input[type="date"] {
 /* ------------------------------------------------------------------------------ */
 
 
-
-
-
-
+::-webkit-scrollbar {
+  height: 20px; /* 가로축 스크롤바 폭 너비 */
+}
+::-webkit-scrollbar-thumb {
+  background: #799BC4; /* 스크롤바 막대 색상 */
+  border: 1px solid #799BC4; /* 스크롤바 막대 테두리 설정  */
+  border-radius: 12px 12px 12px 12px;
+}
+/* 스크롤이 움직이는 뒷 배경 */
+::-webkit-scrollbar-track {
+  background: rgb(121, 155, 196, 0.3); /* 스크롤바 뒷 배경 색상 */
+  border-radius: 12px 12px 12px 12px;
+}
