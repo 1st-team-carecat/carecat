@@ -30,30 +30,70 @@ function db_select_todos_cnt($conn)
     return (int)$result[0]["cnt"];
 }
 
+// function db_select_todos_list(&$conn, &$array_param) {
+//     $sql =
+//     "SELECT "
+//     . "list_no "
+//     . ",cat_no "
+//     . ",content "
+//     . ",todo_date "
+//     . ",checked "
+//     . "FROM "
+//     . "todos "
+//     . "WHERE "
+//     . "deleted_at IS NULL "
+//     . "AND cat_no = 1 ";
+    
+//     // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
+//     if (isset($array_param['selected_date'])) {
+//         $sql .= "AND todo_date = :selected_date ";
+//     } else {
+//         // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
+//         $array_param['selected_date'] = date('Y-m-d');
+//         $sql .= "AND todo_date = :selected_date ";
+//     }
+
+//     $sql .= "ORDER BY "
+//     . "list_no DESC ";
+    
+//     $stmt = $conn->prepare($sql);
+    
+//     // 바인딩
+//     $stmt->bindParam(':selected_date', $array_param['selected_date']);
+
+//     $stmt->execute();
+//     $result = $stmt->fetchAll();
+
+//     return $result;
+// }
 function db_select_todos_list(&$conn, &$array_param) {
-    $sql =
-    "SELECT "
-    . "list_no "
-    . ",cat_no "
-    . ",content "
-    . ",todo_date "
-    . ",checked "
-    . "FROM "
-    . "todos "
-    . "WHERE "
-    . "deleted_at IS NULL "
-    . "AND cat_no = 1 ";
+    $sql = 
+    " SELECT 
+     t.list_no,
+     t.cat_no,
+     t.content,
+     t.todo_date,
+     t.checked,
+     i.name
+    FROM 
+    todos t
+    JOIN 
+    informations i ON t.cat_no = i.cat_no
+    WHERE 
+    t.deleted_at IS NULL 
+    AND t.cat_no = 1";
+
     
     // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
     if (isset($array_param['selected_date'])) {
-        $sql .= "AND todo_date = :selected_date ";
+        $sql .= " AND todo_date = :selected_date ";
     } else {
         // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
         $array_param['selected_date'] = date('Y-m-d');
-        $sql .= "AND todo_date = :selected_date ";
+        $sql .= " AND todo_date = :selected_date ";
     }
 
-    $sql .= "ORDER BY "
+    $sql .= " ORDER BY "
     . "list_no DESC ";
     
     $stmt = $conn->prepare($sql);
@@ -66,6 +106,8 @@ function db_select_todos_list(&$conn, &$array_param) {
 
     return $result;
 }
+
+
 
 
 function db_update_todos(&$conn, &$array_param)

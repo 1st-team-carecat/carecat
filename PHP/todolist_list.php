@@ -10,8 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $conn = my_db_conn(); // DB 연결
         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
-
-
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
 
@@ -67,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
-
+         
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
@@ -148,15 +146,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <header>
-        <div class="main-title">
-            <img src="./css/content-title.png" class="title-img" />
-        </div>
+<header>
+    <div class="main-title">
+        <img src="./css/content-title.png" class="title-img" />
+    </div>
+    <?php if (!empty($item) && isset($item["name"])) { ?>
+        <div class="header-profile-name"><?php echo $item["name"]; ?></div>
+    <?php } else { ?>
         <div class="header-profile-name">로미</div>
-        <a href="./todolist_mypage.php">
-            <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
-        </a>
-    </header>
+    <?php } ?>
+    <a href="./todolist_mypage.php">
+        <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
+    </a>
+</header>
+
+
+
     <main class="main-box">
         <div class="box">
             <div class="menu-content">
@@ -255,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
                                                 <li >
-                                                    <button type="submit"  name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>"<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'style="background-color: pink; border-radius: 50%"' : ''; ?>>
+                                                    <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>"  name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                         <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
