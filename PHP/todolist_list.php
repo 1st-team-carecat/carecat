@@ -36,7 +36,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($result !== 1) {
             throw new Exception("Insert Boards count");
         }
+        
+        // 보배언니작성
+        // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
+        $array_param = [
+            "list_no" => $list_no
+        ];
+        $result = db_update_contents_checked($conn, $array_param);
 
+        if ($result === 1) {
+            echo "Successfully updated the checked status.";
+        } else {
+            echo "Failed to update the checked status.";
+        }
+        // 보배언니작성끝
         $conn->commit();
         header("Location: todolist_list.php?selected_date=" . $todo_date);
         exit;
@@ -87,35 +100,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 // checked 데이터 넘길 함수 호출
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    try {
-        $conn = my_db_conn(); // DB 연결
-        $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : ""; // POST 데이터에서 list_no 가져오기
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//     try {
+//         $conn = my_db_conn(); // DB 연결
+//         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : ""; // POST 데이터에서 list_no 가져오기
 
-        // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
-        $array_param = [
-            "list_no" => $list_no
-        ];
-        $result = db_update_contents_checked($conn, $array_param);
+//         // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
+//         $array_param = [
+//             "list_no" => $list_no
+//         ];
+//         $result = db_update_contents_checked($conn, $array_param);
 
-        if ($result === 1) {
-            echo "Successfully updated the checked status.";
-        } else {
-            echo "Failed to update the checked status.";
-        }
+//         if ($result === 1) {
+//             echo "Successfully updated the checked status.";
+//         } else {
+//             echo "Failed to update the checked status.";
+//         }
 
-    } catch (\Throwable $e) {
-        echo $e->getMessage();
-    } finally {
-        if (!empty($conn)) {
-            $conn = null;
-        }
-    }
-}
-
-
+//     } catch (\Throwable $e) {
+//         echo $e->getMessage();
+//     } finally {
+//         if (!empty($conn)) {
+//             $conn = null;
+//         }
+//     }
+// }
 
 
+
+
+// 
 ?>
 
 
@@ -184,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <div class="chk-list">
                                     <!-- list_no 담을 인풋 히든처리 -->
                                     <input type="hidden" value="<?php echo $item["list_no"]?>" name="list_no">
+                                    <input type="hidden" value="<?php echo $item["todo_date"]?>" name="todo_date">
                                     <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
                                     <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
 
