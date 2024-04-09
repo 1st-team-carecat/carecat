@@ -80,6 +80,27 @@ try {
         $cat_no = '';
     }
 
+
+    // 디데이 가져오기
+    // 현재 날짜 
+    $now = date("Y-m-d");
+
+    // 생일의 연도를 현재 연도로 설정
+    $next_birthday = date('Y') . '-' . date('m-d', strtotime($birth_at));
+
+
+    // 생일이 오늘보다 이전인 경우 연도를 다음해로 설정
+    if ($next_birthday < $now) {
+        $next_birthday = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
+    }
+
+    // 남은 일 수 계산
+    $difference = strtotime($next_birthday) - strtotime($now);
+    $dday = floor($difference / (60 * 60 * 24));
+
+
+
+
 } catch(\Throwable $e) {
     echo $e->getMessage();
     exit;
@@ -95,8 +116,17 @@ try {
 
 
 
+// 성별 데이터 출력
+if ($gender === 0) {
+    $gender_echo = "수컷";
+} else {
+    $gender_echo = "암컷";  
+} 
 
-$name = "로미";
+// 생년월일 데이터 출력
+$birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
+
+
 
 ?>
 
@@ -152,7 +182,7 @@ $name = "로미";
                         <input type="text" name="birth_at" id="" class="info-text1" value="<?php echo $birth_at ?>">
                         <input type="text" name="weight" id="" class="info-text2" value="<?php echo $weight ?>">
                         <input type="hidden" name="cat_no" id="" class="info-text2" value="<?php echo $cat_no ?>">
-                        <span class="dday dday-up"><?php echo $name."의 생일이 100일 남았습니다!"?></span>
+                        <span class="dday dday-up"><?php echo $name."의 생일이 ".$dday."일 남았습니다!"?></span>
                     </div>
                 </form>
             </div>
