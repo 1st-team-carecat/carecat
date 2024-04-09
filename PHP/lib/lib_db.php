@@ -269,6 +269,7 @@ function db_select_information(&$conn, &$array_param) {
     $sql =
     "SELECT
         name
+        ,profile
         ,gender
         ,birth_at
         ,weight
