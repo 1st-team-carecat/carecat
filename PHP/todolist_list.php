@@ -148,21 +148,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <header>
     <div class="main-title">
-        <img src="./css/content-title.png" class="title-img" />
+        <img src="/img/content-title.png" class="title-img" />
     </div>
     <?php if (!empty($item) && isset($item["name"])) { ?>
         <div class="header-profile-name"><?php echo $item["name"]; ?></div>
     <?php } else { ?>
-    <header>
-        <div class="main-title">
-            <img src="/PHP/img/content-title.png" class="title-img">
-        </div>
         <div class="header-profile-name">로미</div>
     <?php } ?>
     <a href="./todolist_mypage.php">
         <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
     </a>
 </header>
+
 
 
 
