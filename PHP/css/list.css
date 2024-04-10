@@ -368,7 +368,7 @@ li {
 
 /* 날짜 체크하면 뒷배경 핑크넣기 */
 .btn-selected-date {
-  background-color: pink;
+  border: 2px solid pink;
   border-radius: 50%;
   width: 80%;
 }
