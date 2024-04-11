@@ -81,67 +81,8 @@ function db_select_todos_list2(&$conn, &$array_param) {
 
     return $result2;
 }
-// function db_select_todos_list(&$conn, &$array_param) {
-//     $sql = 
-//     " SELECT 
-//      tod.list_no,
-//      tod.cat_no,
-//      tod.content,
-//      tod.todo_date,
-//      tod.checked,
-//      inf.name,
-//      inf.profile
-//     FROM 
-//     todos tod
-//     JOIN 
-//     informations inf ON tod.cat_no = inf.cat_no
-//     WHERE 
-//     tod.deleted_at IS NULL 
-//     AND tod.cat_no = 1";
-
-    
-//     // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
-//     if (isset($array_param['selected_date'])) {
-//         $sql .= " AND todo_date = :selected_date ";
-//     } else {
-//         // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
-//         $array_param['selected_date'] = date('Y-m-d');
-//         $sql .= " AND todo_date = :selected_date ";
-//     }
-
-//     $sql .= " ORDER BY "
-//     . "list_no DESC ";
-    
-//     $stmt = $conn->prepare($sql);
-    
-//     // 바인딩
-//     $stmt->bindParam(':selected_date', $array_param['selected_date']);
-
-//     $stmt->execute();
-//     $result = $stmt->fetchAll();
-
-//     return $result;
-// }
 
 
-
-
-function db_update_todos(&$conn, &$array_param)
-{
-    $sql =
-        " UPDATE "
-        . " todos "
-        . " SET "
-        . " content = :content "
-        . " WHERE "
-        . " list_no = :list_no ";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(array(':cat_no' => $array_param['cat_no']));
-    $stmt->execute(array(':content' => $array_param['content'], ':list_no' => $array_param['list_no']));
-
-
-    return $stmt->rowCount();
-}
 
 function db_insert_list(&$conn, &$array_param)
 {
@@ -196,9 +137,6 @@ function db_update_todos_no(&$conn, &$array_param)
 
 
 
-// 리스트페이지 - 달력
-//  수정하기
-
 
 // 리스트페이지 - 삭제
 function db_delete_todos_no($conn, $array_param)
@@ -242,7 +180,7 @@ function db_select_todos_list_with_date($conn, $chk_day) {
     $sql = "SELECT * 
     FROM todos 
     WHERE todo_date = :chk_day 
-    AND checked = 1";
+    AND checked = 0";
     
     // PDO를 사용하는 예시
     $stmt = $conn->prepare($sql);
