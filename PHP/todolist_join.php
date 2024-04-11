@@ -22,7 +22,7 @@ try {
         if($birth_at === ""){
             $arr_err_param[] = "birth_at";
         }
-        if($gender !== ""){
+        if($gender === ""){
             $arr_err_param[] = "gender";
         }
         if($weight === ""){
