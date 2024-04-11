@@ -256,7 +256,7 @@ input[type="date"] {
     text-align: center;
     line-height: 55px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     border: none;
     font-family: 'GmarketSansMedium';
 }
@@ -309,27 +309,31 @@ input[type="date"] {
     font-family: 'GmarketSansMedium';
 }
 
-.info-name {
-    font-size: 1.3rem;
-}
-
 .info-other {
     color: #4f4f4f;
 }
 
 
 .dday {
-    background-color: #DADADA;
     width: 70%;
-    height: 90px;
+    height: 70px;
     border-radius: 30px;
     text-align: center;
-    line-height: 90px;
+    line-height: 75px;
     margin: 5px;
     font-size: 1.2rem;
     border: none;
     font-family: 'GmarketSansMedium';
     
+}
+
+.dday2 {
+
+}
+
+.bold {
+    font-size: 1.4rem;
+    color: #FF8CAE;
 }
 
 .dday-up {

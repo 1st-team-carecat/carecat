@@ -49,6 +49,7 @@ try {
     $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
     $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
     $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
+    $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
     
     $array_param = array(
         'name' => $name
@@ -56,6 +57,7 @@ try {
         ,'gender' => $gender
         ,'birth_at' => $birth_at
         ,'weight' => $weight
+        ,'adopt_at' => $adopt_at
     );
 
 
@@ -71,18 +73,20 @@ try {
         $gender = $result[0]['gender'];
         $birth_at = $result[0]['birth_at'];
         $weight = $result[0]['weight'];
+        $adopt_at = $result[0]['adopt_at'];
 
     } else {
         // 가져온 데이터가 없을 경우 빈 문자열
-        $name = "1";
-        $gender = "1";
-        $birth_at = "1";
-        $weight = "1";
+        $name = "";
+        $gender = "";
+        $birth_at = "";
+        $weight = "";
+        $adopt_at = '';
     }
 
 
 
-    // 디데이 가져오기
+    // 생일 디데이 가져오기
     // 현재 날짜 
     $now = date("Y-m-d");
 
@@ -97,9 +101,21 @@ try {
 
     // 남은 일 수 계산
     $difference = strtotime($next_birthday) - strtotime($now);
-    $dday = floor($difference / (60 * 60 * 24));
+    $birth_dday = floor($difference / (60 * 60 * 24));
 
-        
+    // 유닉스 타임스탬프로 변환
+    $adopt_timestamp = strtotime($adopt_at);
+    $now_timestamp = strtotime($now);
+
+    // 두 날짜 차이 계산
+    $adopt_dday = ($now_timestamp - $adopt_timestamp) / (60 * 60 * 24);
+
+
+
+
+
+
+
 
 } catch(\Throwable $e) {
     echo $e->getMessage();
@@ -163,15 +179,18 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
                 <div class="info-box">
                     <div class="info-left">
                         <img class="info-pic" src="<?php echo $profile ?>" alt="">
-                        <a href="./todolist_info_update.php" class="info-edit">내 정보 수정</a> 
+                        <span class="info-edit"><?php echo $name ?></span>
                     </div>
                     <div class="info-right">
-                        <span class="info-con1 info-name"><?php echo $name ?></span>
-                        <span class="info-con2 info-other"><?php echo $gender_echo ?></span>
-                        <span class="info-con1 info-other"><?php echo $birth_at_echo ?></span>
-                        <span class="info-con2 info-other"><?php echo $weight."kg" ?></span>
-                        <span class="dday"><?php echo $name?>"의 생일이<?php echo $dday?>일 남았습니다!"</span>
-                    </span>
+                        <span class="info-con1 info-other"><?php echo $gender_echo ?></span>
+                        <span class="info-con2 info-other"><?php echo $birth_at_echo ?></span>
+                        <span class="info-con1 info-other">몸무게 : <?php echo $weight ?> kg</span>
+                        <span class="info-con2 dday"><?php echo $name?>와 만난지
+                            <span class="bold"><?php echo $adopt_dday?>일</span> 째
+                        </span>
+                        <span class="info-con1 dday"><?php echo $name?>의 생일까지
+                            <span class="bold"><?php echo $birth_dday?>일</span>!
+                        </span>
                 </div>
             </div>
         </div>

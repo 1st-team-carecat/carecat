@@ -331,6 +331,7 @@ function db_select_information(&$conn, &$array_param) {
         ,gender
         ,birth_at
         ,weight
+        ,adopt_at
     FROM informations
     WHERE cat_no = 1 "
     ;
