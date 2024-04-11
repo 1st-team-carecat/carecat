@@ -155,10 +155,8 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
           <img src="/img/content-title.png" class="title-img">
         </div>
         <div class="header-profile-name"><?php echo $name ?></div>
-        <a href="./mypage.php">
           <img class="header-profile-img"
                 src="<?php echo $profile ?>"/>
-        </a>
       </header>
     <main class="main-box">
       <div class="box">
@@ -185,11 +183,11 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
                         <span class="info-con1 info-other"><?php echo $gender_echo ?></span>
                         <span class="info-con2 info-other"><?php echo $birth_at_echo ?></span>
                         <span class="info-con1 info-other">몸무게 : <?php echo $weight ?> kg</span>
-                        <span class="info-con2 dday"><?php echo $name?>와 만난지
-                            <span class="bold"><?php echo $adopt_dday?>일</span> 째
-                        </span>
-                        <span class="info-con1 dday"><?php echo $name?>의 생일까지
+                        <span class="info-con2 dday"><?php echo $name?>의 생일까지
                             <span class="bold"><?php echo $birth_dday?>일</span>!
+                        </span>
+                        <span class="info-con1 dday"><?php echo $name?>와 만난지
+                            <span class="bold"><?php echo $adopt_dday?>일</span> 째
                         </span>
                 </div>
             </div>
