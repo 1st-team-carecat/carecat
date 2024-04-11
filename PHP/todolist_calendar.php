@@ -70,8 +70,6 @@ try {
       </div>
       <div class="calendar-dox">
         <div class="calendar">
-          <form action="/todolist_list.php" method="get">
-            <input type="date" name="list_start_date" style="display: none;">
             <div class="todo-get-calendar">
               <div class="nav">
                 <!-- 년 월 구하기 -->
@@ -130,7 +128,6 @@ try {
                 ?>
               </ul>
             </div>
-          </form>
         </div>
       </div>
     </div>

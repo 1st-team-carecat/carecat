@@ -66,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
 
-        $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
 
