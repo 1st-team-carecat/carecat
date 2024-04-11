@@ -265,6 +265,7 @@ function db_insert_profile(&$conn, &$array_param){
         ."  ,birth_at "		
         ."  ,gender "
         ."  ,weight "	
+        ."  ,adopt_at "	
         ." ) "
         ." VALUES( "	
         ."  :PROFILE "
@@ -272,6 +273,7 @@ function db_insert_profile(&$conn, &$array_param){
         ."  ,:birth_at "		
         ."  ,:gender "
         ."  ,:weight "	
+        ."  ,:adopt_at "	
         ." ) "
     ;	
     $stmt = $conn->prepare($sql);

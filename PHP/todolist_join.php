@@ -10,6 +10,7 @@ try {
         $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
         $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
         $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
+        $adopt_at = isset($_POST["adopt_at"]) ? trim($_POST["adopt_at"]) : "";
 
 
         $arr_err_param = [];
@@ -28,6 +29,9 @@ try {
         if($weight === ""){
             $arr_err_param[] = "weight";
         }
+        if($adopt_at === ""){
+            $arr_err_param[] = "adopt_at";
+        }
         if(count($arr_err_param) > 0){
             throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
         }
@@ -41,6 +45,7 @@ try {
             ,"birth_at" => $birth_at
             ,"gender" => $gender
             ,"weight" => $weight
+            ,"adopt_at" => $adopt_at
         ];
         $result = db_insert_profile($conn, $arr_param);
 
@@ -147,13 +152,19 @@ try {
                 <div class="join-content">
                     <label for="birthday">생년월일</label>
                     <div class="content-title">
-                        <input type="date" class="join-date" name="birth_at" id="birth_at" required >
+                        <input type="date" class="join-date" name="birth_at" id="birth_at" required>
                     </div>
                 </div>
                 <div class="join-content">
                     <label for="weight">몸무게</label>
                     <div class="content-title">
                         <input type="number" name="weight" id="weight" required placeholder="kg"> 
+                    </div>
+                </div>
+                <div class="join-content">
+                    <label for="birthday">입양일자</label>
+                    <div class="content-title">
+                        <input type="date" class="join-date" name="adopt_at" id="adopt_at" required>
                     </div>
                 </div>
                 <footer>
