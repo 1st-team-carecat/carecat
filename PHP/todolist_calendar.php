@@ -1,48 +1,58 @@
 <?php
-
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
 require_once(FILE_LIB_DB); // DB관련 라이브러리
-
 try {
     // GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
     $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
     // GET으로 넘겨 받은 month값이 있다면 넘겨 받은걸 month변수에 적용하고 없다면 현재 월
     $month = isset($_GET['month']) ? $_GET['month'] : date('m');
-    
     $date = "$year-$month-01"; // 현재 날짜
     $time = strtotime($date); // 현재 날짜의 타임스탬프
     $start_week = date('w', $time); // 1. 시작 요일
     $total_day = date('t', $time); // 2. 현재 달의 총 날짜
     $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
-
     // 할일 목록을 가져오기 위해 DB 연결
     $conn = my_db_conn(); // connection 함수 호출
-    
 } catch (\Throwable $e) {
     echo $e->getMessage();
     exit;
 }
-
+try {
+    $name = isset($_GET['name']) ? $_GET['name'] : '';
+    $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
+    $array_param = array(
+        'name' => $name
+        ,'profile' => $profile
+    );
+    $result = db_select_information($conn, $array_param);
+    if (!empty($result)) {
+        $name = $result[0]['name'];
+        $profile = $result[0]['profile'];
+    } else {
+        // 가져온 데이터가 없을 경우 빈 문자열
+        $name = "1";
+    }
+} catch (\Throwable $t) {
+    echo $t->getMessage();
+    exit;
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>케어해달라냥 캘린더</title>
   <link rel="stylesheet" href="./css/todolist.css">
 </head>
-
 <body>
   <header>
     <div class="main-title">
       <img src="/img/content-title.png" class="title-img">
     </div>
-    <div class="header-profile-name">로미</div>
+    <div class="header-profile-name"><?php echo $name ?></div>
     <a href="./join.html">
-      <img class="header-profile-img" src="./css/11zon_cropped__2_-removebg-preview.png" />
+      <img class="header-profile-img" src="<?php echo $profile ?>" />
     </a>
   </header>
   <main class="main-box">
@@ -126,5 +136,13 @@ try {
     </div>
   </main>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+

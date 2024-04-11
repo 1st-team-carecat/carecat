@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try {
         $conn = my_db_conn(); // connection 함수 호출
-         
+
         $page_num = isset($_GET["page"]) ? $_GET["page"] : $page_num; // 파라미터에서 page 획득
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
@@ -82,10 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
 
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
-        
+
         $result1 = db_select_todos_list1($conn, $arr_param); // 게시글 내용 조회
         $result2 = db_select_todos_list2($conn, $arr_param); // 게시글 내용 조회
-        
+
 
     } catch (\Throwable $e) {
         echo $e->getMessage();
@@ -147,15 +147,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-<header>
-    <div class="main-title">
-        <img src="/img/content-title.png" class="title-img" />
-    </div>
-        <div class="header-profile-name"><?php echo $result1[0]["NAME"];?></div>
+    <header>
+        <div class="main-title">
+            <img src="/img/content-title.png" class="title-img" />
+        </div>
+        <div class="header-profile-name"><?php echo $result1[0]["NAME"]; ?></div>
         <a href="./todolist_mypage.php">
-            <img class="header-profile-img" src="<?php echo $result1[0]["PROFILE"]?>" />
+            <img class="header-profile-img" src="<?php echo $result1[0]["PROFILE"] ?>" />
         </a>
-</header>
+    </header>
 
 
     <main class="main-box">
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <input type="hidden" value="<?php echo $item["todo_date"] ?>" name="todo_date">
                                     <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
                                     <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
-                                    
+
                                     <input type="text" name="content" value="<?php echo $item["content"]; ?>" />
                                     <!-- 수정 버튼 -->
                                     <button type="submit" formaction="./todolist_list_update.php">
@@ -255,8 +255,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <!-- 달력 날짜 표시 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
-                                                <li >
-                                                    <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>"  name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
+                                                <li>
+                                                    <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                         <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
@@ -273,13 +273,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </form>
                     <!-- 쇼핑리스트 -->
                     <form action="./todolist.html" method="post">
-                        <div class="shopping-list">
-                            <div class="shopping-list-title">쇼핑리스트</div>
-                            <input type="text" value="폼폼공" name="" id="shp-li">
-                            <input type="text" value="고양이정수기필터" name="" id="shp-li">
-                            <input type="text" value="B유산균" name="" id="shp-li">
-                            <input type="text" value="" name="" id="shp-li">
+                        <div class="cat-frame">
+                            <!-- 고양이 영상을 표시하는 iframe -->
+                            <iframe width="200" height="270" src="https://www.youtube.com/embed/GzWVk9wPBAk" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </form>
+
+
                 </div>
             </div>
         </div>

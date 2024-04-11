@@ -257,8 +257,6 @@ button[for^="check"] {
   display: none;
 }
 
-
-
 .chk-list {
   display: flex;
   align-items: center;
@@ -292,21 +290,21 @@ label:active + input[type="text"] {
   padding: 10px;
 }
 
-/* 쇼핑리스트 */
-.shopping-list {
+/* 고양이 영상 */
+.cat-frame {
   width: 200px;
   height: 270px;
   margin: 10px;
   color: #4f82ab;
   text-align: center;
   border: 3px solid #4f82ab;
-  padding: 10px;
+  /* padding: 10px; */
+  overflow: hidden;
 }
 
-.shopping-list-title {
-  font-weight: 600;
-  font-size: 1.3rem;
-  border-bottom: 3px dotted #4f82ab;
+.cat-frame iframe {
+  display: block;
+  margin: 0 auto; /* iframe을 가운데 정렬 */
 }
 
 /* 캘린더  */
@@ -358,17 +356,19 @@ li {
   color: #aaa;
 }
 
-#shp-li {width: 170px; 
-  height: 3px; 
-  border:none; 
-  border-bottom: 3px solid #799bc4; 
-  border-radius: 0; 
-  background-color:transparent;  
-  margin: 5px 0 
+#shp-li {
+  width: 170px;
+  height: 3px;
+  border: none;
+  border-bottom: 3px solid #799bc4;
+  border-radius: 0;
+  background-color: transparent;
+  margin: 5px 0;
 }
 
+/* 날짜 체크하면 뒷배경 핑크넣기 */
 .btn-selected-date {
-  background-color: pink;
+  border: 2px solid pink;
   border-radius: 50%;
   width: 80%;
 }

@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파�
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 try {
-    if ($_SERVER["REQUEST_METHOD"] === "POST") { 
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
         $content = isset($_POST["content"]) ? $_POST["content"] : "";
 
