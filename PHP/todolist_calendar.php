@@ -51,7 +51,7 @@ try {
       <img src="/img/content-title.png" class="title-img">
     </div>
     <div class="header-profile-name"><?php echo $name ?></div>
-    <a href="./join.html">
+    <a href="./todolist_mypage.php">
       <img class="header-profile-img" src="<?php echo $profile ?>" />
     </a>
   </header>

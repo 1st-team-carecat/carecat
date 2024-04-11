@@ -4,10 +4,11 @@ USE team1;
 
 CREATE TABLE informations (
 	cat_no		INT			PRIMARY KEY AUTO_INCREMENT
-	,PROFILE		CHAR(1)		NOT NULL		COMMENT '0, 1, 2, 3, 4 의 이미지 존재'
+	,PROFILE		VARCHAR(50)	NOT NULL		
 	,NAME			VARCHAR(50)	NOT NULL
 	,birth_at	DATE			NOT NULL
 	,gender		CHAR(1)		NOT NULL		COMMENT '0 : 남자, 1: 여자'
+	,weight		INT         NOT NULL		COMMENT '단위 kg'
 	,created_at	DATETIME		NOT NULL		DEFAULT CURRENT_TIMESTAMP()
 	,deleted_at	DATETIME		NULL
 );
@@ -24,7 +25,3 @@ CREATE TABLE todos (
 );
 
 ALTER TABLE todos ADD CONSTRAINT fk_todos_cat_no FOREIGN KEY (cat_no) REFERENCES informations(cat_no);
-
-
-ALTER TABLE informations CHANGE COLUMN age birth_at DATE NOT NULL;
-ALTER TABLE informations CHANGE COLUMN age birth_at DATE NOT NULL;
