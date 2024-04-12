@@ -181,7 +181,8 @@ function db_select_todos_list_with_date($conn, $chk_day) {
     FROM todos 
     WHERE todo_date = :chk_day
     AND checked = '0'
-    AND cat_no = 1 ";
+    AND cat_no = 1 
+    AND deleted_at IS NULL ";
     
     // PDO를 사용하는 예시
     $stmt = $conn->prepare($sql);
