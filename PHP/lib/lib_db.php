@@ -245,10 +245,15 @@ function db_count_checked($conn) {
     // SQL
     $sql = 
     "SELECT 
-    COUNT(checked) chk_ttl
-    , SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
+        (SELECT COUNT(checked)
+            FROM todos
+            WHERE deleted_at IS NULL
+            AND YEAR(todo_date) = YEAR(CURRENT_DATE())
+            AND MONTH(todo_date) = MONTH(CURRENT_DATE()) ) chk_ttl
+            ,SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
     FROM todos
-    WHERE deleted_at IS NULL "
+    WHERE deleted_at IS NULL
+    AND cat_no = 1"
     ;
 
     // 쿼리 실행
@@ -256,6 +261,7 @@ function db_count_checked($conn) {
     
     // 쿼리 결과 가져옴
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
 
     // 결과 반환
     return $result; 
