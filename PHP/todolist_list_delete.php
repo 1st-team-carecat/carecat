@@ -24,7 +24,7 @@ try {
     }
 
     $conn->commit();
-    header("location:./todolist_list.php");
+    header("Location: todolist_list.php?selected_date=" . $todo_date);
     exit;
 } catch (\Throwable $e) {
     echo $e->getMessage();
