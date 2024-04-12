@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         $conn = my_db_conn(); // DB 연결
-        $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
 
@@ -21,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (count($arr_err_param) > 0) {
             throw new Exception("Parameter Error: " . implode(". ", $arr_err_param));
         }
-        $conn = my_db_conn();
         $conn->beginTransaction();
 
 
@@ -35,19 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             throw new Exception("Insert Boards count");
         }
 
-        // 보배언니작성
-        // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
-        $array_param = [
-            "list_no" => $list_no
-        ];
-        $result = db_update_contents_checked($conn, $array_param);
-
-        if ($result === 1) {
-            echo "Successfully updated the checked status.";
-        } else {
-            echo "Failed to update the checked status.";
-        }
-        // 보배언니작성끝
         $conn->commit();
         header("Location: todolist_list.php?selected_date=" . $todo_date);
         exit;
@@ -95,37 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-// checked 데이터 넘길 함수 호출
-// if ($_SERVER["REQUEST_METHOD"] === "POST") {
-//     try {
-//         $conn = my_db_conn(); // DB 연결
-//         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : ""; // POST 데이터에서 list_no 가져오기
 
-//         // list_no를 매개변수로 하여 db_update_contents_checked 함수 호출
-//         $array_param = [
-//             "list_no" => $list_no
-//         ];
-//         $result = db_update_contents_checked($conn, $array_param);
-
-//         if ($result === 1) {
-//             echo "Successfully updated the checked status.";
-//         } else {
-//             echo "Failed to update the checked status.";
-//         }
-
-//     } catch (\Throwable $e) {
-//         echo $e->getMessage();
-//     } finally {
-//         if (!empty($conn)) {
-//             $conn = null;
-//         }
-//     }
-// }
-
-
-
-
-// 
 ?>
 
 
