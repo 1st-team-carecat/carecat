@@ -68,8 +68,9 @@ function db_select_todos_list2(&$conn, &$array_param) {
         $sql .= "AND todo_date = :selected_date ";
     }
 
-    $sql .= "ORDER BY "
-    . "list_no DESC ";
+    $sql .=
+        " ORDER BY "
+        ." list_no DESC ";
     
     $stmt = $conn->prepare($sql);
     
