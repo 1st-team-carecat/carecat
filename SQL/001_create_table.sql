@@ -9,6 +9,7 @@ CREATE TABLE informations (
 	,birth_at	DATE			NOT NULL
 	,gender		CHAR(1)		NOT NULL		COMMENT '0 : 남자, 1: 여자'
 	,weight		INT         NOT NULL		COMMENT '단위 kg'
+	,adopt_at	DATE 			NOT NULL 
 	,created_at	DATETIME		NOT NULL		DEFAULT CURRENT_TIMESTAMP()
 	,deleted_at	DATETIME		NULL
 );
