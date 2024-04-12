@@ -128,11 +128,12 @@ try {
 }
 
 // 성별 데이터 출력
-if ($gender === 0) {
+if ($gender === '0') {
     $gender_echo = "수컷";
 } else {
     $gender_echo = "암컷";  
 } 
+
 
 // 생년월일 데이터 출력
 $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
