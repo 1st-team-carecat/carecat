@@ -54,10 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
 
+        $arr_date = explode('-', $selected_date);
+
         // GET으로 넘겨 받은 year값이 있다면 넘겨 받은걸 year변수에 적용하고 없다면 현재 년도
-        $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+        // $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+        $year = isset($_GET['year']) ? $_GET['year'] : (isset($arr_date[0]) ? $arr_date[0] : date('Y'));
         // GET으로 넘겨 받은 month값이 있다면 넘겨 받은걸 month변수에 적용하고 없다면 현재 월
-        $month = isset($_GET['month']) ? $_GET['month'] : date('m');
+        // $month = isset($_GET['month']) ? $_GET['month'] : date('m');
+        $month = isset($_GET['month']) ? $_GET['month'] : (isset($arr_date[1]) ? $arr_date[1] : date('m'));
 
         $date = "$year-$month-01"; // 현재 날짜
         $time = strtotime($date); // 현재 날짜의 타임스탬프
@@ -210,14 +214,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <?php for ($k = 0; $k < 7; $k++) { ?>
                                                 <li>
-                                                    <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
-                                                        <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
+                                                    <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
+                                                        <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
-                                                        <?php }; ?>
+                                                        <?php } ?>
                                                     </button>
                                                 </li>
-                                            <?php }; ?>
+                                            <?php } ?>
                                         <?php } ?>
                                     </ul>
 
