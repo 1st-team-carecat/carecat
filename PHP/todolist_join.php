@@ -158,7 +158,7 @@ try {
                 <div class="join-content">
                     <label for="weight">몸무게</label>
                     <div class="content-title">
-                        <input type="number" name="weight" id="weight" required placeholder="kg"> 
+                        <input type="number" name="weight" id="weight" required placeholder="kg" step="0.1"> 
                     </div>
                 </div>
                 <div class="join-content">
