@@ -102,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>케어해달라냥 할일 페이지</title>
     <link rel="stylesheet" href="./css/list.css" />
+    <link rel="icon" href="/img/favicon.png">
 </head>
 
 <body>

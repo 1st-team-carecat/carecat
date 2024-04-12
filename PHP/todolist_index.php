@@ -12,6 +12,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케어해달라냥</title>
     <link rel="stylesheet" href="./css/todolist.css">
+    <link rel="icon" href="/img/favicon.png">
 </head>
 <body class="start-page">
     <div class="line">
