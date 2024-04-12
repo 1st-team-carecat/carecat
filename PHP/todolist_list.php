@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: todolist_list.php?selected_date=" . $todo_date);
         exit;
     } catch (\Throwable $e) {
-        if (!empty($conn)) {
+        if (!empty($conn) && $conn->inTransaction()) {
             $conn->rollBack();
         }
         echo $e->getMessage();

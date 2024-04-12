@@ -185,6 +185,7 @@ input[type="text"]:not(:first-of-type) {
   border-radius: 30px;
   margin: 10px;
   background-color: rgb(121, 155, 196, 0.3);
+  font-family: 'GmarketSansMedium';
 }
 input[type="text"]:first-of-type {
   width: 500px;
@@ -196,6 +197,7 @@ input[type="text"]:first-of-type {
   border-radius: 30px;
   margin: 10px;
   background-color: #fff;
+  font-family: 'GmarketSansMedium';
 }
 
 .scroll {
