@@ -6,6 +6,8 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 try {
     $conn = my_db_conn();
 
+    // 현재 달과 월을 담을 변수 선언하기
+
     // 함수 호출하기
     $result = db_count_checked($conn);
 
@@ -35,7 +37,6 @@ try {
         $conn = null;
     }
 }
-
 
 // 내 정보 출력하기
 
@@ -197,11 +198,11 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
         </div>
         <div class="gauge">
             <div class="gauge-back">
-                <span class="gauge-percent"><?php echo $percentage."%"; ?></span>
-                <!-- 퍼센트를 텍스트로 출력 -->
                 <div class="gauge-bar" style="width: <?php echo $percentage; ?>%;"></div>
                 <!-- 퍼센트를 게이지 바의 넓이로 출력 -->
                 <span class="gauge-text">행복달성지수</span>
+                <span class="gauge-percent"><?php echo $percentage."%"; ?></span>
+                <!-- 퍼센트를 텍스트로 출력 -->
             </div>
         </div>
     </div>
