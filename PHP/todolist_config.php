@@ -11,7 +11,6 @@ define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
 define("FILE_HEADER", ROOT."todolist_header.php");
 define("FILE_LIB_DB", ROOT."lib/lib_db.php");
 
-
 define("REQUEST_METHOD", strtoupper($_SERVER["REQUEST_METHOD"]));
 
 ?>
