@@ -5,7 +5,7 @@ define("MARIADB_USER", "team1");
 define("MARIADB_PASSWORD", "team1");
 define("MARIADB_NAME", "team1");
 define("MARIADB_CHARSET", "utf8mb4");
-define("MARIADB_DSN", "mysql:host=".MARIADB_HOST.";port=6412;dbname=;dbname=".MARIADB_NAME.";charset=".MARIADB_CHARSET);
+define("MARIADB_DSN", "mysql:host=".MARIADB_HOST.";port=6412;dbname=".MARIADB_NAME.";charset=".MARIADB_CHARSET);
 
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
 define("FILE_HEADER", ROOT."todolist_header.php");
