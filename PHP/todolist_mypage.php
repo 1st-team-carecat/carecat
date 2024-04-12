@@ -155,8 +155,10 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
           <img src="/img/content-title.png" class="title-img">
         </div>
         <div class="header-profile-name"><?php echo $name ?></div>
+        <a href="#">
           <img class="header-profile-img"
                 src="<?php echo $profile ?>"/>
+        </a>
       </header>
     <main class="main-box">
       <div class="box">
