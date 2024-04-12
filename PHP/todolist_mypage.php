@@ -146,7 +146,7 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케어해달라냥 내 정보 페이지</title>
-    <link rel="stylesheet" href="./CSS/mypage.css">
+    <link rel="stylesheet" href="./css/mypage.css">
 
 </head>
 <body>
