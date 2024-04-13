@@ -230,15 +230,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
                         </div>
                     </form>
-                    <!-- 쇼핑리스트 -->
-                    <form action="./todolist.html" method="post">
-                        <div class="cat-frame">
-                            <!-- 고양이 영상을 표시하는 iframe -->
-                            <iframe width="200" height="270" src="https://www.youtube.com/embed/GzWVk9wPBAk" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </form>
-
-
+                    <div class="cat-frame">
+                        <!-- 고양이 영상을 표시하는 iframe -->
+                        <iframe width="200" height="270" src="https://www.youtube.com/embed/GzWVk9wPBAk" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
