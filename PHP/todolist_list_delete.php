@@ -6,7 +6,6 @@ try {
     $conn = my_db_conn();
 
     $list_no = isset($_POST["list_no"]) ? $_POST["list_no"]  : "";
-    $page = isset($_POST["page"]) ? $_POST["page"]  : "";
     $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : "";
 
     $arr_err_param = [];
