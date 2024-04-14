@@ -18,7 +18,7 @@ try {
 
     $conn->commit();
 
-    // 상세 페이지로 이동
+    // 리스트 페이지로 이동
     header("Location: todolist_list.php?selected_date=" . $todo_date);
 
 } catch(\Throwable $e) {

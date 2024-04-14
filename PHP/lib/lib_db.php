@@ -245,6 +245,21 @@ function db_select_todolist_no(&$conn, &$array_param){
 
     
 // 내 정보 페이지
+// function db_count_checked($conn) {
+//     // SQL
+//     $sql = 
+//     "SELECT 
+//         (SELECT COUNT(checked)
+//             FROM todos
+//             WHERE deleted_at IS NULL
+//             AND YEAR(todo_date) = YEAR(CURRENT_DATE())
+//             AND MONTH(todo_date) = MONTH(CURRENT_DATE()) ) chk_ttl
+//             ,SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
+//     FROM todos
+//     WHERE deleted_at IS NULL
+//     AND cat_no = 1"
+//     ;
+
 function db_count_checked($conn) {
     // SQL
     $sql = 
@@ -254,11 +269,13 @@ function db_count_checked($conn) {
             WHERE deleted_at IS NULL
             AND YEAR(todo_date) = YEAR(CURRENT_DATE())
             AND MONTH(todo_date) = MONTH(CURRENT_DATE()) ) chk_ttl
-            ,SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
+            ,SUM(checked = '1') chk_cnt
     FROM todos
     WHERE deleted_at IS NULL
-    AND cat_no = 1"
+    AND YEAR(todo_date) = YEAR(CURRENT_DATE())
+    AND MONTH(todo_date) = MONTH(CURRENT_DATE())"
     ;
+
 
     // 쿼리 실행
     $stmt = $conn->query($sql);

@@ -3,6 +3,14 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파�
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 
+$name = "";
+$profile = "";
+$gender = "";
+$birth_at = "";
+$weight = "";
+$adopt_at = '';
+
+
 try {
     $conn = my_db_conn();
 
@@ -44,13 +52,12 @@ try {
 
     $conn = my_db_conn();
 
-
-    $name = isset($_GET['name']) ? $_GET['name'] : '';
-    $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
-    $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
-    $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
-    $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
-    $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
+    // $name = isset($_GET['name']) ? $_GET['name'] : '';
+    // $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
+    // $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
+    // $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
+    // $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
+    // $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
     
     $array_param = array(
         'name' => $name
@@ -60,7 +67,7 @@ try {
         ,'weight' => $weight
         ,'adopt_at' => $adopt_at
     );
-
+ 
 
     // 데이터 가져오기
     $result = db_select_information($conn, $array_param);
@@ -89,24 +96,37 @@ try {
 
     // 생일 디데이 가져오기
     // 현재 날짜 
-    $now = date("Y-m-d");
+    // $now = date("Y-m-d");
+
+    $now = new DateTime();
 
     // 생일의 연도를 현재 연도로 설정
-    $next_birthday = date('Y') . '-' . date('m-d', strtotime($birth_at));
+    // $next_birth_at = date('Y') . '-' . date('m-d', strtotime($birth_at));
+
+    $next_birth_at = new DateTime(date('Y') . '-' . date('m-d', strtotime($birth_at)));
 
 
     // 생일이 오늘보다 이전인 경우 연도를 다음해로 설정
-    if ($next_birthday < $now) {
-        $next_birthday = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
+    // if ($next_birth_at < $now) {
+    //     $next_birth_at = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
+    // }
+
+    if ($next_birth_at < $now) {
+        $next_birth_at->modify('+1 year') . '-' . date('m-d', strtotime($birth_at));
     }
 
+
     // 남은 일 수 계산
-    $difference = strtotime($next_birthday) - strtotime($now);
-    $birth_dday = floor($difference / (60 * 60 * 24));
+    // $difference = strtotime($next_birth_at - strtotime($now);
+    // $birth_dday = floor($difference / (60 * 60 * 24));
+
+    $difference = $next_birth_at->diff($now);
+    $birth_dday = $difference->days;
+
 
     // 유닉스 타임스탬프로 변환
     $adopt_timestamp = strtotime($adopt_at);
-    $now_timestamp = strtotime($now);
+    $now_timestamp = strtotime($now->format('Y-m-d'));
 
     // 두 날짜 차이 계산
     $adopt_dday = ($now_timestamp - $adopt_timestamp) / (60 * 60 * 24);
