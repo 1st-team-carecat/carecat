@@ -254,7 +254,7 @@ function db_count_checked($conn) {
     WHERE deleted_at IS NULL
     AND YEAR(todo_date) = YEAR(CURRENT_DATE())
     AND MONTH(todo_date) = MONTH(CURRENT_DATE())"
-    ;
+;
 
 
     // 쿼리 실행
@@ -279,9 +279,8 @@ function db_select_information(&$conn, &$array_param) {
         ,birth_at
         ,weight
         ,adopt_at
-    FROM informations
-    WHERE cat_no = 1 "
-    ;
+    FROM informations"
+;
 
     $stmt = $conn->query($sql);
     $result = $stmt->fetchAll(); 
