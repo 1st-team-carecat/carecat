@@ -4,6 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // todolist_co
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 
+
 // HTTP 요청 메서드가 POST인지 확인하는 조건문. 만약 POST 요청이면 아래의 코드 블록이 실행됨
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
@@ -66,9 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try { // 이번에도 오류가 발생할 수 있는 코드를 시도합니다. 만약 오류가 발생하면 catch 블록으로 이동
         $conn = my_db_conn(); // my_db_conn() 함수를 사용하여 데이터베이스 연결을 수행
 
-        $result2 = db_select_todos_list($conn, $arr_param); // name, profile 조회
-        $result1 = db_select_profile($conn, $arr_param); // 게시글 내용 조회
-
         // GET 요청으로부터 'selected_date' 매개변수를 가져옵니다. 매개변수가 없으면 현재 날짜를 기본값으로 사용
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
         // 선택된 날짜를 년, 월, 일로 나누어 배열에 저장합니다.
@@ -90,6 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
         // 선택된 날짜를 매개변수 배열에 추가
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
+
+        
+        $result2 = db_select_todos_list($conn, $arr_param); // 게시글 내용
+        $result1 = db_select_profile($conn, $arr_param); // name, profile 조회
 
     } catch (\Throwable $e) {
         echo $e->getMessage();
