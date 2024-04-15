@@ -11,6 +11,7 @@ function my_db_conn()
 }
 
 // 리스트 페이지 시작
+
 function db_select_profile(&$conn) {
     $sql = "SELECT NAME, PROFILE 
             FROM informations 
@@ -40,20 +41,20 @@ function db_select_todos_list(&$conn, &$array_param) {
     . "WHERE "
     . "deleted_at IS NULL "
     . "AND cat_no = 1 ";
-    
-    // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
-    if (isset($array_param['selected_date'])) {
-        $sql .= "AND todo_date = :selected_date ";
-    } else {
-        // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
-        $array_param['selected_date'] = date('Y-m-d');
-        $sql .= "AND todo_date = :selected_date ";
-    }
 
-    $sql .=
-        " ORDER BY "
-        ." list_no DESC ";
-    
+// 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
+if (isset($array_param['selected_date'])) {
+    $sql .= "AND todo_date = :selected_date ";
+} else {
+    // 선택한 날짜가 없을 경우에는 오늘의 날짜를 기본값으로 합니다.
+    $array_param['selected_date'] = date('Y-m-d');
+    $sql .= "AND todo_date = :selected_date ";
+}
+
+$sql .=
+    " ORDER BY "
+    ." checked ASC, list_no DESC ";
+
     $stmt = $conn->prepare($sql);
     
     // 바인딩
