@@ -13,10 +13,7 @@ try {
         "list_no" => $list_no
     ];
 
-    $conn->beginTransaction();
     $result = db_update_contents_checked($conn, $arr_param);
-
-    $conn->commit();
 
     // 리스트 페이지로 이동
     header("Location: todolist_list.php?selected_date=" . $todo_date);

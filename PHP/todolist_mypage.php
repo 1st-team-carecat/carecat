@@ -122,12 +122,6 @@ try {
     $adopt_dday = $adopt_timestamp->diff($now)->days;
 
 
-
-
-
-
-
-
 } catch(\Throwable $e) {
     echo $e->getMessage();
     exit;
