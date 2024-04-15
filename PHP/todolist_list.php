@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // 해당 월의 총 날짜 수를 확인
         $total_day = date('t', $time); // 2. 현재 달의 총 날짜
         // 해당 월의 총 주 수를 계산
-        $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
+        $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차, ceil은 소수점이있을때 무조건 반올림
         // 선택된 날짜를 매개변수 배열에 추가
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
 
