@@ -6,7 +6,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
         $content = isset($_POST["content"]) ? $_POST["content"] : "";
-        $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : ""; // TODO : 확인
+        $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : ""; 
 
         $arr_err_param = [];
         if ($list_no === "") {

@@ -65,8 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try { // 이번에도 오류가 발생할 수 있는 코드를 시도합니다. 만약 오류가 발생하면 catch 블록으로 이동
         $conn = my_db_conn(); // my_db_conn() 함수를 사용하여 데이터베이스 연결을 수행
-        // 할 일 목록의 개수를 데이터베이스에서 가져옵니다. db_select_todos_cnt() 함수를 사용하여 처리
-        $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
+
+        $result2 = db_select_todos_list($conn, $arr_param); // name, profile 조회
+        $result1 = db_select_profile($conn, $arr_param); // 게시글 내용 조회
+
         // GET 요청으로부터 'selected_date' 매개변수를 가져옵니다. 매개변수가 없으면 현재 날짜를 기본값으로 사용
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
         // 선택된 날짜를 년, 월, 일로 나누어 배열에 저장합니다.
@@ -88,10 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
         // 선택된 날짜를 매개변수 배열에 추가
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
-
-        $result1 = db_select_todos_list1($conn, $arr_param); // 게시글 내용 조회
-        $result2 = db_select_todos_list2($conn, $arr_param); // name, profile 조회
-
 
     } catch (\Throwable $e) {
         echo $e->getMessage();
@@ -189,6 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div class="todo-get-calendar">
                             <div class="nav">
                                 <!-- 년 월 구하기 -->
+                                <!-- 이전버튼 -->
                                 <?php if ($month == 1) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year - 1 ?>&month=12">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
@@ -199,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </a>
                                 <?php } ?>
                                 <p><?php echo  "$year 년 $month 월" ?> </p>
+                                <!-- 다음버튼 -->
                                 <?php if ($month == 12) { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year + 1 ?>&month=1">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
@@ -223,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </ul>
                                     <ul class="days">
                                         <!-- 달력 날짜 표시 -->
-                                        <!-- $total_week: 현재 월에 포함된 주의 총 수를 나타냅니다. 이 수만큼의 행이 생성 -->
+                                        <!-- $total_week: 현재 월에 포함된 주의 총 수를 나타냅니다. 이 수만큼의 행이 생성. -->
                                         <!-- $n: 날짜를 나타내는 변수로, 각 주의 첫 번째 날부터 시작하여 증가합 -->
                                         <!-- $i: 외부 루프의 반복 횟수를 추적하는 변수 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>

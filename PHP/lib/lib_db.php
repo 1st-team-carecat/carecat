@@ -11,41 +11,23 @@ function my_db_conn()
 }
 
 // 리스트 페이지 시작
-function db_select_todos_cnt($conn)
-{
-    $sql =  // sql 작성
-        " SELECT "
-        . "	COUNT(list_no) as cnt "
-        . " FROM "
-        . "  todos "
-        . " WHERE "
-        . " deleted_at IS NULL "
-        . " AND DATE(todo_date) = CURDATE() ";
-
-    // Query 실행
-    $stmt = $conn->query($sql);
-    $result = $stmt->fetchAll();
-
-    // 리턴
-    return (int)$result[0]["cnt"];
-}
-function db_select_todos_list1(&$conn) {
+function db_select_profile(&$conn) {
     $sql = "SELECT NAME, PROFILE 
             FROM informations 
             WHERE cat_no = 1"; // cat_no를 1로 설정
 
     // Query 실행
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(); 
-    $result1 = $stmt->fetchAll();
+    $stmt = $conn->prepare($sql); // 쿼리를 데이터베이스에 제출하지 않고 먼저 준비
+    $stmt->execute(); //  데이터베이스에서 쿼리가 실행되고 결과가 반환
+    $result1 = $stmt->fetchAll(); // 쿼리 결과를 배열 형태로 모두 가져옴
 
     // 리턴
-    return $result1;
+    return $result1; // $result1로 반환
 }
 
 
 
-function db_select_todos_list2(&$conn, &$array_param) {
+function db_select_todos_list(&$conn, &$array_param) {
     $sql =
     "SELECT "
     . "list_no "
@@ -104,10 +86,11 @@ function db_insert_list(&$conn, &$array_param)
     )";
 
 
-    // Query 실행
+    // Query 실행. prepare() 함수를 사용하여 데이터베이스 연결 객체인 $conn에서 $stmt(Statement) 객체를 만듬
     $stmt = $conn->prepare($sql);
 
-    // 바인딩
+    // 바인딩 쿼리의 매개변수에 PHP 변수를 바인드하여 SQL 쿼리가 실행될 때 이러한 값들을 적절히 대체할 수 있도록 합니다. 여기서는 ":list_no", ":todo_date", ":content"와 같은 쿼리의 placeholder에 $array_param 배열에서 해당하는 값을 바인딩
+    // SQL 삽입(SQL Injection) 공격을 방지하는 데 중요한 역할
     $stmt->bindParam(':list_no', $array_param['list_no']);
     $stmt->bindParam(':todo_date', $array_param['todo_date']);
     $stmt->bindParam(':content', $array_param['content']);
