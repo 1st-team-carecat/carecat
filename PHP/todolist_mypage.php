@@ -51,7 +51,12 @@ try {
     $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
 
     $array_param = array(
-        'name' => $name, 'profile' => $profile, 'gender' => $gender, 'birth_at' => $birth_at, 'weight' => $weight, 'adopt_at' => $adopt_at
+        'name' => $name
+        ,'profile' => $profile
+        ,'gender' => $gender
+        ,'birth_at' => $birth_at
+        ,'weight' => $weight
+        ,'adopt_at' => $adopt_at
     );
 
     // 데이터 가져오기
