@@ -91,7 +91,7 @@ try {
                             <!-- 년 월 구하기 -->
                             <!-- 이전 달로 이동하는 링크 -->
                             <!-- $month가 1이라면(1월인 경우), 이전 해 (년도 1감소)의 12월을 가르키는 링크 -->
-                            <?php if ($month === 1) { ?>
+                            <?php if ($month === '1') { ?>
                                 <a href="/todolist_calendar.php?year=<?php echo $year - 1 ?>&month=12">
                                 <?php } else { ?>
                                     <!-- 그렇지 않은 경우 이전 월(월을 1감소)을 가르키는 링크 -->
@@ -105,7 +105,7 @@ try {
 
                                     <!-- 다음 달로 이동하는 링크 -->
                                     <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
-                                    <?php if ($month === 12) { ?>
+                                    <?php if ($month === '12') { ?>
                                         <a href="/todolist_calendar.php?year=<?php echo $year + 1 ?>&month=1">
                                         <?php } else { ?>
                                             <!-- 그렇지 않은 경우 다음 월 (월을 1 증가) 가르키는 링크 -->
