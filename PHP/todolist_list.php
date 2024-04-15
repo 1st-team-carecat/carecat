@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <div class="nav">
                                 <!-- 년 월 구하기 -->
                                 <!-- 이전버튼 -->
-                                <?php if ($month === 1) { ?>
+                                <?php if ($month === '1') { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year - 1 ?>&month=12">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                     </a>
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <?php } ?>
                                 <p><?php echo  "$year 년 $month 월" ?> </p>
                                 <!-- 다음버튼 -->
-                                <?php if ($month === 12) { ?>
+                                <?php if ($month === '12') { ?>
                                     <a href="/todolist_list.php?year=<?php echo $year + 1 ?>&month=1">
                                         <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                     </a>
