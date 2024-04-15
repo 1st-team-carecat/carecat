@@ -34,7 +34,7 @@ try {
 
 
     if (!empty($result)) {
-        // 조회된 결과의 첫 번째 행에서 해당하는 값 가져옴
+        // 조회된 결과의 해당하는 값 가져옴
         $name = $result[0]['name'];
         $profile = $result[0]['profile'];
 
