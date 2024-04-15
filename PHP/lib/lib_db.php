@@ -53,7 +53,7 @@ if (isset($array_param['selected_date'])) {
 
 $sql .=
     " ORDER BY "
-    ." checked ASC, list_no DESC ";
+    ." checked ASC, list_no DESC "; // checked는 오름차순, list_no는 내림차순
 
     $stmt = $conn->prepare($sql);
     
