@@ -1,36 +1,53 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파일 호출
-require_once(FILE_LIB_DB); // DB관련 라이브러리
+// 설정 파일 호출
+require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php");
+// DB관련 라이브러리 호출
+require_once(FILE_LIB_DB); 
 
 try {
+    //데이터베이스 연결합니다.
     $conn = my_db_conn();
-
+    //post 요청에서 할일 목록(list_no)를 가져옵니다.
     $list_no = isset($_POST["list_no"]) ? $_POST["list_no"]  : "";
+    //페이지 번호와
+    $page = isset($_POST["page"]) ? $_POST["page"]  : "";
+    //할일 날짜도 가져옵니다.
     $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : "";
-
+    //유효성 검사(요청한 데이터가 어떤 조건에 충족하는지 확인하는 작업)를 위한 오류
+    //파라미터 배열 초기화
     $arr_err_param = [];
+    //만약 list_no가 빈 문자열이라면, 예외(exception)를 발생시킵니다.
     if ($list_no === "") {
         throw new Exception("Parameter Error: list_no");
     }
-
+    //트랜잭션 시작
     $conn->beginTransaction();
+    //삭제할 할 일 목록 번호를 담은 배열을 생성
     $arr_param = [
         "list_no" => $list_no
     ];
+    //DB에서 할 일 목록 삭제
     $result = db_delete_todos_no($conn, $arr_param);
 
+    // 위 함수가 올바르게 실행되지 않았을 경우 예외 발생시킵니다.
     if ($result !== 1) {
         throw new Exception("Delete Boards no count");
     }
-
+    //트랜잭션을 커밋합니다.
     $conn->commit();
+    //할 일 목록 페이지로 redirect합니다.
     header("Location: todolist_list.php?selected_date=" . $todo_date);
     exit;
+    //예외처리
 } catch (\Throwable $e) {
+    //예외 메시지 출력
     echo $e->getMessage();
+    //스크립트 종료
     exit;
 } finally {
+    //데이터베이스 연결이 존재하는 경우
     if (!empty($conn)) {
+        //연결 닫기
         $conn = null;
     }
 }

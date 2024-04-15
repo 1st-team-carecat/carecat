@@ -4,6 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // 설정 파�
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 try {
+    // 데이터를 서버에 보내기 위함
     if(REQUEST_METHOD === "POST") {
         $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
         $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
@@ -12,7 +13,7 @@ try {
         $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
         $adopt_at = isset($_POST["adopt_at"]) ? trim($_POST["adopt_at"]) : "";
 
-
+        // 필수 입력 필드가 비어 있는지 확인 후 있으면 $arr_err_param 배열에 해당 필드 이름 추가함
         $arr_err_param = [];
         if($PROFILE === ""){
             $arr_err_param[] = "PROFILE";
@@ -36,7 +37,10 @@ try {
             throw new Exception("Parameter Error : ".implode(", ", $arr_err_param));
         }
 
+        // 데이터 베이스 연결
         $conn = my_db_conn();
+
+        // 데이터 베이스 트랜잭션
         $conn->beginTransaction();
 
         $arr_param = [
@@ -47,8 +51,11 @@ try {
             ,"weight" => $weight
             ,"adopt_at" => $adopt_at
         ];
+        
+        // 작성한 데이터 저장
         $result = db_insert_profile($conn, $arr_param);
 
+        // $result 가 1이 아닌 경우는 데이터 저장 실패한 것으로 간주하여 예외 발생
         if($result !== 1){
             throw new Exception("Insert Profile count");
         }
@@ -60,14 +67,19 @@ try {
     }
 
 } catch (\Throwable $e) {
+    // 예외 발생한 경우, 현재 진행 중인 데이터 베이스 트랜잭션이 있는지 확인
+    // 트랜잭션 중이라면 ($conn->inTransaction()이 참이면) 트랜잭션 롤백하여 이전 상태로 복구
     if(!empty($conn) && $conn->inTransaction()){
         $conn->rollBack();
     }
+
+    // 예외 메세지 출력
     echo $e->getMessage();
     exit;
 
 } finally {
     if(!empty($conn)){
+        // 데이터 베이스 연결 해제
         $conn = null;
     }   
 }
