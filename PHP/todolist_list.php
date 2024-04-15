@@ -1,8 +1,8 @@
 <?php
 // require_once 를 쓴 이유는 한번만 실행을 할꺼고 불러오는 php에 오류가 났을때 처리는 중단하기 위해서
-require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // /todolist_config.php 파일을 현재 PHP 스크립트에 포함시킵니다. 이 파일에는 설정 정보가 들어 있습니다.
+require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // todolist_config.php 파일을 현재 PHP 스크립트에 포함시킴 이 파일에는 설정 정보가 들어 있
 require_once(FILE_LIB_DB); // DB관련 라이브러리
-$page_num = 1; // 페이지 번호를 1로 설정합니다. 이 변수는 페이지네이션에 사용될 수 있습니다.
+
 
 // HTTP 요청 메서드가 POST인지 확인하는 조건문입니다. 만약 POST 요청이면 아래의 코드 블록이 실행됩니다.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
