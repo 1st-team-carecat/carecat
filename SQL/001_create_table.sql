@@ -4,11 +4,11 @@ USE team1;
 
 CREATE TABLE informations (
 	cat_no		INT			PRIMARY KEY AUTO_INCREMENT
-	,PROFILE		VARCHAR(50)	NOT NULL		
-	,NAME			VARCHAR(50)	NOT NULL
+	,PROFILE	VARCHAR(50)	NOT NULL		
+	,NAME		VARCHAR(50)	NOT NULL
 	,birth_at	DATE			NOT NULL
-	,gender		CHAR(1)		NOT NULL		COMMENT '0 : 남자, 1: 여자'
-	,weight		INT         NOT NULL		COMMENT '단위 kg'
+	,gender		CHAR(1)			NOT NULL		COMMENT '0 : 수컷, 1: 암컷'
+	,weight		FLOAT         	NOT NULL		COMMENT '단위 kg 소수점 첫째 자리까지'
 	,adopt_at	DATE 			NOT NULL 
 	,created_at	DATETIME		NOT NULL		DEFAULT CURRENT_TIMESTAMP()
 	,deleted_at	DATETIME		NULL

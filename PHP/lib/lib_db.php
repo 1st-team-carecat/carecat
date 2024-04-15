@@ -106,27 +106,17 @@ function db_insert_list(&$conn, &$array_param)
 
 
 // 리스트 페이지 -수정
-// 함수 역할: 데이터베이스에 저장된 할 일 항목을 업데이트하는 기능을 담당합니다.
-//첫 번째 매개변수는 데이터베이스 연결을 나타내는 객체 '$conn' 두번째 매개변수는
-// 업데이트 정보를 담고있는 배열 '$array_param'
+
 function db_update_todos_no(&$conn, &$array_param)
 {
-    // (기존 데이터를 수정하기 위한) SQL 쿼리를 준비합니다.
     $sql =
-    //UPDATE 테이블명
-    //SET 컬럼1 = 값
-       // ,컬럼2 = 값
-       // [WHERE 조건]
-       //;
         " UPDATE todos " .
         " SET content = :content " .
         " ,updated_at = NOW() " .
         " WHERE list_no = :list_no";
-    //실행 준비
     $stmt = $conn->prepare($sql);
-    //실행
     $stmt->execute($array_param);
-    //반환
+
     return $stmt->rowCount();
 }
 
@@ -137,20 +127,15 @@ function db_update_todos_no(&$conn, &$array_param)
 function db_delete_todos_no($conn, $array_param)
 {
     $sql =
-        " UPDATE " //'todos' 테이블을 업데이트한다.
+        " UPDATE "
         . " todos "
-        . " SET " // 지정된 열을 업데이트할 준비를 합니다.
-        . " deleted_at = NOW()" // 'deleted_at' 열을 현재 시간으로 설정합니다.
-        . " WHERE " // 어떤 행을 업데이트할지 조건을 지정합니다.
-        . " list_no = :list_no"; // 'list_no'가 주어진 값과 일치하는 행을 선택합니다.
-
-        //SQL 문자를 준비합니다.
+        . " SET "
+        . " deleted_at = NOW()"
+        . " WHERE "
+        . " list_no = :list_no";
     $stmt = $conn->prepare($sql);
-
-    //실행 (매개변수로 전달된 배열을 사용하여 실행합니다.)
     $stmt->execute($array_param);
 
-    // 업데이트된 행의 수를 반환합니다.
     return $stmt->rowCount();
 }
 
@@ -166,6 +151,8 @@ function db_update_contents_checked(&$conn, &$array_param) {
     // Query 실행
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
+
+    return $stmt->rowCount();
 }
 
 // 리스트페이지 끝
