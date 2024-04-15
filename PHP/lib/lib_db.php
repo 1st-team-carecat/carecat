@@ -109,14 +109,22 @@ function db_insert_list(&$conn, &$array_param)
 
 function db_update_todos_no(&$conn, &$array_param)
 {
+    // (기존 데이터를 수정하기 위한) SQL 쿼리를 준비합니다.
     $sql =
+    //UPDATE 테이블명
+    //SET 컬럼1 = 값
+       // ,컬럼2 = 값
+       // [WHERE 조건]
+       //;
         " UPDATE todos " .
         " SET content = :content " .
         " ,updated_at = NOW() " .
         " WHERE list_no = :list_no";
+    //실행 준비
     $stmt = $conn->prepare($sql);
+    //실행
     $stmt->execute($array_param);
-
+    //반환
     return $stmt->rowCount();
 }
 

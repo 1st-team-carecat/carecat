@@ -2,3 +2,5 @@
 
 
 xcopy D:\carecat\PHP C:\Apache24\htdocs /E /Y
+
+xcopy D:\works\carecat\PHP C:\Apache24\htdocs /E /Y
