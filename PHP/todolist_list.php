@@ -7,14 +7,14 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 // HTTP 요청 메서드가 POST인지 확인하는 조건문. 만약 POST 요청이면 아래의 코드 블록이 실행됨
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     try { // 오류가 발생하면 catch 블록으로 이동합니다.
         $conn = my_db_conn(); // DB 연결
         // 할 일의 날짜를 가져옵니다. 만약 POST 요청에서 "todo_date" 매개변수가 존재하면 그 값을 사용하고, 없으면 현재 날짜를 사용
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
         // 할 일의 내용을 가져옵니다. 만약 POST 요청에서 "content" 매개변수가 존재하면 그 값을 사용하고, 없으면 빈 문자열을 사용
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
-        
+
         // 만약 할 일의 내용이 비어 있다면, 오류 발생 메시지에 "content"를 추가
         $arr_err_param = [];
         if ($content === "") {
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // 선택된 날짜를 매개변수 배열에 추가
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
 
-        
+
         $result2 = db_select_todos_list($conn, $arr_param); // 게시글 내용
         $result1 = db_select_profile($conn, $arr_param); // name, profile 조회
 
@@ -230,16 +230,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         <!-- $i: 외부 루프의 반복 횟수를 추적하는 변수 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <!-- $k: 내부 루프의 반복 횟수를 추적하는 변수 -->
-                                            <?php for ($k = 0; $k < 7; $k++) { ?> 
+                                            <?php for ($k = 0; $k < 7; $k++) { ?>
                                                 <li>
                                                     <!-- $total_day보다 $n이 작고, $k가 $start_week보다 크거나 같은 경우에만 버튼이 생성 -->
+                                                    <!-- $start_week는 첫주 의 빈칸, $total_day 마지막주 의 빈칸을 구하기위해서 -->
                                                     <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                         <!-- 선택된 날짜와 현재 날짜($year . '-' . $month . '-' . $n)가 같은 경우에는 btn-selected-date 클래스가 추가되어 선택된 날짜를 강조 표시 -->
                                                         <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
                                                         <?php } ?>
-                                                    </button>
+                                                        </button>
                                                 </li>
                                             <?php } ?>
                                         <?php } ?>
