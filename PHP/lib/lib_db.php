@@ -137,15 +137,20 @@ function db_update_todos_no(&$conn, &$array_param)
 function db_delete_todos_no($conn, $array_param)
 {
     $sql =
-        " UPDATE "
+        " UPDATE " //'todos' 테이블을 업데이트한다.
         . " todos "
-        . " SET "
-        . " deleted_at = NOW()"
-        . " WHERE "
-        . " list_no = :list_no";
+        . " SET " // 지정된 열을 업데이트할 준비를 합니다.
+        . " deleted_at = NOW()" // 'deleted_at' 열을 현재 시간으로 설정합니다.
+        . " WHERE " // 어떤 행을 업데이트할지 조건을 지정합니다.
+        . " list_no = :list_no"; // 'list_no'가 주어진 값과 일치하는 행을 선택합니다.
+
+        //SQL 문자를 준비합니다.
     $stmt = $conn->prepare($sql);
+
+    //실행 (매개변수로 전달된 배열을 사용하여 실행합니다.)
     $stmt->execute($array_param);
 
+    // 업데이트된 행의 수를 반환합니다.
     return $stmt->rowCount();
 }
 
