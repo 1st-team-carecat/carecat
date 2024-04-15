@@ -4,90 +4,89 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // todolist_co
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 
-// HTTP 요청 메서드가 POST인지 확인하는 조건문입니다. 만약 POST 요청이면 아래의 코드 블록이 실행됩니다.
+// HTTP 요청 메서드가 POST인지 확인하는 조건문. 만약 POST 요청이면 아래의 코드 블록이 실행됨
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-    try { // 오류가 발생할 수 있는 코드 부분을 시도합니다. 오류가 발생하면 catch 블록으로 이동합니다.
-        // 데이터베이스에 연결합니다. my_db_conn() 함수는 데이터베이스 연결을 수행합니다.
+    try { // 오류가 발생하면 catch 블록으로 이동합니다.
         $conn = my_db_conn(); // DB 연결
-        // 할 일의 날짜를 가져옵니다. 만약 POST 요청에서 "todo_date" 매개변수가 존재하면 그 값을 사용하고, 없으면 현재 날짜를 사용합니다.
+        // 할 일의 날짜를 가져옵니다. 만약 POST 요청에서 "todo_date" 매개변수가 존재하면 그 값을 사용하고, 없으면 현재 날짜를 사용
         $todo_date = isset($_POST["todo_date"]) ? trim($_POST["todo_date"]) : date("Y-m-d");
-        // 할 일의 내용을 가져옵니다. 만약 POST 요청에서 "content" 매개변수가 존재하면 그 값을 사용하고, 없으면 빈 문자열을 사용합니다.
+        // 할 일의 내용을 가져옵니다. 만약 POST 요청에서 "content" 매개변수가 존재하면 그 값을 사용하고, 없으면 빈 문자열을 사용
         $content = isset($_POST["content"]) ? trim($_POST["content"]) : "";
         
-        // 만약 할 일의 내용이 비어 있다면, 오류 발생 메시지에 "content"를 추가합니다
+        // 만약 할 일의 내용이 비어 있다면, 오류 발생 메시지에 "content"를 추가
         $arr_err_param = [];
         if ($content === "") {
             $arr_err_param[] = "content";
         }
-        // 오류가 발생한 매개변수가 존재하면 예외를 발생시킵니다. 오류 메시지는 "Parameter Error: [매개변수]" 형식으로 구성됩니다.
+        // 오류가 발생한 매개변수가 존재하면 예외를 발생시킵니다. 오류 메시지는 "Parameter Error: [매개변수]" 형식으로 구성
         if (count($arr_err_param) > 0) {
             throw new Exception("Parameter Error: " . implode(". ", $arr_err_param));
         }
         // 데이터베이스 트랜잭션을 시작합니다. 이후의 작업은 모두 트랜잭션 내에서 처리됩니다.
         $conn->beginTransaction();
 
-        // 할 일의 내용과 날짜를 포함하는 매개변수 배열을 생성합니다.
+        // 할 일의 내용과 날짜를 포함하는 매개변수 배열을 생성
         $arr_param = [
             "content" => $content,
             "todo_date" => $todo_date
         ];
-        // db_insert_list() 함수를 사용하여 데이터베이스에 할 일을 추가합니다.
+        // db_insert_list() 함수를 사용하여 데이터베이스에 할 일을 추가
         $result = db_insert_list($conn, $arr_param);
-        // 할 일 추가 작업이 성공적으로 이루어지지 않았을 경우, 예외를 발생시킵니다.
+        // 할 일 추가 작업이 성공적으로 이루어지지 않았을 경우, 예외를 발생
         if ($result !== 1) {
             throw new Exception("Insert Boards count");
         }
-        // 데이터베이스 트랜잭션을 커밋하여 변경 사항을 영구적으로 반영합니다.
+        // 데이터베이스 트랜잭션을 커밋하여 변경 사항을 영구적으로 반영
         $conn->commit();
-        // HTTP 리다이렉트 헤더를 사용하여 사용자를 할 일 목록 페이지로 이동시킵니다.
+        // HTTP 리다이렉트 헤더를 사용하여 사용자를 할 일 목록 페이지로 이동
         header("Location: todolist_list.php?selected_date=" . $todo_date);
         // PHP 스크립트를 종료합니다.
         exit;
-        // 예외가 발생했을 때 처리할 코드 블록을 시작합니다. \Throwable은 모든 예외 클래스의 부모 클래스입니다.
+        // 예외가 발생했을 때 처리할 코드 블록을 시작합니다. \Throwable은 모든 예외 클래스의 부모 클래스
     } catch (\Throwable $e) {
-        // 데이터베이스 연결이 아직 열려 있고 트랜잭션이 진행 중인 경우, 트랜잭션을 롤백합니다.
+        // 데이터베이스 연결이 아직 열려 있고 트랜잭션이 진행 중인 경우, 트랜잭션을 롤백
         if (!empty($conn) && $conn->inTransaction()) {
-            // 데이터베이스 연결이 아직 열려 있고 트랜잭션이 진행 중인 경우, 트랜잭션을 롤백합니다.
+            // 데이터베이스 연결이 아직 열려 있고 트랜잭션이 진행 중인 경우, 트랜잭션을 롤백
             $conn->rollBack();
         }
-        // 발생한 예외의 메시지를 출력합니다.
+        // 발생한 예외의 메시지를 출력
         echo $e->getMessage();
-        // PHP 스크립트를 종료합니다.
+        // PHP 스크립트를 종료
         exit;
-        // try 블록에서의 작업이 완료된 후에 항상 실행되는 코드 블록을 시작합니다.
+        // try 블록에서의 작업이 완료된 후에 항상 실행되는 코드 블록을 시작
     } finally {
-        // 데이터베이스 연결을 닫습니다.
+        // 데이터베이스 연결을 닫음
         if (!empty($conn)) {
             $conn = null;
         }
     }
-    // HTTP 요청 메서드가 GET인지 확인하는 조건문입니다. 만약 GET 요청이면 아래의 코드 블록이 실행됩니다.
+    // HTTP 요청 메서드가 GET인지 확인하는 조건문입니다. 만약 GET 요청이면 아래의 코드 블록이 실행
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    try { // 이번에도 오류가 발생할 수 있는 코드를 시도합니다. 만약 오류가 발생하면 catch 블록으로 이동합니다.
-        $conn = my_db_conn(); //데이터베이스에 연결합니다. my_db_conn() 함수를 사용하여 데이터베이스 연결을 수행합니다.
-        // 할 일 목록의 개수를 데이터베이스에서 가져옵니다. db_select_todos_cnt() 함수를 사용하여 처리합니다.
+    try { // 이번에도 오류가 발생할 수 있는 코드를 시도합니다. 만약 오류가 발생하면 catch 블록으로 이동
+        $conn = my_db_conn(); // my_db_conn() 함수를 사용하여 데이터베이스 연결을 수행
+        // 할 일 목록의 개수를 데이터베이스에서 가져옵니다. db_select_todos_cnt() 함수를 사용하여 처리
         $result_board_cnt = db_select_todos_cnt($conn); // 게시글수조회
-        // GET 요청으로부터 'selected_date' 매개변수를 가져옵니다. 매개변수가 없으면 현재 날짜를 기본값으로 사용합니다.
+        // GET 요청으로부터 'selected_date' 매개변수를 가져옵니다. 매개변수가 없으면 현재 날짜를 기본값으로 사용
         $selected_date = isset($_GET['selected_date']) ? $_GET['selected_date'] : date('Y-m-d');
         // 선택된 날짜를 년, 월, 일로 나누어 배열에 저장합니다.
         $arr_date = explode('-', $selected_date);
 
-        // GET 요청으로부터 'year' 매개변수를 가져옵니다. 매개변수가 없으면 선택된 날짜에서 년도를 추출하고, 그것도 없으면 현재 년도를 기본값으로 사용합니다.
+        // GET 요청으로부터 'year' 매개변수를 가져옵니다. 매개변수가 없으면 선택된 날짜에서 년도를 추출하고, 그것도 없으면 현재 년도를 기본값으로 사용
         $year = isset($_GET['year']) ? $_GET['year'] : (isset($arr_date[0]) ? $arr_date[0] : date('Y'));
-        // GET 요청으로부터 'month' 매개변수를 가져옵니다. 매개변수가 없으면 선택된 날짜에서 월을 추출하고, 그것도 없으면 현재 월을 기본값으로 사용합니다.
+        // GET 요청으로부터 'month' 매개변수를 가져옵니다. 매개변수가 없으면 선택된 날짜에서 월을 추출하고, 그것도 없으면 현재 월을 기본값으로 사용
         $month = isset($_GET['month']) ? $_GET['month'] : (isset($arr_date[1]) ? $arr_date[1] : date('m'));
-        // 연도와 월을 조합하여 현재 날짜를 구성합니다. 날짜의 일 부분은 항상 01로 설정됩니다.
+        // 연도와 월을 조합하여 현재 날짜를 구성합니다. 날짜의 일 부분은 항상 01로 설정
         $date = "$year-$month-01"; // 현재 날짜
-        // 문자열 형식의 날짜를 타임스탬프로 변환합니다.
+        // 문자열 형식의 날짜를 타임스탬프로 변환
         $time = strtotime($date); // 현재 날짜의 타임스탬프
-        // 해당 월의 첫 날이 몇 번째 요일인지 확인합니다.
+        // 해당 월의 첫 날이 몇 번째 요일인지 확인
         $start_week = date('w', $time); // 1. 시작 요일
-        // 해당 월의 총 날짜 수를 확인합니다.
+        // 해당 월의 총 날짜 수를 확인
         $total_day = date('t', $time); // 2. 현재 달의 총 날짜
-        // 해당 월의 총 주 수를 계산합니다.
+        // 해당 월의 총 주 수를 계산
         $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
-        // 선택된 날짜를 매개변수 배열에 추가합니다.
+        // 선택된 날짜를 매개변수 배열에 추가
         $arr_param['selected_date'] = $selected_date; // 선택한 날짜를 매개변수에 추가
 
         $result1 = db_select_todos_list1($conn, $arr_param); // 게시글 내용 조회
@@ -224,8 +223,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </ul>
                                     <ul class="days">
                                         <!-- 달력 날짜 표시 -->
-                                        <!-- $total_week: 현재 월에 포함된 주의 총 수를 나타냅니다. 이 수만큼의 행이 생성됩니다. -->
-                                        <!-- $n: 날짜를 나타내는 변수로, 각 주의 첫 번째 날부터 시작하여 증가합니다. -->
+                                        <!-- $total_week: 현재 월에 포함된 주의 총 수를 나타냅니다. 이 수만큼의 행이 생성 -->
+                                        <!-- $n: 날짜를 나타내는 변수로, 각 주의 첫 번째 날부터 시작하여 증가합 -->
                                         <!-- $i: 외부 루프의 반복 횟수를 추적하는 변수 -->
                                         <?php for ($n = 1, $i = 0; $i < $total_week; $i++) { ?>
                                             <!-- $k: 내부 루프의 반복 횟수를 추적하는 변수 -->
