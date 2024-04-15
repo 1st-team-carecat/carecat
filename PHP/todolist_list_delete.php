@@ -10,7 +10,6 @@ try {
     //post 요청에서 할일 목록(list_no)를 가져옵니다.
     $list_no = isset($_POST["list_no"]) ? $_POST["list_no"]  : "";
     //페이지 번호와
-    $page = isset($_POST["page"]) ? $_POST["page"]  : "";
     //할일 날짜도 가져옵니다.
     $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : "";
     //유효성 검사(요청한 데이터가 어떤 조건에 충족하는지 확인하는 작업)를 위한 오류
