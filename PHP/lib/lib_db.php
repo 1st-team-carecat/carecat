@@ -151,9 +151,6 @@ function db_update_contents_checked(&$conn, &$array_param) {
     // Query 실행
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
-
-    // 리턴
-    return $stmt->rowCount();
 }
 
 // 리스트페이지 끝

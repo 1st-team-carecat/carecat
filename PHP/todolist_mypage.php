@@ -99,7 +99,6 @@ try {
         $next_birth_at->modify('+1 year') . '-' . date('m-d', strtotime($birth_at));
     }
 
-
     // 남은 일 수 계산
     // $difference = strtotime($next_birth_at - strtotime($now);
     // $birth_dday = floor($difference / (60 * 60 * 24));
@@ -117,6 +116,8 @@ try {
     // 두 날짜 차이 계산
     // $adopt_dday = ($now_timestamp - $adopt_timestamp) / (60 * 60 * 24);
     $adopt_dday = $adopt_timestamp->diff($now)->days;
+
+    
 } catch (\Throwable $e) {
     echo $e->getMessage();
     exit;
