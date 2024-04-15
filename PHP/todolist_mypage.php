@@ -21,7 +21,7 @@ try {
         $percentage = ($checked_total > 0) ? ($checked_count / $checked_total) * 100 : 0;
 
         // 백분율 정수로 반환
-        $percentage = intval($percentage);
+        $percentage = (int)$percentage;
     } else {
         // 결과 없을 경우 0 반환
         echo 0;
