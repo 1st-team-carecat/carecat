@@ -12,6 +12,9 @@ try {
         //1.리스트 번호(list_no) 
         //2.내용(content) 
         //3.할일 날짜(todo_date)를 가져옵니다.
+        //구체 설명: 슈퍼파라미터 변수인 $_POST에 list_no가 존재하면
+        //좌측 $list_no에 담아주고, 그렇지 않으면 빈문자열을 실행합니다.
+        //content todo_date도 동일합니다.
         $list_no = isset($_POST["list_no"]) ? $_POST["list_no"] : "";
         $content = isset($_POST["content"]) ? $_POST["content"] : "";
         $todo_date = isset($_POST["todo_date"]) ? $_POST["todo_date"] : ""; // TODO : 확인
@@ -52,6 +55,7 @@ try {
         // 커밋 (트랜잭션이 성공하면  DB 변경사항을 확정합니다.) *commit 약속하다 전념하다 맡기다
         $conn->commit();
         // 수정이 완료되면 다시 리스트페이지로 이동합니다.
+        //지정된 날짜로 위치하도록 (기존 ->오늘날짜 기준)
         header("Location: todolist_list.php?selected_date=" . $todo_date);
         exit;
     }

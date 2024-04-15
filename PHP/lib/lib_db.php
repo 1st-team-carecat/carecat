@@ -108,15 +108,23 @@ function db_insert_list(&$conn, &$array_param)
 // 리스트 페이지 -수정
 
 function db_update_todos_no(&$conn, &$array_param)
-{
+{  //기존 데이터 수정 위함 SQL 쿼리 준비합니다.
     $sql =
-        " UPDATE todos " .
-        " SET content = :content " .
-        " ,updated_at = NOW() " .
-        " WHERE list_no = :list_no";
+    //UPDATE 테이블명
+    //SET 컬럼1 = 값
+     //  ,컬럼2 = 값
+     //   [WHERE 조건]
+     //  ;
+        " UPDATE todos " . // 'todos' 테이블을 업데이트합니다.
+        " SET content = :content " . // 'content' 열을 ':content' 값으로 설정합니다.
+        " ,updated_at = NOW() " . // 'update_at' 열을 현재 시간으로 업데이트합니다.
+        " WHERE list_no = :list_no"; // 'list_no'가 ':list_no'와 일치하는 행을 선택합니다.
+        //이때 ':content'와 ':list_no'는 나중에 바인딩 될 매개변수입니다.
+    //앞선 SQL 문장 실행 준비 합니다.
     $stmt = $conn->prepare($sql);
+    //문장 실행합니다.
     $stmt->execute($array_param);
-
+    //영향 받은 행의 수를 반환합니다.
     return $stmt->rowCount();
 }
 
@@ -125,17 +133,19 @@ function db_update_todos_no(&$conn, &$array_param)
 
 // 리스트페이지 - 삭제
 function db_delete_todos_no($conn, $array_param)
-{
+{ // 데이터 삭제 위한 SQL 쿼리 준비합니다.
     $sql =
-        " UPDATE "
+        " UPDATE " // todos 테이블을 업데이트합니다.
         . " todos "
         . " SET "
-        . " deleted_at = NOW()"
+        . " deleted_at = NOW()" // deleted_at 열을 현재시간으로 업데이트합니다.
         . " WHERE "
-        . " list_no = :list_no";
+        . " list_no = :list_no"; // list number가 :list_no와 일치하는 행을 선택합니다.
+        //앞선 sql 문장 실행 준비합니다.
     $stmt = $conn->prepare($sql);
+    //실행합니다.
     $stmt->execute($array_param);
-
+    //영향 받은 행의 수를 반환합니다.
     return $stmt->rowCount();
 }
 
