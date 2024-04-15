@@ -106,7 +106,9 @@ function db_insert_list(&$conn, &$array_param)
 
 
 // 리스트 페이지 -수정
-
+// 함수 역할: 데이터베이스에 저장된 할 일 항목을 업데이트하는 기능을 담당합니다.
+//첫 번째 매개변수는 데이터베이스 연결을 나타내는 객체 '$conn' 두번째 매개변수는
+// 업데이트 정보를 담고있는 배열 '$array_param'
 function db_update_todos_no(&$conn, &$array_param)
 {
     // (기존 데이터를 수정하기 위한) SQL 쿼리를 준비합니다.
