@@ -22,19 +22,17 @@ try {
 
         // 백분율 정수로 반환
         $percentage = intval($percentage);
-
     } else {
         // 결과 없을 경우 0 반환
         echo 0;
     }
-
 } catch (\Throwable $e) {
     echo $e->getMessage();
     // exit;
 
 } finally {
     // 연결 종료
-    if(!empty($conn)) {
+    if (!empty($conn)) {
         $conn = null;
     }
 }
@@ -51,16 +49,11 @@ try {
     $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
     $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
     $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
-    
+
     $array_param = array(
-        'name' => $name
-        ,'profile' => $profile
-        ,'gender' => $gender
-        ,'birth_at' => $birth_at
-        ,'weight' => $weight
-        ,'adopt_at' => $adopt_at
+        'name' => $name, 'profile' => $profile, 'gender' => $gender, 'birth_at' => $birth_at, 'weight' => $weight, 'adopt_at' => $adopt_at
     );
- 
+
     // 데이터 가져오기
     $result = db_select_information($conn, $array_param);
 
@@ -72,7 +65,6 @@ try {
         $birth_at = $result[0]['birth_at'];
         $weight = $result[0]['weight'];
         $adopt_at = $result[0]['adopt_at'];
-
     } else {
         // 가져온 데이터가 없을 경우 빈 문자열
         $name = "";
@@ -116,18 +108,15 @@ try {
     // $now_timestamp = strtotime($now->format('Y-m-d'));
     $adopt_timestamp = new DateTime($adopt_at);
 
-    
+
     // 두 날짜 차이 계산
     // $adopt_dday = ($now_timestamp - $adopt_timestamp) / (60 * 60 * 24);
     $adopt_dday = $adopt_timestamp->diff($now)->days;
-
-
-} catch(\Throwable $e) {
+} catch (\Throwable $e) {
     echo $e->getMessage();
     exit;
-
 } finally {
-    if(!empty($conn)) {
+    if (!empty($conn)) {
         $conn = null;
     }
 }
@@ -136,8 +125,8 @@ try {
 if ($gender === '0') {
     $gender_echo = "수컷";
 } else {
-    $gender_echo = "암컷";  
-} 
+    $gender_echo = "암컷";
+}
 
 
 // 생년월일 데이터 출력
@@ -148,6 +137,7 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
 
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -155,61 +145,62 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
     <link rel="stylesheet" href="./css/mypage.css">
     <link rel="icon" href="/img/favicon.png">
 </head>
+
 <body>
     <header>
         <div class="main-title">
-          <img src="/img/content-title.png" class="title-img">
+            <img src="/img/content-title.png" class="title-img">
         </div>
         <div class="header-profile-name"><?php echo $name ?></div>
         <a href="#">
-          <img class="header-profile-img"
-                src="<?php echo $profile ?>"/>
+            <img class="header-profile-img" src="<?php echo $profile ?>" />
         </a>
-      </header>
+    </header>
     <main class="main-box">
-      <div class="box">
-        <div class="menu-content">
-            <div class="menu selected-menu">
-                <a href="./todolist_mypage.php">내정보</a>
-            </div>
-            <div class="menu">
-                <a href="./todolist_list.php">할일</a>
-            </div>
-            <div class="menu">
-                <a href="./todolist_calendar.php">캘린더</a>
-            </div>
-        </div>
-        <div class="content-info">
-            <div class="info-title">집사 반가워!</div>
-            <div>
-                <div class="info-box">
-                    <div class="info-left">
-                        <img class="info-pic" src="<?php echo $profile ?>" alt="">
-                        <span class="info-edit"><?php echo $name ?></span>
-                    </div>
-                    <div class="info-right">
-                        <span class="info-con1 info-other"><?php echo $gender_echo ?></span>
-                        <span class="info-con2 info-other"><?php echo $birth_at_echo ?></span>
-                        <span class="info-con1 info-other">몸무게 : <?php echo $weight ?> kg</span>
-                        <span class="info-con2 dday"><?php echo $name?>의 생일까지
-                            <span class="bold"><?php echo $birth_dday?>일</span>!
-                        </span>
-                        <span class="info-con1 dday"><?php echo $name?>와 만난지
-                            <span class="bold"><?php echo $adopt_dday?>일</span> 째
-                        </span>
+        <div class="box">
+            <div class="menu-content">
+                <div class="menu selected-menu">
+                    <a href="./todolist_mypage.php">내정보</a>
+                </div>
+                <div class="menu">
+                    <a href="./todolist_list.php">할일</a>
+                </div>
+                <div class="menu">
+                    <a href="./todolist_calendar.php">캘린더</a>
                 </div>
             </div>
-        </div>
-        <div class="gauge">
-            <div class="gauge-back">
-                <div class="gauge-bar" style="width: <?php echo $percentage; ?>%;"></div>
-                <!-- 퍼센트를 게이지 바의 넓이로 출력 -->
-                <span class="gauge-text">행복달성지수</span>
-                <span class="gauge-percent"><?php echo $percentage."%"; ?></span>
-                <!-- 퍼센트를 텍스트로 출력 -->
+            <div class="content-info">
+                <div class="info-title">집사 반가워!</div>
+                <div>
+                    <div class="info-box">
+                        <div class="info-left">
+                            <img class="info-pic" src="<?php echo $profile ?>" alt="">
+                            <span class="info-edit"><?php echo $name ?></span>
+                        </div>
+                        <div class="info-right">
+                            <span class="info-con1 info-other"><?php echo $gender_echo ?></span>
+                            <span class="info-con2 info-other"><?php echo $birth_at_echo ?></span>
+                            <span class="info-con1 info-other">몸무게 : <?php echo $weight ?> kg</span>
+                            <span class="info-con2 dday"><?php echo $name ?>의 생일까지
+                                <span class="bold"><?php echo $birth_dday ?>일</span>!
+                            </span>
+                            <span class="info-con1 dday"><?php echo $name ?>와 만난지
+                                <span class="bold"><?php echo $adopt_dday ?>일</span> 째
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gauge">
+                    <div class="gauge-back">
+                        <div class="gauge-bar" style="width: <?php echo $percentage; ?>%;"></div>
+                        <!-- 퍼센트를 게이지 바의 넓이로 출력 -->
+                        <span class="gauge-text">행복달성지수</span>
+                        <span class="gauge-percent"><?php echo $percentage . "%"; ?></span>
+                        <!-- 퍼센트를 텍스트로 출력 -->
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</main>
+    </main>
 </body>
+
 </html>

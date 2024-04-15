@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php");												
+require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php");
 require_once(FILE_LIB_DB);
 
 try {
@@ -17,13 +17,11 @@ try {
 
     // 리스트 페이지로 이동
     header("Location: todolist_list.php?selected_date=" . $todo_date);
-
-} catch(\Throwable $e) {
+} catch (\Throwable $e) {
     echo $e->getMessage();
     exit;
-
 } finally {
-    if(!empty($conn)) {
+    if (!empty($conn)) {
         $conn = null;
     }
 }
