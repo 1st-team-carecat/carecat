@@ -18,7 +18,7 @@ try {
 } catch (\Throwable $e) {
     echo $e->getMessage();
     exit;
-}
+} 
 
 try {
     // 전송된 데이터 수집
