@@ -60,7 +60,7 @@ try {
         header("Location: todolist_mypage.php");
         exit;
     }
-    
+
 } catch (\Throwable $e) {
     // 예외 발생한 경우, 현재 진행 중인 데이터 베이스 트랜잭션이 있는지 확인
     // 트랜잭션 중이라면 ($conn->inTransaction()이 참이면) 트랜잭션 롤백하여 이전 상태로 복구
@@ -147,7 +147,7 @@ try {
                 <div class="join-content">
                     <label for="NAME">이름</label>
                     <div class="content-title">
-                        <input type="text" name="NAME" id="NAME" required>
+                        <input type="text" name="NAME" id="NAME" required autocomplete="off">
                     </div>
                 </div>
                 <div class="join-content">
@@ -168,7 +168,7 @@ try {
                 <div class="join-content">
                     <label for="weight">몸무게</label>
                     <div class="content-title">
-                        <input type="number" name="weight" id="weight" required placeholder="kg" step="0.1">
+                        <input type="number" name="weight" id="weight" required placeholder=" kg" step="0.1" autocomplete="off">
                     </div>
                 </div>
                 <div class="join-content">
