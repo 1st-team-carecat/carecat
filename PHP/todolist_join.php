@@ -44,7 +44,12 @@ try {
         $conn->beginTransaction();
 
         $arr_param = [
-            "PROFILE" => $PROFILE, "NAME" => $NAME, "birth_at" => $birth_at, "gender" => $gender, "weight" => $weight, "adopt_at" => $adopt_at
+            "PROFILE" => $PROFILE
+            , "NAME" => $NAME
+            , "birth_at" => $birth_at
+            , "gender" => $gender
+            , "weight" => $weight
+            , "adopt_at" => $adopt_at
         ];
 
         // 작성한 데이터 저장
