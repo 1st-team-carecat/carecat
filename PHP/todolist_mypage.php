@@ -43,21 +43,14 @@ try {
 
 try {
 
-    $name = "";
-    $profile = "";
-    $gender = "";
-    $birth_at = "";
-    $weight = "";
-    $adopt_at = '';
-
     $conn = my_db_conn();
 
-    // $name = isset($_GET['name']) ? $_GET['name'] : '';
-    // $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
-    // $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
-    // $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
-    // $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
-    // $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
+    $name = isset($_GET['name']) ? $_GET['name'] : '';
+    $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
+    $gender = isset($_GET['gender']) ? $_GET['gender'] : '';
+    $birth_at = isset($_GET['birth_at']) ? $_GET['birth_at'] : '';
+    $weight = isset($_GET['weight']) ? $_GET['weight'] : '';
+    $adopt_at = isset($_GET['adopt_at']) ? $_GET['adopt_at'] : '';
     
     $array_param = array(
         'name' => $name
