@@ -185,7 +185,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                     <!-- 달력  -->
                     <form action="/todolist_list.php" method="get">
-                        <input type="date" name="list_start_date" style="display: none;">
                         <div class="todo-get-calendar">
                             <div class="nav">
                                 <!-- 년 월 구하기 -->
