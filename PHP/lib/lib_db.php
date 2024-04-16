@@ -13,9 +13,15 @@ function my_db_conn()
 // 리스트 페이지 시작
 
 function db_select_profile(&$conn) {
-    $sql = "SELECT NAME, PROFILE 
-            FROM informations 
-            WHERE cat_no = 1"; // cat_no를 1로 설정
+    $sql = 
+        " SELECT "
+        ."  NAME "
+        ."  ,PROFILE " 
+        ." FROM " 
+        ."  informations " 
+        ." WHERE " 
+        ."  cat_no = 1 " // cat_no를 1로 설정
+    ;
 
     // Query 실행
     $stmt = $conn->prepare($sql); // 쿼리를 데이터베이스에 제출하지 않고 먼저 준비
@@ -30,17 +36,18 @@ function db_select_profile(&$conn) {
 
 function db_select_todos_list(&$conn, &$array_param) {
     $sql =
-    "SELECT "
-    . "list_no "
-    . ",cat_no "
-    . ",content "
-    . ",todo_date "
-    . ",checked "
-    . "FROM "
-    . "todos "
-    . "WHERE "
-    . "deleted_at IS NULL "
-    . "AND cat_no = 1 ";
+        " SELECT "
+        ."  list_no "
+        ."  ,cat_no "
+        ."  ,content "
+        ."  ,todo_date "
+        ."  ,checked "
+        ." FROM "
+        ."  todos "
+        ." WHERE "
+        ."  deleted_at IS NULL "
+        ."  AND cat_no = 1 "
+    ;
 
 // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
 if (isset($array_param['selected_date'])) {
@@ -70,18 +77,20 @@ $sql .=
 function db_insert_list(&$conn, &$array_param)
 {
     // SQL
-    $sql = "INSERT INTO todos (
-        cat_no,
-        todo_date,
-        content,
-        checked
-    ) 
-    VALUES (
-        1,
-        :todo_date, 
-        :content, 
-        0
-    )";
+    $sql = 
+        " INSERT INTO todos ( "
+        ."  cat_no "
+        ."  ,todo_date "
+        ."  ,content "
+        ."  ,checked "
+        ." ) " 
+        ." VALUES ( "
+        ."  1 "
+        ."  ,:todo_date  "
+        ."  ,:content  "
+        ."  0 "
+        ." ) "
+    ;
 
 
     // Query 실행. prepare() 함수를 사용하여 데이터베이스 연결 객체인 $conn에서 $stmt(Statement) 객체를 만듬
@@ -107,10 +116,14 @@ function db_insert_list(&$conn, &$array_param)
 function db_update_todos_no(&$conn, &$array_param)
 {
     $sql =
-        " UPDATE todos " .
-        " SET content = :content " .
-        " ,updated_at = NOW() " .
-        " WHERE list_no = :list_no";
+        " UPDATE todos "
+        ." SET " 
+        ."  content = :content "
+        ."  ,updated_at = NOW() "
+        ." WHERE " 
+        ."  list_no = :list_no"
+    ;
+
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
 
@@ -124,12 +137,13 @@ function db_update_todos_no(&$conn, &$array_param)
 function db_delete_todos_no($conn, $array_param)
 {
     $sql =
-        " UPDATE "
-        . " todos "
-        . " SET "
-        . " deleted_at = NOW()"
-        . " WHERE "
-        . " list_no = :list_no";
+        " UPDATE todos "
+        ." SET "
+        ."  deleted_at = NOW()"
+        ." WHERE "
+        ."  list_no = :list_no"
+    ;
+
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
 
@@ -139,10 +153,13 @@ function db_delete_todos_no($conn, $array_param)
 function db_update_contents_checked(&$conn, &$array_param) {
     // SQL
     $sql = 
-    " UPDATE todos
-    SET checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END
-    WHERE list_no = :list_no 
-    AND deleted_at IS NULL"
+        " UPDATE todos "
+        ." SET " 
+        ."  checked = CASE WHEN checked = '0' THEN '1' ELSE '0' END "
+        ." WHERE " 
+        ."  list_no = :list_no "
+        ." AND "
+        ."  deleted_at IS NULL "
     ;
 
     // Query 실행
@@ -158,12 +175,16 @@ function db_update_contents_checked(&$conn, &$array_param) {
 // 달력페이지 시작
 function db_select_todos_list_with_date($conn, $chk_day) {
     // 해당 날짜의 할 일 목록 중에서 checked 상태와 상관없이 모든 항목을 가져오는 쿼리를 실행합니다.
-    $sql = "SELECT * 
-    FROM todos 
-    WHERE todo_date = :chk_day
-    AND checked = '0'
-    AND cat_no = 1 
-    AND deleted_at IS NULL ";
+    $sql = 
+        " SELECT * " 
+        ." FROM " 
+        ."  todos " 
+        ." WHERE " 
+        ."  todo_date = :chk_day "
+        ."  AND checked = '0' "
+        ."  AND cat_no = 1 " 
+        ."  AND deleted_at IS NULL "
+    ;
     
     // PDO를 사용하는 예시
     $stmt = $conn->prepare($sql);
@@ -197,7 +218,8 @@ function db_insert_profile(&$conn, &$array_param){
         ."  ,:weight "	
         ."  ,:adopt_at "	
         ." ) "
-    ;	
+    ;
+
     $stmt = $conn->prepare($sql);
     $stmt->execute($array_param);
 
@@ -223,13 +245,17 @@ function db_insert_profile(&$conn, &$array_param){
 function db_count_checked($conn) {
     // SQL
     $sql = 
-    "SELECT 
-       COUNT(*) chk_ttl
-       ,SUM(checked = 1) chk_cnt
-   FROM todos
-   WHERE deleted_at IS NULL
-   AND todo_date BETWEEN DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01') AND LAST_DAY(CURRENT_DATE());"
-;
+        " SELECT "
+       ."   COUNT(*) chk_ttl "
+       ."   ,SUM(checked = 1) chk_cnt "
+       ." FROM " 
+       ."   todos "
+       ." WHERE " 
+       ."   deleted_at IS NULL "
+       ."   AND todo_date BETWEEN DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01') " 
+       ."   AND LAST_DAY(CURRENT_DATE()) "
+    ;
+
     // 쿼리 실행
     $stmt = $conn->query($sql);
     
@@ -244,15 +270,16 @@ function db_count_checked($conn) {
 function db_select_information(&$conn) {
     //SQL
     $sql =
-    "SELECT
-        name
-        ,profile
-        ,gender
-        ,birth_at
-        ,weight
-        ,adopt_at
-    FROM informations"
-;
+        " SELECT "
+        ."  name "
+        ."  ,profile "
+        ."  ,gender "
+        ."  ,birth_at "
+        ."  ,weight "
+        ."  ,adopt_at "
+        ." FROM " 
+        ."  informations "
+    ;
 
     $stmt = $conn->query($sql);
     $result = $stmt->fetchAll(); 
@@ -264,17 +291,16 @@ function db_select_information(&$conn) {
 function db_update_information(&$conn, &$array_param) {
     //SQL
     $sql =
-        "UPDATE informations
-        SET
-            name = :name
-            ,gender = :gender
-            ,birth_at = :birth_at
-            ,weight = :weight
-        WHERE cat_no = :cat_no " 
-        ;
-            
+        " UPDATE informations "
+        ."  SET "
+        ."  name = :name "
+        ."  ,gender = :gender "
+        ."  ,birth_at = :birth_at "
+        ."  ,weight = :weight "
+        ." WHERE " 
+        ."  cat_no = :cat_no " 
     ;
-
+            
     // 쿼리 실행
     $stmt = $conn->prepare($sql);
 
