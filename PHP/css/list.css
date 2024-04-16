@@ -352,9 +352,10 @@ li {
   width: calc(100% / 7);
   position: relative;
 }
+
 .calendar .days li {
   z-index: 1;
-  margin-top: 10px;
+  padding: 8px 0;
   cursor: pointer;
 }
 
