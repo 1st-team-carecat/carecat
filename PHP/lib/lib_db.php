@@ -67,7 +67,6 @@ $sql .=
 }
 
 
-
 function db_insert_list(&$conn, &$array_param)
 {
     // SQL
@@ -235,16 +234,12 @@ function db_count_checked($conn) {
     // SQL
     $sql = 
     "SELECT 
-        (SELECT COUNT(checked)
-            FROM todos
-            WHERE deleted_at IS NULL
-            AND YEAR(todo_date) = YEAR(CURRENT_DATE())
-            AND MONTH(todo_date) = MONTH(CURRENT_DATE()) ) chk_ttl
-            ,SUM(checked = '1') chk_cnt
-    FROM todos
-    WHERE deleted_at IS NULL
-    AND YEAR(todo_date) = YEAR(CURRENT_DATE())
-    AND MONTH(todo_date) = MONTH(CURRENT_DATE())"
+       COUNT(*) AS chk_ttl,
+       SUM(checked = 1) AS chk_cnt
+      FROM todos
+      WHERE deleted_at IS NULL
+      AND todo_date BETWEEN DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01')
+      AND LAST_DAY(CURRENT_DATE()) "
 ;
 
 
