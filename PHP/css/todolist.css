@@ -190,7 +190,7 @@ header {
 
 /* 라디오 버튼 */
 .radio-img {
-    display: none;
+    opacity: 0;
 }
 
 .radio-img-label .cat-img {
