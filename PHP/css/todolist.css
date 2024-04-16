@@ -315,7 +315,8 @@ footer {
     z-index: 1;
     /* margin-top: 30px; */
     border: 1px solid #799bc4;
-    height: 77px;
+    height: 85px;
+    padding: 5px;
     /* cursor: pointer; */
   }
   
@@ -326,6 +327,10 @@ footer {
   
   .days li.active {
     color: #fff;
+  }
+
+  .todo-get-calendar {
+    padding: 10px;
   }
 
 /* 서린이 작성해둠 캘린더 년월*/
