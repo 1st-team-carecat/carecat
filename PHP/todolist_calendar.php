@@ -15,14 +15,7 @@ try {
     $total_week = ceil(($total_day + $start_week) / 7);  // 3. 현재 달의 총 주차
     // 할일 목록을 가져오기 위해 DB 연결
     $conn = my_db_conn(); // connection 함수 호출
-} catch (\Throwable $e) {
-    echo $e->getMessage();
-    exit;
-} 
 
-try {
-    // 전송된 데이터 수집
-    // 변수가 설정되었는지 확인후 설정되어 있지 않으면 빈 문자열 할당
     $name = isset($_GET['name']) ? $_GET['name'] : '';
     $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
 
@@ -36,10 +29,10 @@ try {
         $profile = $result[0]['profile'];
     }
 
-} catch (\Throwable $t) {
-    echo $t->getMessage();
+} catch (\Throwable $e) {
+    echo $e->getMessage();
     exit;
-}
+} 
 
 ?>
 <!DOCTYPE html>
@@ -83,28 +76,16 @@ try {
                             <!-- 년 월 구하기 -->
                             <!-- 이전 달로 이동하는 링크 -->
                             <!-- $month가 1이라면(1월인 경우), 이전 해 (년도 1감소)의 12월을 가르키는 링크 -->
-                            <?php if ($month === '1') { ?>
-                                <a href="/todolist_calendar.php?year=<?php echo $year - 1 ?>&month=12">
-                                <?php } else { ?>
-                                    <!-- 그렇지 않은 경우 이전 월(월을 1감소)을 가르키는 링크 -->
-                                    <a href="/todolist_calendar.php?year=<?php echo $year ?>&month=<?php echo $month - 1 ?>">
-                                    <?php } ?>
-                                    <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
-                                    </a>
-
-                                    <!-- 연도와 월 출력 -->
-                                    <p> <?php echo  "$year 년 $month 월" ?> </p>
-
-                                    <!-- 다음 달로 이동하는 링크 -->
-                                    <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
-                                    <?php if ($month === '12') { ?>
-                                        <a href="/todolist_calendar.php?year=<?php echo $year + 1 ?>&month=1">
-                                        <?php } else { ?>
-                                            <!-- 그렇지 않은 경우 다음 월 (월을 1 증가) 가르키는 링크 -->
-                                        <a href="/todolist_calendar.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
-                                            <?php } ?>
-                                            <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
-                                        </a>
+                            <a href="/todolist_calendar.php?<?php echo $month === '1' ? 'year='.($year - 1).'&month=12' : 'year='.$year.'&month='.($month - 1); ?>">
+                                <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
+                            </a>
+                                <!-- 연도와 월 출력 -->
+                                <p> <?php echo  "$year 년 $month 월" ?> </p>
+                                <!-- 다음 달로 이동하는 링크 -->
+                                <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
+                            <a href="/todolist_calendar.php?<?php echo $month ==='12' ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.($month + 1); ?>">
+                                <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
+                            </a>
                         </div>
 
                         <!-- 요일 표시 -->
