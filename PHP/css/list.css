@@ -332,8 +332,7 @@ label:active + input[type="text"] {
   margin: 5px;
 }
 
-ul,
-li {
+ul, li {
   list-style: none;
   position: relative;
 }
