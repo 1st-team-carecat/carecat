@@ -91,6 +91,10 @@ header {
   width: 40px;
   text-align: center;
   margin-top: 10px;
+}
+
+.menu > a {
+  display: block;
   padding: 10px;
 }
 
