@@ -137,11 +137,6 @@ header {
     padding: 10px;
 }
 
-.menu > a {
-    display: block;
-    padding: 10px;
-}
-
 .content {
     background-image: url("../img/content-back.jpg");
     border: 5px solid #799BC4;
@@ -191,7 +186,7 @@ header {
 
 /* 라디오 버튼 */
 .radio-img {
-    opacity: 0;
+    display: none;
 }
 
 .radio-img-label .cat-img {
@@ -283,44 +278,47 @@ footer {
     list-style: none;
     flex-wrap: wrap;
     text-align: center;
-  }
-  .calendar .weeks li {
+}
+
+.calendar .weeks li {
     font-weight: 500;
     height: 2rem;
-  }
-  .calendar .days {
+}
+
+.calendar .days {
     margin-bottom: 20px;
     border: 1px solid #799bc4;
-  }
-  .calendar ul li {
+}
+
+.calendar ul li {
     /*#8*/
     width: calc(100% / 7);
     height: 4rem;
     /*#9*/
     position: relative;
-  }
-  .calendar .days li {
+}
+
+.calendar .days li {
     /*#10*/
     z-index: 1;
     /* margin-top: 30px; */
     border: 1px solid #799bc4;
-    height: 78px;
-    padding: 5px;
+    height: 95px;
     /* cursor: pointer; */
-  }
+}
   
-  /*#11*/
-  .days li.inactive {
+/*#11*/
+.days li.inactive {
     color: #aaa;
-  }
+}
   
-  .days li.active {
+.days li.active {
     color: #fff;
-  }
+}
 
 
-  /* 서린이 작성해둠 캘린더 */
-  .cal-y-m {
+/* 서린이 작성해둠 캘린더 */
+.cal-y-m {
     width: 300px;
     font-size: 1.5rem;
     margin: 10px 0;
@@ -328,11 +326,11 @@ footer {
     align-items: center;
     justify-content: space-around;
 
-  }
+}
 
-  .cal-y-m button{
+.cal-y-m button{
     border: none;
     outline: none;
     background-color: inherit ;
     cursor: pointer;
-  }
+}
