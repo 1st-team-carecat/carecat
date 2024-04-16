@@ -60,6 +60,7 @@ try {
         exit;
     }
     //트랜잭션 중 에러가 발생한 경우 롤백 (변경사항 취소)
+
 } catch (\Throwable $e) {
     if (!empty($conn) && $conn->inTransaction()) {
         $conn->rollBack();
@@ -67,6 +68,7 @@ try {
     echo $e->getMessage();
     exit;
     //에러메시지 출력 후 종료합니다.
+    
 } finally {
     //데이터베이스 연결을 해제합니다.
     if (!empty($conn)) {

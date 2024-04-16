@@ -60,6 +60,7 @@ try {
     echo $e->getMessage();
     //스크립트 종료
     exit;
+    
 } finally {
     //데이터베이스 연결이 존재하는 경우
     if (!empty($conn)) {
