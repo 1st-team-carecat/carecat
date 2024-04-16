@@ -7,7 +7,7 @@ require_once(FILE_LIB_DB); // DB관련 라이브러리
 try {
     $conn = my_db_conn();
 
-    // 현재 달과 월을 담을 변수 선언하기
+    // 프로그래스 바 출력
 
     // 함수 호출하기
     $result = db_count_checked($conn);
@@ -17,31 +17,21 @@ try {
         $checked_total = $result['chk_ttl']; // 전체 데이터
         $checked_count = $result['chk_cnt']; // 체크된 데이터
 
+        // 정수로 반환
+        $checked_count = floor($checked_count);
+        $checked_total = floor($checked_total);
+
         // 백분율로 계산
         $percentage = ($checked_total > 0) ? ($checked_count / $checked_total) * 100 : 0;
 
-        // 백분율 정수로 반환
-        $percentage = (int)$percentage;
+        $percentage = floor($percentage);
+
     } else {
         // 결과 없을 경우 0 반환
         echo 0;
     }
-} catch (\Throwable $e) {
-    echo $e->getMessage();
-    // exit;
 
-} finally {
-    // 연결 종료
-    if (!empty($conn)) {
-        $conn = null;
-    }
-}
-
-// 내 정보 출력하기
-
-try {
-
-    $conn = my_db_conn();
+    // 내 정보 출력
 
     $name = isset($_GET['name']) ? $_GET['name'] : '';
     $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
@@ -60,7 +50,7 @@ try {
     );
 
     // 데이터 가져오기
-    $result = db_select_information($conn, $array_param);
+    $result = db_select_information($conn);
 
     // 가져온 데이터가 있으면 변수에 할당
     if (!empty($result)) {
@@ -78,8 +68,6 @@ try {
         $weight = "";
         $adopt_at = '';
     }
-
-
 
     // 생일 디데이 가져오기
     // 현재 날짜 
@@ -117,15 +105,19 @@ try {
     // $adopt_dday = ($now_timestamp - $adopt_timestamp) / (60 * 60 * 24);
     $adopt_dday = $adopt_timestamp->diff($now)->days;
 
-    
+
 } catch (\Throwable $e) {
     echo $e->getMessage();
-    exit;
+    // exit;
+
 } finally {
+    // 연결 종료
     if (!empty($conn)) {
         $conn = null;
     }
 }
+
+// 출력할 데이터 가공하기
 
 // 성별 데이터 출력
 if ($gender === '0') {
@@ -133,7 +125,6 @@ if ($gender === '0') {
 } else {
     $gender_echo = "암컷";
 }
-
 
 // 생년월일 데이터 출력
 $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
