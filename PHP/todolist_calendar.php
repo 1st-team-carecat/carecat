@@ -35,6 +35,7 @@ try {
 } 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -111,24 +112,24 @@ try {
                                     // $chk_day 날자에 해당하는 할 일 목록을 데이터 베이스에서 가져옴
                                     $todo_list = db_select_todos_list_with_date($conn, $chk_day); // 수정된 함수 사용
                             ?>
-                                    <li>
-                                        <!-- 날짜 입력 -->
-                                        <input type="hidden" name="chk_day" value="<?php echo $chk_day; ?>">
-                                        <!-- 날짜 표시 -->
-                                        <?php
-                                        // $total_day보다 $n이 작고, $k가 $start_week보다 크거나 같은 경우에만 날짜 출력
-                                        // 첫째주와 마지막주의 빈칸을 채우기 위함
-                                        if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {
-                                            echo $n;
-                                            // 해당 날짜에 할 일 목록이 있고, 그 중에서도 todo_date에 내용이 있으면 이미지로 출력
-                                            if (!empty($todo_list)) {
-                                                echo '<br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAACbUlEQVR4nKVWTWsUQRBdjd/oQZCgEDwEjaIeEvxCb+rBiwqi3rypoOBF9CQ5KYLgH/CQs4ZV8QPMQchU74dxu6ojootCgkTBg0Q0qFGQuD7pnsnuZLdndowLfZip6ffqvaqu3lyuzQ/Agv+JJ28c5k1QXAJxDUqqUM821mPV6hIouQHFUyD5CpJryOc7soMPjS2F4ndQgsbicRiz2MWJb86N2WUuZicoyKlWALEkR0Jl8rslRvIZRIuyERAPJBBcBslZf0xgybMRKL6TQtCfSBCrUzuCK14A0mdA5rQ/xjVbu4wWmc0g/uNRsBPDemuCunI737dB8WEYsyJ8lsEmgDe2590ieetRcNLtK71c7XCKuiee8bl6xsSvUTLrUS6vguIH4XseB+kdje/leJPCuwAWItAHoPhT9G7GPlu/+1rsIH5cBxvy+wpl9rlaWTIL7qzj7004xRyU3PYXzazJVLBoXNgaeOoybQkmvATB6HYfkJcgMAcTCj9l/fzmDRbMuoYd3BdlOAOSMSh9tKlBPKMjstovTSZms0WB97Z4a0cF6UOxoj9MSHK/LdYJz1zpDzeObgDxZEJ2kyC9NlJ41WPPrbjE67GNAUZGloMqXa49E8eC+/aJ6yCqrgSxjiU4OHueGiRF3YOC7AoPku6Fkg+p4A2wR+7c2H2B2Y0Sd6e3XNjf05nAVV3JLzeBn77oTAfP5ztA/P6fwNWc9Sr1CnVS5w+OUE2lK5mAaBlIfs4fnL+0vZtBcj666OMbayB5DpJ7UHwfSgTEP5oIPsbPRhsS3QuSCyC+hICP+eaSa88Sd0PpPShWtth/Gj6wv9yB9UMKw8w6AAAAAElFTkSuQmCC">';
-                                            }
-                                            // 다음 날짜로 이동
-                                            $n++;
+                                <li>
+                                    <!-- 날짜 입력 -->
+                                    <input type="hidden" name="chk_day" value="<?php echo $chk_day; ?>">
+                                    <!-- 날짜 표시 -->
+                                    <?php
+                                    // $total_day보다 $n이 작고, $k가 $start_week보다 크거나 같은 경우에만 날짜 출력
+                                    // 첫째주와 마지막주의 빈칸을 채우기 위함
+                                    if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) {
+                                        echo $n;
+                                        // 해당 날짜에 할 일 목록이 있고, 그 중에서도 todo_date에 내용이 있으면 이미지로 출력
+                                        if (!empty($todo_list)) {
+                                            echo '<br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAACbUlEQVR4nKVWTWsUQRBdjd/oQZCgEDwEjaIeEvxCb+rBiwqi3rypoOBF9CQ5KYLgH/CQs4ZV8QPMQchU74dxu6ojootCgkTBg0Q0qFGQuD7pnsnuZLdndowLfZip6ffqvaqu3lyuzQ/Agv+JJ28c5k1QXAJxDUqqUM821mPV6hIouQHFUyD5CpJryOc7soMPjS2F4ndQgsbicRiz2MWJb86N2WUuZicoyKlWALEkR0Jl8rslRvIZRIuyERAPJBBcBslZf0xgybMRKL6TQtCfSBCrUzuCK14A0mdA5rQ/xjVbu4wWmc0g/uNRsBPDemuCunI737dB8WEYsyJ8lsEmgDe2590ieetRcNLtK71c7XCKuiee8bl6xsSvUTLrUS6vguIH4XseB+kdje/leJPCuwAWItAHoPhT9G7GPlu/+1rsIH5cBxvy+wpl9rlaWTIL7qzj7004xRyU3PYXzazJVLBoXNgaeOoybQkmvATB6HYfkJcgMAcTCj9l/fzmDRbMuoYd3BdlOAOSMSh9tKlBPKMjstovTSZms0WB97Z4a0cF6UOxoj9MSHK/LdYJz1zpDzeObgDxZEJ2kyC9NlJ41WPPrbjE67GNAUZGloMqXa49E8eC+/aJ6yCqrgSxjiU4OHueGiRF3YOC7AoPku6Fkg+p4A2wR+7c2H2B2Y0Sd6e3XNjf05nAVV3JLzeBn77oTAfP5ztA/P6fwNWc9Sr1CnVS5w+OUE2lK5mAaBlIfs4fnL+0vZtBcj666OMbayB5DpJ7UHwfSgTEP5oIPsbPRhsS3QuSCyC+hICP+eaSa88Sd0PpPShWtth/Gj6wv9yB9UMKw8w6AAAAAElFTkSuQmCC">';
                                         }
-                                        ?>
-                                    </li>
+                                        // 다음 날짜로 이동
+                                        $n++;
+                                    }
+                                    ?>
+                                </li>
                             <?php
                                 }
                             }
@@ -140,5 +141,4 @@ try {
         </div>
     </main>
 </body>
-
 </html>

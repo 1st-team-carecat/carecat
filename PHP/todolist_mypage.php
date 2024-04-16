@@ -197,6 +197,7 @@ $birth_at_echo = date("y년 m월 d일", strtotime($birth_at));
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 </body>
 

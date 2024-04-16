@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // PHP 스크립트를 종료합니다.
         exit;
         // 예외가 발생했을 때 처리할 코드 블록을 시작합니다. \Throwable은 모든 예외 클래스의 부모 클래스
+
     } catch (\Throwable $e) {
         // 데이터베이스 연결이 아직 열려 있고 트랜잭션이 진행 중인 경우, 트랜잭션을 롤백
         if (!empty($conn) && $conn->inTransaction()) {
@@ -56,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // PHP 스크립트를 종료
         exit;
         // try 블록에서의 작업이 완료된 후에 항상 실행되는 코드 블록을 시작
+
     } finally {
         // 데이터베이스 연결을 닫음
         if (!empty($conn)) {
@@ -63,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
     // HTTP 요청 메서드가 GET인지 확인하는 조건문입니다. 만약 GET 요청이면 아래의 코드 블록이 실행
+
 } else if ($_SERVER["REQUEST_METHOD"] === "GET") {
     try { // 이번에도 오류가 발생할 수 있는 코드를 시도합니다. 만약 오류가 발생하면 catch 블록으로 이동
         $conn = my_db_conn(); // my_db_conn() 함수를 사용하여 데이터베이스 연결을 수행
@@ -96,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } catch (\Throwable $e) {
         echo $e->getMessage();
         exit;
+
     } finally {
         if (!empty($conn)) {
             $conn = null;
@@ -126,7 +130,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <img class="header-profile-img" src="<?php echo $result1[0]["PROFILE"] ?>" />
         </a>
     </header>
-
 
     <main class="main-box">
         <div class="box">
@@ -163,24 +166,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         foreach ($result2 as $item) {
                             $cnt++
                         ?>
-                            <form method="post">
-                                <div class="chk-list">
-                                    <!-- list_no 담을 인풋 히든처리 -->
-                                    <input type="hidden" value="<?php echo $item["list_no"] ?>" name="list_no">
-                                    <input type="hidden" value="<?php echo $item["todo_date"] ?>" name="todo_date">
-                                    <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
-                                    <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
+                        <form method="post">
+                            <div class="chk-list">
+                                <!-- list_no 담을 인풋 히든처리 -->
+                                <input type="hidden" value="<?php echo $item["list_no"] ?>" name="list_no">
+                                <input type="hidden" value="<?php echo $item["todo_date"] ?>" name="todo_date">
+                                <button type="submit" formaction="./todolist_com.php" id="check<?php echo $item["list_no"]; ?>"></button>
+                                <label for="check<?php echo $item["list_no"]; ?>" class="<?php echo $item["checked"] === "1" ? "checked-com" : "" ?>"></label>
 
-                                    <input type="text" name="content" value="<?php echo $item["content"]; ?>" />
-                                    <!-- 수정 버튼 -->
-                                    <button type="submit" formaction="./todolist_list_update.php">
-                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAABa0lEQVR4nO3XvUoDQRDA8VX8KAQ730QQfRcLC9NZ2cxoYEF7wTI7Z2M6BUtRgwQzk2BhaamFL6Hi18ndJYZILmfhcbOwf9j+x3CzxxoTCoVKaevwfN6e3M8ZH7LN20V00kaSGJ18IEkLGp0VoxvMvRQ8cvgNos668QcsQ7i2iQPJfj44O+Dkymiq1ribRZKziWiSd3XLWSuCO/5Shy6EO2mbqto+vlwA4oudSJb/DHfcS5a1MjA6vuljnvCos1QIrxI8/lrja2vbM7lwJ3taJhyPXmV8YLQ1CYw/11l3w/gExuzH8ZK3mCrBODy5i6kVHGu61gL43wsTLrsw4bILEy477yachMQAxJ/egAcBcc0rcFocT6GTR3/A/ZJ3nlfgJHBiEzgQP3gBHvOpbKbLqQmMjut5D9BBQIxqwLuN7lr2juPTIriawHFz+AD1AG5tPI3Ez78WrW7ULxlJC0lek4lDJKtVk0KhkNHXN22uzocDxBx4AAAAAElFTkSuQmCC" /></button>
-                                    <!-- 삭제 버튼 -->
-                                    <button type="submit" formaction="./todolist_list_delete.php">
-                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC1UlEQVR4nO2ZO2wTQRCGFwJCEAkEJA00UEGgBUTDo6cEt0CFCIiCRNi7x+MoaVAIr+hmHKEECmJRICIhpSAWnrETJBc8QkVDAyL0kSISxXB2nJh4D4ll1wfoPmka+/zP/rdzvt9nIRISEhIS/gcy2eJhifRAQfGE+CepVFZJJKWA5xVypVb0KBOUNzUe5vv5NV62eOxKlneJvw3/4eRGhfRk2cBySaCPCvhQfbcU0tvq68hzCvnGmaC8NpZF9w6Ptcv7tLleXpb3KaAPOhNLZpDnJNC4AlrQvE/h7jRq9g6PtTsz4GHpgAR+E7EYuwW0oIBfy6C436oJPyhvkMifnRvAJkOfLt4srbdmxAM62HITWKuwtzUjl+HlzpaMFDaPWGZgYoewiUS+FcOO9AkXKOTRlc0k0owEyvxRIc1oTIw6MbFo5F7z9vO871dWm2qGn128p6w4QXxXuEIhXdeNgBx6tdVUsyfId2g1gX3hCgV0XjvLQXG3qWYaJ7q0RoLCOeEKmaWU/tulFkFMqMUWnWbRXejMIB3VNc0EfNxUM1ywfpcLR4Qr0kB7I+b5rKmmQu7WGhks7LG7+samg4VOrRGkq8aayNd0mj1BvkO4IpXLtf38e2PJyG1TTQV8R/eVnsrl2oRLJPBXTZR4bKyHPNK8IzRtd9W6xsDvNY1fmOvRuGa0poRrFHC++WKnd8Z6yFMavXG7q9Y1Bs5pGn8x1kOa1sSTEburdpy3YslZLvJWLDmrTpiBbOWtqJylkLuFa6LyVpiZflcrjCEtz1ku8lYsOatOmIFs5a2onJXGiS7hmui8xUM+lrY0Pmj7VVWPRR6KCIydzo1U8xbybMRFaqNmneesOgp50pkRoJJoFR7waVdGPKCTLTNSvSMDP7NvhJ6Gf0+IVnKh//k6BdSvkL5ZMBBq9IWaIi68gdJ2iXTK9OFcOEqXsrwtNgMJCQkJCQk/zsB35gy2CL4XJHAAAAAASUVORK5CYII=" />
-                                    </button>
-                                </div>
-                            </form>
+                                <input type="text" name="content" value="<?php echo $item["content"]; ?>" />
+                                <!-- 수정 버튼 -->
+                                <button type="submit" formaction="./todolist_list_update.php">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAACXBIWXMAAAsTAAALEwEAmpwYAAABa0lEQVR4nO3XvUoDQRDA8VX8KAQ730QQfRcLC9NZ2cxoYEF7wTI7Z2M6BUtRgwQzk2BhaamFL6Hi18ndJYZILmfhcbOwf9j+x3CzxxoTCoVKaevwfN6e3M8ZH7LN20V00kaSGJ18IEkLGp0VoxvMvRQ8cvgNos668QcsQ7i2iQPJfj44O+Dkymiq1ribRZKziWiSd3XLWSuCO/5Shy6EO2mbqto+vlwA4oudSJb/DHfcS5a1MjA6vuljnvCos1QIrxI8/lrja2vbM7lwJ3taJhyPXmV8YLQ1CYw/11l3w/gExuzH8ZK3mCrBODy5i6kVHGu61gL43wsTLrsw4bILEy477yachMQAxJ/egAcBcc0rcFocT6GTR3/A/ZJ3nlfgJHBiEzgQP3gBHvOpbKbLqQmMjut5D9BBQIxqwLuN7lr2juPTIriawHFz+AD1AG5tPI3Ez78WrW7ULxlJC0lek4lDJKtVk0KhkNHXN22uzocDxBx4AAAAAElFTkSuQmCC" /></button>
+                                <!-- 삭제 버튼 -->
+                                <button type="submit" formaction="./todolist_list_delete.php">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC1UlEQVR4nO2ZO2wTQRCGFwJCEAkEJA00UEGgBUTDo6cEt0CFCIiCRNi7x+MoaVAIr+hmHKEECmJRICIhpSAWnrETJBc8QkVDAyL0kSISxXB2nJh4D4ll1wfoPmka+/zP/rdzvt9nIRISEhIS/gcy2eJhifRAQfGE+CepVFZJJKWA5xVypVb0KBOUNzUe5vv5NV62eOxKlneJvw3/4eRGhfRk2cBySaCPCvhQfbcU0tvq68hzCvnGmaC8NpZF9w6Ptcv7tLleXpb3KaAPOhNLZpDnJNC4AlrQvE/h7jRq9g6PtTsz4GHpgAR+E7EYuwW0oIBfy6C436oJPyhvkMifnRvAJkOfLt4srbdmxAM62HITWKuwtzUjl+HlzpaMFDaPWGZgYoewiUS+FcOO9AkXKOTRlc0k0owEyvxRIc1oTIw6MbFo5F7z9vO871dWm2qGn128p6w4QXxXuEIhXdeNgBx6tdVUsyfId2g1gX3hCgV0XjvLQXG3qWYaJ7q0RoLCOeEKmaWU/tulFkFMqMUWnWbRXejMIB3VNc0EfNxUM1ywfpcLR4Qr0kB7I+b5rKmmQu7WGhks7LG7+samg4VOrRGkq8aayNd0mj1BvkO4IpXLtf38e2PJyG1TTQV8R/eVnsrl2oRLJPBXTZR4bKyHPNK8IzRtd9W6xsDvNY1fmOvRuGa0poRrFHC++WKnd8Z6yFMavXG7q9Y1Bs5pGn8x1kOa1sSTEburdpy3YslZLvJWLDmrTpiBbOWtqJylkLuFa6LyVpiZflcrjCEtz1ku8lYsOatOmIFs5a2onJXGiS7hmui8xUM+lrY0Pmj7VVWPRR6KCIydzo1U8xbybMRFaqNmneesOgp50pkRoJJoFR7waVdGPKCTLTNSvSMDP7NvhJ6Gf0+IVnKh//k6BdSvkL5ZMBBq9IWaIi68gdJ2iXTK9OFcOEqXsrwtNgMJCQkJCQk/zsB35gy2CL4XJHAAAAAASUVORK5CYII=" />
+                                </button>
+                            </div>
+                        </form>
                         <?php } ?>
                     </div>
                     <!-- 달력  -->
@@ -210,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </a>
                                 <?php // } ?>
                             </div> -->
-                            
+
                             <!-- 위 코드를 더 간단하게 아래에 작성 -->
                             <div class="nav">
                                 <!-- 년 월 구하기 -->
@@ -254,13 +257,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                                         <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
-                                                        <?php } ?>
                                                         </button>
+                                                    <?php } ?>
                                                 </li>
                                             <?php } ?>
                                         <?php } ?>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
