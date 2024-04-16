@@ -106,6 +106,7 @@ header {
   height: 600px;
   width: 1000px;
 }
+
 /* 리스트 페이지 */
 .menu:nth-child(2) {
   border: 3px solid #799bc4;
@@ -124,14 +125,17 @@ input[type="date"]::-webkit-datetime-edit-text {
   -webkit-appearance: none;
   display: none;
 }
+
 input[type="date"]::-webkit-datetime-edit-month-field {
   -webkit-appearance: none;
   display: none;
 }
+
 input[type="date"]::-webkit-datetime-edit-day-field {
   -webkit-appearance: none;
   display: none;
 }
+
 input[type="date"]::-webkit-datetime-edit-year-field {
   -webkit-appearance: none;
   display: none;
@@ -171,6 +175,7 @@ input[type="date"]::before {
 input[type="date"]:valid::before {
   display: none;
 }
+
 /* text */
 .list-box {
   width: 600px;
@@ -191,6 +196,7 @@ input[type="text"]:not(:first-of-type) {
   background-color: rgb(121, 155, 196, 0.3);
   font-family: 'GmarketSansMedium';
 }
+
 input[type="text"]:first-of-type {
   width: 500px;
   height: 50px;
@@ -259,6 +265,7 @@ label[for^="check"] {
   /* left: -2.5px; */
   top: 2px;
 }
+
 button[for^="check"] {
   display: none;
 }
@@ -276,16 +283,19 @@ label:active + input[type="text"] {
 ::-webkit-scrollbar {
   height: 20px; /* 가로축 스크롤바 폭 너비 */
 }
+
 ::-webkit-scrollbar-thumb {
   background: #799bc4; /* 스크롤바 막대 색상 */
   border: 1px solid #799bc4; /* 스크롤바 막대 테두리 설정  */
   border-radius: 12px 12px 12px 12px;
 }
+
 /* 스크롤이 움직이는 뒷 배경 */
 ::-webkit-scrollbar-track {
   background: rgb(121, 155, 196, 0.3); /* 스크롤바 뒷 배경 색상 */
   border-radius: 12px 12px 12px 12px;
 }
+
 /* 전체적인 content list */
 .content-list {
   display: flex;
@@ -343,6 +353,7 @@ ul, li {
   flex-wrap: wrap;
   text-align: center;
 }
+
 .calendar .weeks li {
   font-weight: 500;
 }

@@ -139,7 +139,7 @@ header {
 .menu > a {
     display: block;
     padding: 10px;
-  }
+}
 
 .content {
     background-image: url("../img/content-back.jpg");
@@ -251,6 +251,7 @@ header {
 footer {
     text-align: right;
 }
+
 .join-back {
     display: inline-block;
     border: 1px solid #5f5f5f;
@@ -294,23 +295,27 @@ footer {
     list-style: none;
     flex-wrap: wrap;
     text-align: center;
-  }
-  .calendar .weeks li {
+}
+
+.calendar .weeks li {
     font-weight: 500;
     height: 2rem;
-  }
-  .calendar .days {
+}
+
+.calendar .days {
     margin-bottom: 20px;
     border: 1px solid #799bc4;
-  }
-  .calendar ul li {
+}
+
+.calendar ul li {
     /*#8*/
     width: calc(100% / 7);
     height: 4rem;
     /*#9*/
     position: relative;
-  }
-  .calendar .days li {
+}
+
+.calendar .days li {
     /*#10*/
     z-index: 1;
     /* margin-top: 30px; */
@@ -318,20 +323,20 @@ footer {
     height: 78px;
     padding: 5px;
     /* cursor: pointer; */
-  }
+}
   
   /*#11*/
-  .days li.inactive {
+.days li.inactive {
     color: #aaa;
-  }
+}
   
-  .days li.active {
+.days li.active {
     color: #fff;
-  }
+}
 
-  .todo-get-calendar {
+.todo-get-calendar {
     padding: 10px;
-  }
+}
 
 /* 서린이 작성해둠 캘린더 년월*/
 .nav {
@@ -342,21 +347,23 @@ footer {
     align-items: center;
     justify-content: space-around;
 
-  }
+}
 
 .nav a{
     background-color: inherit ;
     cursor: pointer;
-  }  
+}  
 
 ::-webkit-scrollbar {
 height: 20px; /* 가로축 스크롤바 폭 너비 */
 }
+
 ::-webkit-scrollbar-thumb {
 background: #799BC4; /* 스크롤바 막대 색상 */
 border: 1px solid #799BC4; /* 스크롤바 막대 테두리 설정  */
 border-radius: 12px 12px 12px 12px;
 }
+
 /* 스크롤이 움직이는 뒷 배경 */
 ::-webkit-scrollbar-track {
 background: rgb(121, 155, 196, 0.3); /* 스크롤바 뒷 배경 색상 */
