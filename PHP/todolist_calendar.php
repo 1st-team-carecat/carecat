@@ -26,22 +26,14 @@ try {
     $name = isset($_GET['name']) ? $_GET['name'] : '';
     $profile = isset($_GET['profile']) ? $_GET['profile'] : '';
 
-    // 가져온 데이터를 각각의 함수에 저장
-    $array_param = array(
-        'name' => $name, 'profile' => $profile
-    );
-
     // 데이터 베이스에서 정보 조회
-    $result = db_select_information($conn, $array_param);
+    $result = db_select_information($conn);
 
 
     if (!empty($result)) {
         // 조회된 결과의 해당하는 값 가져옴
         $name = $result[0]['name'];
         $profile = $result[0]['profile'];
-    } else {
-        // 가져온 데이터가 없을 경우 빈 문자열
-        $name = "1";
     }
 
 } catch (\Throwable $t) {
@@ -101,7 +93,7 @@ try {
                                     </a>
 
                                     <!-- 연도와 월 출력 -->
-                                    <p><?php echo  "$year 년 $month 월" ?> </p>
+                                    <p> <?php echo  "$year 년 $month 월" ?> </p>
 
                                     <!-- 다음 달로 이동하는 링크 -->
                                     <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
@@ -109,10 +101,10 @@ try {
                                         <a href="/todolist_calendar.php?year=<?php echo $year + 1 ?>&month=1">
                                         <?php } else { ?>
                                             <!-- 그렇지 않은 경우 다음 월 (월을 1 증가) 가르키는 링크 -->
-                                            <a href="/todolist_calendar.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
+                                        <a href="/todolist_calendar.php?year=<?php echo $year ?>&month=<?php echo $month + 1 ?>">
                                             <?php } ?>
                                             <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
-                                            </a>
+                                        </a>
                         </div>
 
                         <!-- 요일 표시 -->
