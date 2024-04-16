@@ -224,21 +224,18 @@ function db_count_checked($conn) {
     // SQL
     $sql = 
     "SELECT 
-       COUNT(*) AS chk_ttl,
-       SUM(checked = 1) AS chk_cnt
+       COUNT(*) chk_ttl
+       ,SUM(checked = 1) chk_cnt
    FROM todos
    WHERE deleted_at IS NULL
    AND todo_date BETWEEN DATE_FORMAT(CURRENT_DATE(), '%Y-%m-01') AND LAST_DAY(CURRENT_DATE());"
 ;
-
-
     // 쿼리 실행
     $stmt = $conn->query($sql);
     
     // 쿼리 결과 가져옴
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
-
     // 결과 반환
     return $result; 
 
