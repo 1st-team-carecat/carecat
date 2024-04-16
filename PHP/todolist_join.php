@@ -7,20 +7,26 @@ try {
     // 데이터를 서버에 보내기 위함
     if (REQUEST_METHOD === "POST") {
         $PROFILE = isset($_POST["PROFILE"]) ? trim($_POST["PROFILE"]) : "";
+        // -(만약 슈퍼글로벌 변수 $_POST에 "PROFILE" 값이 존재하면 공백을 제거하여 $PROFILE 변수에 할당합니다.
+        //그렇지 않으면 빈 문자열.)
         $NAME = isset($_POST["NAME"]) ? trim($_POST["NAME"]) : "";
         $birth_at = isset($_POST["birth_at"]) ? trim($_POST["birth_at"]) : "";
         $gender = isset($_POST["gender"]) ? trim($_POST["gender"]) : "";
         $weight = isset($_POST["weight"]) ? trim($_POST["weight"]) : "";
         $adopt_at = isset($_POST["adopt_at"]) ? trim($_POST["adopt_at"]) : "";
 
-        // 필수 입력 필드가 비어 있는지 확인 후 있으면 $arr_err_param 배열에 해당 필드 이름 추가함
+        //필수 입력 필드가 비어 있는지 확인 후 있으면 $arr_err_param 배열에 해당 필드 이름 추가함
+        // -(오류 파라미터를 저장할 빈 배열을 선언합니다.)
         $arr_err_param = [];
+        // 만약 $PROFILE이 비어있다면, $arr_err_param 배열에 "PROFILE"을 추가합니다.
         if ($PROFILE === "") {
             $arr_err_param[] = "PROFILE";
         }
+        // $NAME이 비어있다면, $arr_err_param 배열에 "NAME"을 추가합니다.
         if ($NAME === "") {
             $arr_err_param[] = "NAME";
         }
+        // $birth_at이 비어있다면, $arr_err_param 배열에 "birth_at"를 추가합니다.
         if ($birth_at === "") {
             $arr_err_param[] = "birth_at";
         }
@@ -33,7 +39,9 @@ try {
         if ($adopt_at === "") {
             $arr_err_param[] = "adopt_at";
         }
+        // 오류 파라미터 배열에 값이 하나 이상 있다면
         if (count($arr_err_param) > 0) {
+            // 예외를 발생시키는 코드입니다. 발생한 예외는 오류 파라미터의 목록을 메시지로 갖습니다.
             throw new Exception("Parameter Error : " . implode(", ", $arr_err_param));
         }
 
@@ -44,9 +52,9 @@ try {
         $conn->beginTransaction();
 
         $arr_param = [
-            "PROFILE" => $PROFILE
-            , "NAME" => $NAME
-            , "birth_at" => $birth_at
+            "PROFILE" => $PROFILE // "PROFILE" 키에 $PROFILE 변수의 값을 할당합니다.
+            , "NAME" => $NAME // "NAME" 키에 $NAME 변수의 값을 할당합니다.
+            , "birth_at" => $birth_at //"birth_at" 키에 $birth_at 변수의 값을 할당합니다.
             , "gender" => $gender
             , "weight" => $weight
             , "adopt_at" => $adopt_at
@@ -61,11 +69,16 @@ try {
         }
 
         $conn->commit();
-
+        //HTTP를 사용해서 브라우저에게 지정된 위치로 이동하라는 지시를
+        //전달합니다. 여기서는 "todolist_mypage.php"로 이동하도록 설정되어 있습니다.
+        //이것은 사용자를 다른 페이지로 리디렉션하게 됩니다.
         header("Location: todolist_mypage.php");
         exit;
     }
-
+    //Throwable -> 예외와 오류를 처리하는 기본 클래스임.
+    //주요 하위 클래스
+    //1.Error: 프로그램 실행동안 발생한 치명적 오류를 나타냄.
+    //2. Exception: 예외적인 상황 나타냄
 } catch (\Throwable $e) {
     // 예외 발생한 경우, 현재 진행 중인 데이터 베이스 트랜잭션이 있는지 확인
     // 트랜잭션 중이라면 ($conn->inTransaction()이 참이면) 트랜잭션 롤백하여 이전 상태로 복구
