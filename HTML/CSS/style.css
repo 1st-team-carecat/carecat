@@ -91,6 +91,10 @@ header {
   width: 40px;
   text-align: center;
   margin-top: 10px;
+}
+
+.menu > a {
+  display: block;
   padding: 10px;
 }
 
@@ -325,7 +329,7 @@ li {
 }
 .calendar .days li {
   z-index: 1;
-  margin-top: 15px;
+  padding: 8px 0;
   cursor: pointer;
 }
  

@@ -3,9 +3,9 @@
 function my_db_conn()
 {
     $option = [
-        PDO::ATTR_EMULATE_PREPARES    =>    FALSE,
-        PDO::ATTR_ERRMODE    =>    PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE    => PDO::FETCH_ASSOC
+        PDO::ATTR_EMULATE_PREPARES       => FALSE,
+        PDO::ATTR_ERRMODE                => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE     => PDO::FETCH_ASSOC
     ];
     return new PDO(MARIADB_DSN, MARIADB_USER, MARIADB_PASSWORD, $option);
 }
@@ -71,14 +71,12 @@ function db_insert_list(&$conn, &$array_param)
 {
     // SQL
     $sql = "INSERT INTO todos (
-        list_no,
         cat_no,
         todo_date,
         content,
         checked
     ) 
     VALUES (
-        :list_no,
         1,
         :todo_date, 
         :content, 
@@ -171,7 +169,7 @@ function db_select_todos_list_with_date($conn, $chk_day) {
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':chk_day', $chk_day);
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     
     return $result;
 }
@@ -238,7 +236,7 @@ function db_count_checked($conn) {
     $stmt = $conn->query($sql);
     
     // 쿼리 결과 가져옴
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     
 
     // 결과 반환
