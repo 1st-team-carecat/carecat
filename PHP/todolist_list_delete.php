@@ -33,11 +33,9 @@ try {
     $result = db_delete_todos_no($conn, $arr_param);
 
     // 위 함수가 올바르게 실행되지 않았을 경우 예외 발생시킵니다.
-    //구체설명: 삭제된 행의 수가 1이 아닌 경우를 확인합니다. 삭제가 정상적으로
-    //이루어지지 않았을 때를 의미합니다.
+    // 삭제가 정상적으로 이루어지지 않았을 때 임의로 예외 발생시킴.
     if ($result !== 1) {
-        //삭제된 행의 수가 1이 아닌 경우 임의로 예외를 발생시킵니다.
-        //"Delete Boards no count"라는 메시지와 함께 예외가 발생합니다.
+        //"Delete Boards no count"라는 메시지와 함께
         throw new Exception("Delete Boards no count");
     }
     //트랜잭션을 커밋합니다.
@@ -46,14 +44,11 @@ try {
     header("Location: todolist_list.php?selected_date=" . $todo_date);
     exit;
     
-    //예외처리
+    //트랜잭션 도중 에러 발생하면 롤백
 } catch (\Throwable $e) {
     //'$connection'이 비어있지 않은지 확인 후 현재 트랜
     //잭션 중인지 여부 확인합니다.
     if (!empty($conn) && $conn->inTransaction()) {
-        //만약, 데이터베이스 연결 존재하고, 현재 트랜잭션 중이라면
-        //롤백(트랜잭션 내에서 수행한 모든 변경사항을 취소하고
-        //이전 상태로 되돌리는 작업/데이터 일관성 유지에 중요한 단계) 실행합니다.
         $conn->rollBack();
     }
     //예외 메시지 출력
