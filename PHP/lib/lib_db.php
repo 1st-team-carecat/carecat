@@ -256,7 +256,7 @@ function db_count_checked($conn) {
     $stmt = $conn->query($sql);
     
     // 쿼리 결과 가져옴
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
     // 결과 반환
     return $result; 
