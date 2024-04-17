@@ -95,7 +95,6 @@ function db_insert_list(&$conn, &$array_param)
 
     // 바인딩 쿼리의 매개변수에 PHP 변수를 바인드하여 SQL 쿼리가 실행될 때 이러한 값들을 적절히 대체할 수 있도록 합니다. 여기서는 ":list_no", ":todo_date", ":content"와 같은 쿼리의 placeholder에 $array_param 배열에서 해당하는 값을 바인딩
     // SQL 삽입(SQL Injection) 공격을 방지하는 데 중요한 역할
-    $stmt->bindParam(':list_no', $array_param['list_no']);
     $stmt->bindParam(':todo_date', $array_param['todo_date']);
     $stmt->bindParam(':content', $array_param['content']);
 
