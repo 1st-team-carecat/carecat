@@ -16,7 +16,6 @@ CREATE TABLE informations (
 
 CREATE TABLE todos (
 	list_no		INT				PRIMARY KEY AUTO_INCREMENT
-	,cat_no		INT				NOT NULL
 	,todo_date	DATE			NOT NULL
 	,content	VARCHAR(50)		NOT NULL 
 	,checked	CHAR(1)			NOT NULL		COMMENT '0 : 미완료, 1: 완료'
