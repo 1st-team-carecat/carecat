@@ -20,7 +20,7 @@ function db_select_profile(&$conn) {
         ." FROM " 
         ."  informations " 
         ." WHERE " 
-        ."  cat_no = 1 " // cat_no를 1로 설정
+        ."  cat_no = 2 " // cat_no를 2로 설정
     ;
 
     // Query 실행
@@ -46,7 +46,7 @@ function db_select_todos_list(&$conn, &$array_param) {
         ."  todos "
         ." WHERE "
         ."  deleted_at IS NULL "
-        ."  AND cat_no = 1 "
+        ."  AND cat_no = 2 "
     ;
 
 // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
@@ -85,7 +85,7 @@ function db_insert_list(&$conn, &$array_param)
         ."  ,checked "
         ." ) " 
         ." VALUES ( "
-        ."  1 "
+        ."  2 "
         ."  ,:todo_date  "
         ."  ,:content  "
         ."  0 "
@@ -182,7 +182,7 @@ function db_select_todos_list_with_date($conn, $chk_day) {
         ." WHERE " 
         ."  todo_date = :chk_day "
         ."  AND checked = '0' "
-        ."  AND cat_no = 1 " 
+        ."  AND cat_no = 2 " 
         ."  AND deleted_at IS NULL "
     ;
     
@@ -239,7 +239,7 @@ function db_insert_profile(&$conn, &$array_param){
 //             ,SUM(CASE WHEN checked = '1' THEN 1 ELSE 0 END) chk_cnt
 //     FROM todos
 //     WHERE deleted_at IS NULL
-//     AND cat_no = 1"
+//     AND cat_no = 2 "
 //     ;
 
 function db_count_checked($conn) {
@@ -279,6 +279,8 @@ function db_select_information(&$conn) {
         ."  ,adopt_at "
         ." FROM " 
         ."  informations "
+        ." WHERE "
+        ."  cat_no = 2 "
     ;
 
     $stmt = $conn->query($sql);
