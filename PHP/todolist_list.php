@@ -4,7 +4,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // todolist_co
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
 
-
 // HTTP 요청 메서드가 POST인지 확인하는 조건문. 만약 POST 요청이면 아래의 코드 블록이 실행됨
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -193,14 +192,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <!-- 년 월 구하기 -->
                                 <!-- 이전 달로 이동하는 링크 -->
                                 <!-- $month가 1이라면(1월인 경우), 이전 해 (년도 1감소)의 12월을 가르키는 링크 -->
-                                <a href="/todolist_list.php?<?php echo $month === '1' ? 'year='.($year - 1).'&month=12' : 'year='.$year.'&month='.($month - 1); ?>">
+                                <a href="/todolist_list.php?<?php echo $month === '1' ? 'year='.($year - 1).'&month=12' : 'year='.$year.'&month='.str_pad($month-1, 2, '0', STR_PAD_LEFT); ?>">
                                     <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                 </a>
                                     <!-- 연도와 월 출력 -->
                                     <p> <?php echo  "$year 년 $month 월" ?> </p>
                                     <!-- 다음 달로 이동하는 링크 -->
                                     <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
-                                <a href="/todolist_list.php?<?php echo $month ==='12' ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.($month + 1); ?>">
+                                <a href="/todolist_list.php?<?php echo $month ==='12' ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.str_pad($month+1, 2, '0', STR_PAD_LEFT); ?>">
                                     <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                 </a>
                             </div>
@@ -228,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                                     <!-- $start_week는 첫주 의 빈칸, $total_day 마지막주 의 빈칸을 구하기위해서 -->
                                                     <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                         <!-- 선택된 날짜와 현재 날짜($year . '-' . $month . '-' . $n)가 같은 경우에는 btn-selected-date 클래스가 추가되어 선택된 날짜를 강조 표시 -->
-                                                        <button type="submit" class="calendar-date <?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
+                                                        <button type="submit" class="<?php echo ($selected_date === ($year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-' . str_pad($n, 2, '0', STR_PAD_LEFT))) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-' . str_pad($n, 2, '0', STR_PAD_LEFT); ?>">
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
                                                         </button>
