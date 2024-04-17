@@ -198,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <p> <?php echo  "$year 년 $month 월" ?> </p>
                                     <!-- 다음 달로 이동하는 링크 -->
                                     <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
-                                <a href="/todolist_list.php?<?php echo $month == 12 ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.str_pad($month+1, 2, '0', STR_PAD_LEFT); ?>">
+                                <a href="/todolist_list.php?<?php echo $month == 12 ? 'year='.($year + 1).'&month=01' : 'year='.$year.'&month='.str_pad($month+1, 2, '0', STR_PAD_LEFT); ?>">
                                     <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                 </a>
                             </div>
