@@ -38,7 +38,6 @@ function db_select_todos_list(&$conn, &$array_param) {
     $sql =
         " SELECT "
         ."  list_no "
-        ."  ,cat_no "
         ."  ,content "
         ."  ,todo_date "
         ."  ,checked "
@@ -46,7 +45,7 @@ function db_select_todos_list(&$conn, &$array_param) {
         ."  todos "
         ." WHERE "
         ."  deleted_at IS NULL "
-        ."  AND cat_no = 2 "
+
     ;
 
 // 선택한 날짜가 있을 경우에만 해당 조건을 추가합니다.
@@ -79,14 +78,12 @@ function db_insert_list(&$conn, &$array_param)
     // SQL
     $sql = 
         " INSERT INTO todos ( "
-        ."  cat_no "
-        ."  ,todo_date "
+        ."  todo_date "
         ."  ,content "
         ."  ,checked "
         ." ) " 
         ." VALUES ( "
-        ."  2 "
-        ."  ,:todo_date  "
+        ."  :todo_date  "
         ."  ,:content  "
         ."  0 "
         ." ) "
@@ -182,7 +179,6 @@ function db_select_todos_list_with_date($conn, $chk_day) {
         ." WHERE " 
         ."  todo_date = :chk_day "
         ."  AND checked = '0' "
-        ."  AND cat_no = 2 " 
         ."  AND deleted_at IS NULL "
     ;
     
@@ -288,33 +284,4 @@ function db_select_information(&$conn) {
 
     return $result;
 
-}
-
-function db_update_information(&$conn, &$array_param) {
-    //SQL
-    $sql =
-        " UPDATE informations "
-        ."  SET "
-        ."  name = :name "
-        ."  ,gender = :gender "
-        ."  ,birth_at = :birth_at "
-        ."  ,weight = :weight "
-        ." WHERE " 
-        ."  cat_no = :cat_no " 
-    ;
-            
-    // 쿼리 실행
-    $stmt = $conn->prepare($sql);
-
-    // 바인딩 매개 변수 설정
-    $stmt->bindParam(':name', $array_param['name']);
-    $stmt->bindParam(':gender', $array_param['gender']);
-    $stmt->bindParam(':birth_at', $array_param['birth_at']);
-    $stmt->bindParam(':weight', $array_param['weight']);
-    $stmt->bindParam(':cat_no', $array_param['cat_no']);
-    
-
-    $stmt->execute();
-
-    return true;
 }
