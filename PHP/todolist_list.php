@@ -228,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                                     <!-- $start_week는 첫주 의 빈칸, $total_day 마지막주 의 빈칸을 구하기위해서 -->
                                                     <?php if (($n > 1 || $k >= $start_week) && ($total_day >= $n)) { ?>
                                                         <!-- 선택된 날짜와 현재 날짜($year . '-' . $month . '-' . $n)가 같은 경우에는 btn-selected-date 클래스가 추가되어 선택된 날짜를 강조 표시 -->
-                                                        <button type="submit" class="<?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
+                                                        <button type="submit" class="calendar-date <?php echo ($selected_date === ($year . '-' . $month . '-' . $n)) ? 'btn-selected-date' : ''; ?>" name="selected_date" value="<?php echo $year . '-' . $month . '-' . $n; ?>">
                                                             <!-- 현재 날짜를 보여주고 1씩 더해줌 -->
                                                             <?php echo $n++ ?>
                                                         </button>
