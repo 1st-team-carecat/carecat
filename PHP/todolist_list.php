@@ -3,7 +3,6 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/todolist_config.php"); // todolist_config.php 파일을 현재 PHP 스크립트에 포함시킴 이 파일에는 설정 정보가 들어 있
 require_once(FILE_LIB_DB); // DB관련 라이브러리
 
-
 // HTTP 요청 메서드가 POST인지 확인하는 조건문. 만약 POST 요청이면 아래의 코드 블록이 실행됨
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -192,14 +191,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <!-- 년 월 구하기 -->
                                 <!-- 이전 달로 이동하는 링크 -->
                                 <!-- $month가 1이라면(1월인 경우), 이전 해 (년도 1감소)의 12월을 가르키는 링크 -->
-                                <a href="/todolist_list.php?<?php echo $month === '1' ? 'year='.($year - 1).'&month=12' : 'year='.$year.'&month='.str_pad($month-1, 2, '0', STR_PAD_LEFT); ?>">
+                                <a href="/todolist_list.php?<?php echo $month == 1 ? 'year='.($year - 1).'&month=12' : 'year='.$year.'&month='.str_pad($month-1, 2, '0', STR_PAD_LEFT); ?>">
                                     <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxklEQVR4nO2VTQrCMBCFcwh/NnoZF66ajF3UwygYZkKPouIMBS+ip1DQegglhUIrLie40AezfV94eZMY85e2bOAZkFwB+QxhP1U1L0oeOuI7kDzjOOK1KsAhH1rzOIsgczVziwJd8whTM8/8dgAotw7gYcvdWA0AJNw/vRTJogHiY7rWoNS5r0ZqAEfse60hWaqZNwDkTVJAExFKnSyiqKSX3Oq9pupRZakX7XtRBcXH7lOrAGVlknw4KBcgPuW+mqgDzM/pBWGTysH2H670AAAAAElFTkSuQmCC">
                                 </a>
                                     <!-- 연도와 월 출력 -->
                                     <p> <?php echo  "$year 년 $month 월" ?> </p>
                                     <!-- 다음 달로 이동하는 링크 -->
                                     <!-- $month 가 12라면(12월인 경우), 다음 해 (년도 1증가)의 1월을 가르키는 링크 -->
-                                <a href="/todolist_list.php?<?php echo $month ==='12' ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.str_pad($month+1, 2, '0', STR_PAD_LEFT); ?>">
+                                <a href="/todolist_list.php?<?php echo $month == 12 ? 'year='.($year + 1).'&month=1' : 'year='.$year.'&month='.str_pad($month+1, 2, '0', STR_PAD_LEFT); ?>">
                                     <img class="material-icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAuUlEQVR4nO2UQQrCQAxF5xBWV3oYBVftpILjaZSSKT2KSn8QvIieQkH0EEpBoXWdLIo+yDYP/vyJc380SAtMiHGmKFdimTltPGNNUZ7NeJZ7qJCoCvJS5h/Be+C08Yy6LfEsQVWQFtsBsdxakkdW7UaqkoyFulHh6LShKDCNKlRImiaZtsqzhK9WbfojCNYRkeUj51FW3eWoTT/aojgM7aKJWPbn2Hnrc03lfkwRJ2K5ZCWmqsvdz/MCS6HK05bgwhsAAAAASUVORK5CYII=">
                                 </a>
                             </div>
