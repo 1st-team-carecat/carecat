@@ -78,13 +78,15 @@ try {
     // $next_birth_at = date('Y') . '-' . date('m-d', strtotime($birth_at));
     $next_birth_at = new DateTime(date('Y') . '-' . date('m-d', strtotime($birth_at)));
 
-
     // 생일이 오늘보다 이전인 경우 연도를 다음해로 설정
     // if ($next_birth_at < $now) {
     //     $next_birth_at = date('Y', strtotime('+1 year')) . '-' . date('m-d', strtotime($birth_at));
     // }
     if ($next_birth_at < $now) {
-        $next_birth_at->modify('+1 year') . '-' . date('m-d', strtotime($birth_at));
+        // $next_birth_at->modify('+1 year') . '-' . date('m-d', strtotime($birth_at));
+
+        $next_birth_at->modify('+1 year');
+        $next_birth_at->format("Y") . '-' . date('m-d', strtotime($birth_at));
     }
 
     // 남은 일 수 계산
@@ -93,8 +95,7 @@ try {
 
     $difference = $next_birth_at->diff($now);
     $birth_dday = $difference->days;
-
-
+    
     // 유닉스 타임스탬프로 변환
     // $adopt_timestamp = strtotime($adopt_at);
     // $now_timestamp = strtotime($now->format('Y-m-d'));
