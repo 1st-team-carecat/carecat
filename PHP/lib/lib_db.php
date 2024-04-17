@@ -85,7 +85,7 @@ function db_insert_list(&$conn, &$array_param)
         ." VALUES ( "
         ."  :todo_date  "
         ."  ,:content  "
-        ."  0 "
+        ."  ,0 "
         ." ) "
     ;
 
